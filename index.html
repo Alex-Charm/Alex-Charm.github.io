@@ -3,428 +3,613 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All About Websites</title>
+    <title>The Ultimate Web Guide & Flappy Game</title>
     <style>
-        /* Base Styles */
+        /* Modern Dark Texture & Variables */
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(22, 28, 45, 0.6);
+            --border-glow: #00d2ff;
+            --accent-purple: #9b5de5;
+            --text-color: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 210, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(155, 93, 229, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
             overflow-x: hidden;
         }
-        
-        /* Keyframe Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        /* --- INTRO SCREEN OVERLAY --- */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #161c2d, #05070c);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        /* Header & Navigation */
-        header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: #ffffff;
-            padding: 60px 0;
+        .intro-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px 60px;
+            border-radius: 20px;
             text-align: center;
-            animation: fadeIn 1.5s ease-out;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: pulseGlow 3s infinite alternate;
         }
+
+        .intro-card h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--border-glow), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #00d2ff, #0066ff);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 25px;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.8);
+        }
+
+        /* --- MAIN CONTENT STYLES --- */
+        #main-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, rgba(5,7,12,0.8) 0%, transparent 100%);
+        }
+
         header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            margin: 0 0 10px 0;
+            text-shadow: 0 0 20px rgba(0,210,255,0.4);
         }
+
         nav {
-            background-color: #34495e;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             padding: 15px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+
         nav a {
-            color: white;
+            color: #94a3b8;
             text-decoration: none;
             margin: 0 15px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
+
         nav a:hover {
-            color: #1abc9c;
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #1abc9c;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-        nav a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
+            color: var(--border-glow);
+            text-shadow: 0 0 10px rgba(0,210,255,0.6);
         }
 
-        /* Main Container & Sections */
         .container {
-            max-width: 900px;
-            margin: 30px auto;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 20px;
-            background: #ffffff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-radius: 8px;
-        }
-        section {
-            padding: 20px 0;
-            animation: fadeInUp 1s ease-out both;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
         }
 
-        /* Images */
+        /* Glass Textured Panels */
+        section {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: border 0.4s ease, transform 0.4s ease;
+        }
+
+        section:hover {
+            border-color: rgba(0, 210, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background: var(--border-glow);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        /* Upgraded Images with Tech Glow */
         .web-image {
             width: 100%;
-            max-height: 400px;
+            max-height: 380px;
             object-fit: cover;
-            border-radius: 8px;
-            margin: 15px 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .web-image:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Table */
+        .web-image:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 25px rgba(155, 93, 229, 0.4);
+        }
+
+        /* Custom Tech Table */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #bdc3c7;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        
-        /* Lists */
-        ol, ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
+            margin: 25px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        /* --- MINI GAME STYLES --- */
-        .game-box {
-            background-color: #f8f9fa;
-            border: 2px dashed #3498db;
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        th {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--border-glow);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        /* --- FLAPPY BIRD SECTION --- */
+        .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #111827;
+            border: 2px solid var(--accent-purple);
             border-radius: 12px;
-            padding: 25px;
-            margin-top: 30px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(155, 93, 229, 0.2);
+        }
+
+        #gameCanvas {
+            background: #70c5ce;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            cursor: pointer;
+            max-width: 100%;
+        }
+
+        .game-instructions {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #94a3b8;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .game-title {
-            color: #e74c3c;
-            margin-top: 0;
-            font-size: 1.8rem;
-        }
-        .quiz-option {
-            display: block;
-            width: 80%;
-            margin: 10px auto;
-            padding: 12px;
-            background-color: #fff;
-            border: 2px solid #34495e;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
+
+        .game-score-board {
+            display: flex;
+            gap: 40px;
+            font-size: 1.3rem;
             font-weight: bold;
-            transition: all 0.2s ease;
+            margin-bottom: 15px;
+            color: #fff;
         }
-        .quiz-option:hover {
-            background-color: #34495e;
-            color: white;
-            animation: pulse 0.4s infinite alternate;
-        }
-        #quiz-feedback {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 15px;
-            min-height: 30px;
-        }
-        .score-display {
-            font-size: 1.1rem;
-            margin-top: 10px;
-            color: #7f8c8d;
-        }
-        .restart-btn {
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            display: none;
-        }
-        .restart-btn:hover {
-            background-color: #27ae60;
+
+        /* Custom Animations */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0, 210, 255, 0.2); }
+            100% { box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(155, 93, 229, 0.4); }
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 40px;
+            padding: 40px;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--border-glow);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Understanding the Web</h1>
-        <p>An interactive, animated guide to websites, their uses, and how to build them.</p>
-    </header>
-
-    <nav>
-        <a href="#what-is-it">What is a Website?</a>
-        <a href="#types-examples">Types & Examples</a>
-        <a href="#uses">Why We Use Them</a>
-        <a href="#steps">How to Create One</a>
-        <a href="#mini-game" style="color: #e74c3c;">★ Mini Game ★</a>
-    </nav>
-
-    <div class="container">
-
-        <section id="what-is-it" style="animation-delay: 0.2s;">
-            <h2>What is a Website?</h2>
-            <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=900&q=80" alt="Web Design Concept">
-            <p>A <strong>website</strong> is a collection of publicly accessible, interlinked web pages that share a single domain name. Websites can be created and maintained by an individual, group, business, or organization to serve a variety of purposes.</p>
-            <p>Together, all publicly accessible websites constitute the <strong>World Wide Web (WWW)</strong>.</p>
-        </section>
-
-        <hr>
-
-        <section id="types-examples" style="animation-delay: 0.3s;">
-            <h2>Types of Websites & Examples</h2>
-            <p>Websites come in many shapes and sizes depending on their goals. Here are the most common types:</p>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Website Type</th>
-                        <th>Purpose</th>
-                        <th>Examples</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Search Engines</strong></td>
-                        <td>To help users find information on the internet.</td>
-                        <td>Google.com, Bing.com</td>
-                    </tr>
-                    <tr>
-                        <td><strong>E-Commerce</strong></td>
-                        <td>To buy and sell goods and services online.</td>
-                        <td>Amazon.com, eBay.com</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Social Media</strong></td>
-                        <td>To connect, communicate, and share content with others.</td>
-                        <td>Facebook.com, X.com, Instagram.com</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Informational / Media</strong></td>
-                        <td>To provide news, educational content, or references.</td>
-                        <td>Wikipedia.org, BBC.com</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Streaming / Entertainment</strong></td>
-                        <td>To consume video, music, or gaming content.</td>
-                        <td>YouTube.com, Netflix.com, Spotify.com</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <hr>
-
-        <section id="uses" style="animation-delay: 0.4s;">
-            <h2>What Do We Use Websites For?</h2>
-            <img class="web-image" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Using Website Analytics">
-            <p>Websites have completely transformed how society functions. We primarily use them for information sharing, communication, business, entertainment, and education.</p>
-        </section>
-
-        <hr>
-
-        <section id="steps" style="animation-delay: 0.5s;">
-            <h2>5 Basic Steps to Create a Website</h2>
-            <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=900&q=80" alt="Coding a Website">
-            <ol>
-                <li><strong>Plan Your Website:</strong> Map out its purpose and pages.</li>
-                <li><strong>Register a Domain Name:</strong> Buy your web address (e.g., www.site.com).</li>
-                <li><strong>Choose a Web Hosting Provider:</strong> Rent space on a server.</li>
-                <li><strong>Build the Site:</strong> Use HTML, CSS, and JS or a website builder.</li>
-                <li><strong>Publish and Maintain:</strong> Push it live and update it.</li>
-            </ol>
-        </section>
-
-        <hr>
-
-        <section id="mini-game" style="animation-delay: 0.6s;">
-            <div class="game-box">
-                <h2 class="game-title">🎮 Web Master Quiz Game</h2>
-                <p>Test your knowledge! Can you answer these questions based on the info above?</p>
-                
-                <div id="quiz-container">
-                    <h3 id="quiz-question">Loading question...</h3>
-                    <div id="quiz-options">
-                        </div>
-                    <div id="quiz-feedback"></div>
-                    <div class="score-display">Score: <span id="current-score">0</span> / <span id="total-questions">0</span></div>
-                    <button class="restart-btn" id="restart-btn" onclick="restartGame()">Play Again</button>
-                </div>
-            </div>
-        </section>
-
+    <div id="intro-overlay">
+        <div class="intro-card">
+            <h1>The World of Web Development</h1>
+            <p style="color: #94a3b8; font-size: 1.1rem; max-width: 450px; margin: 0 auto;">
+                Welcome! Step inside to learn how websites work, discover their infrastructure, and play our mini flappy game.
+            </p>
+            <button class="start-btn" onclick="startWebsite()">Start Learning</button>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Web Guide Website. Built with HTML, CSS, JS & Fun.</p>
-    </footer>
+    <div id="main-content">
+        <header>
+            <h1 style="background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Understanding the Web</h1>
+            <p style="color: var(--border-glow);">A high-fidelity dashboard built with modern code structures.</p>
+        </header>
+
+        <nav>
+            <a href="#what-is-it">What is a Website?</a>
+            <a href="#types-examples">Types & Examples</a>
+            <a href="#steps">How to Create One</a>
+            <a href="#flappy-game" style="color: var(--accent-purple); border: 1px dashed var(--accent-purple);">🎮 Flappy Bird Game</a>
+        </nav>
+
+        <div class="container">
+
+            <section id="what-is-it">
+                <h2>What is a Website?</h2>
+                <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80" alt="Web Concept">
+                <p>A <strong>website</strong> is a central repository of publicly accessible, logically interconnected web pages tied down to a distinct domain name. Created by individuals, enterprises, or organizations, they build the framework of the global internet grid.</p>
+                <p>Cumulatively, all globally available sites construct the architectural phenomenon called the <strong>World Wide Web (WWW)</strong>.</p>
+            </section>
+
+            <section id="types-examples">
+                <h2>Categories & Ecosystem Implementations</h2>
+                <p>The internet is categorized into explicit web ecosystems structured purely around their technical end-goals:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ecosystem Profile</th>
+                            <th>Functional Mechanics</th>
+                            <th>Native Implementations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Search Frameworks</strong></td>
+                            <td>Crawling and indexing worldwide data structures dynamically.</td>
+                            <td>Google, Bing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Digital Commerce</strong></td>
+                            <td>Financial transactional processors, secure ledgers, and inventory nodes.</td>
+                            <td>Amazon, eBay</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Social Ecosystems</strong></td>
+                            <td>High-velocity user graph networks and content streams.</td>
+                            <td>X (Twitter), Instagram</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Streaming Arrays</strong></td>
+                            <td>Asynchronous data packet distribution for audio/video buffering.</td>
+                            <td>YouTube, Netflix, Spotify</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="steps">
+                <h2>Engineering Architecture Roadmap</h2>
+                <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1000&q=80" alt="Coding">
+                <p>Deploying a stable, scalable interface follows a rigorous engineering pipeline:</p>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Systems Architecture Planning:</strong> Mapping requirements and user experience interfaces.</li>
+                    <li><strong>Domain Allocation Routing:</strong> Securing a unique DNS identification label.</li>
+                    <li><strong>Server Core Cloud Infrastructure:</strong> Provisioning dedicated container blocks or web host nodes.</li>
+                    <li><strong>Front-End Interface Development:</strong> Crafting the presentation layout natively using HTML5, CSS3, and modern JavaScript engines.</li>
+                </ol>
+            </section>
+
+            <section id="flappy-game">
+                <h2>Cyber Sandbox: Flappy Bird</h2>
+                <p style="margin-bottom: 20px; color: #94a3b8;">Take a break and test your reflexes! Jump into this retro arcade canvas game integrated seamlessly right within our app layer.</p>
+                
+                <div class="game-wrapper">
+                    <div class="game-score-board">
+                        <div>Score: <span id="scoreDisplay">0</span></div>
+                        <div>Best Score: <span id="highScoreDisplay">0</span></div>
+                    </div>
+                    
+                    <canvas id="gameCanvas" width="400" height="450"></canvas>
+                    
+                    <div class="game-instructions">
+                        <strong>CONTROLS:</strong> Press <strong>SPACEBAR</strong> or <strong>CLICK inside the blue canvas box</strong> to jump. Avoid the green pipe structures!
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Architectural Hub Integration. Rendered inside a Native DOM Object Engine.</p>
+        </footer>
+    </div>
 
     <script>
-        const quizData = [
-            {
-                question: "1. What does the 'WWW' stand for?",
-                options: ["World Wide Web", "Web Web Web", "Word Wide Website", "Working Web Way"],
-                answer: 0
-            },
-            {
-                question: "2. Which of the following is an example of an E-Commerce website?",
-                options: ["Wikipedia", "Netflix", "Amazon", "Google"],
-                answer: 2
-            },
-            {
-                question: "3. What core coding languages are used to build a website from scratch?",
-                options: ["Python & C++", "HTML, CSS, and JavaScript", "Java only", "WordPress and Wix"],
-                answer: 1
-            },
-            {
-                question: "4. What acts as your website's 'home address' on the internet?",
-                options: ["A server", "A content manager", "A domain name", "A browser"],
-                answer: 2
-            }
-        ];
+        // 1. INTRO LAYER HANDLER
+        function startWebsite() {
+            const overlay = document.getElementById('intro-overlay');
+            const mainContent = document.getElementById('main-content');
+            
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            
+            mainContent.style.display = 'block';
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                mainContent.style.visibility = 'visible';
+                // Initialize the game loop as soon as view updates
+                initGame();
+            }, 100);
+        }
 
-        let currentQuestionIndex = 0;
+        // 2. NATIVE CANVAS FLAPPY BIRD ENGINE
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const highScoreDisplay = document.getElementById('highScoreDisplay');
+
+        // Physics variables
+        let bird;
+        let pipes = [];
+        let frameCounter = 0;
         let score = 0;
+        let highScore = localStorage.getItem('flappyHighScore') || 0;
+        let gameActive = false;
+        let gameOver = false;
 
-        const questionElement = document.getElementById("quiz-question");
-        const optionsContainer = document.getElementById("quiz-options");
-        const feedbackElement = document.getElementById("quiz-feedback");
-        const scoreElement = document.getElementById("current-score");
-        const totalElement = document.getElementById("total-questions");
-        const restartButton = document.getElementById("restart-btn");
+        highScoreDisplay.textContent = highScore;
 
-        function loadQuestion() {
-            feedbackElement.textContent = "";
-            optionsContainer.innerHTML = "";
-            totalElement.textContent = quizData.length;
-            scoreElement.textContent = score;
+        class Bird {
+            constructor() {
+                this.x = 60;
+                this.y = 150;
+                this.radius = 12;
+                this.gravity = 0.4;
+                this.velocity = 0;
+                this.jumpStrength = -6.5;
+            }
+            draw() {
+                // Draw Glowing Cyber Bird
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff007f';
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#ff007f';
+                ctx.fill();
+                ctx.closePath();
+                ctx.shadowBlur = 0; // Reset shadow
+            }
+            update() {
+                this.velocity += this.gravity;
+                this.y += this.velocity;
+                
+                // Ground Collision
+                if (this.y + this.radius >= canvas.height) {
+                    this.y = canvas.height - this.radius;
+                    endGame();
+                }
+                // Ceiling Collision
+                if (this.y - this.radius <= 0) {
+                    this.y = this.radius;
+                    this.velocity = 0;
+                }
+            }
+            jump() {
+                this.velocity = this.jumpStrength;
+            }
+        }
 
-            if (currentQuestionIndex >= quizData.length) {
-                // Game finished
-                questionElement.textContent = "🎉 Quiz Complete!";
-                feedbackElement.style.color = "#2ecc71";
-                feedbackElement.textContent = `Excellent! Final score: ${score} out of ${quizData.length}`;
-                restartButton.style.display = "inline-block";
+        class Pipe {
+            constructor() {
+                this.gap = 110;
+                this.width = 55;
+                this.x = canvas.width;
+                this.topHeight = Math.floor(Math.random() * (canvas.height - this.gap - 100)) + 40;
+                this.bottomHeight = canvas.height - (this.topHeight + this.gap);
+                this.passed = false;
+            }
+            draw() {
+                ctx.fillStyle = '#00ffcc';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#00ffcc';
+                
+                // Top Pipe
+                ctx.fillRect(this.x, 0, this.width, this.topHeight);
+                // Bottom Pipe
+                ctx.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
+                
+                ctx.shadowBlur = 0; // Reset shadow
+            }
+            update() {
+                this.x -= 2.5; // Game speed multiplier
+            }
+        }
+
+        function initGame() {
+            bird = new Bird();
+            pipes = [];
+            score = 0;
+            frameCounter = 0;
+            gameOver = false;
+            scoreDisplay.textContent = score;
+            drawStartMessage();
+        }
+
+        function drawStartMessage() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bird.draw();
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CLICK HERE OR PRESS SPACE', canvas.width / 2, canvas.height / 2 - 10);
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#00d2ff';
+            ctx.fillText('To Fly and Avoid Pipes', canvas.width / 2, canvas.height / 2 + 20);
+        }
+
+        function gameLoop() {
+            if (!gameActive || gameOver) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Render Background Sky Simulation dynamically 
+            ctx.fillStyle = '#203a43';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            bird.update();
+            bird.draw();
+
+            // Pipe Spawning Strategy
+            if (frameCounter % 100 === 0) {
+                pipes.push(new Pipe());
+            }
+
+            for (let i = pipes.length - 1; i >= 0; i--) {
+                pipes[i].update();
+                pipes[i].draw();
+
+                // Check Matrix Structural Collisions
+                if (
+                    bird.x + bird.radius > pipes[i].x &&
+                    bird.x - bird.radius < pipes[i].x + pipes[i].width &&
+                    (bird.y - bird.radius < pipes[i].topHeight || bird.y + bird.radius > canvas.height - pipes[i].bottomHeight)
+                ) {
+                    endGame();
+                }
+
+                // Increment Tracking Score System
+                if (!pipes[i].passed && pipes[i].x + pipes[i].width < bird.x) {
+                    score++;
+                    pipes[i].passed = true;
+                    scoreDisplay.textContent = score;
+                    if (score > highScore) {
+                        highScore = score;
+                        highScoreDisplay.textContent = highScore;
+                        localStorage.setItem('flappyHighScore', highScore);
+                    }
+                }
+
+                // Remove Offscreen Objects Optimization
+                if (pipes[i].x + pipes[i].width < 0) {
+                    pipes.splice(i, 1);
+                }
+            }
+
+            frameCounter++;
+            requestAnimationFrame(gameLoop);
+        }
+
+        function triggerJump() {
+            if (!gameActive && !gameOver) {
+                gameActive = true;
+                gameLoop();
+            }
+            if (gameOver) {
+                initGame();
+                gameActive = true;
+                gameLoop();
                 return;
             }
-
-            let currentQuestion = quizData[currentQuestionIndex];
-            questionElement.textContent = currentQuestion.question;
-
-            currentQuestion.options.forEach((option, index) => {
-                const button = document.createElement("button");
-                button.className = "quiz-option";
-                button.textContent = option;
-                button.onclick = () => checkAnswer(index);
-                optionsContainer.appendChild(button);
-            });
+            bird.jump();
         }
 
-        function checkAnswer(selectedIndex) {
-            let currentQuestion = quizData[currentQuestionIndex];
+        function endGame() {
+            gameOver = true;
+            gameActive = false;
             
-            // Disable further option clicks for this question
-            const buttons = document.getElementsByClassName("quiz-option");
-            for(let btn of buttons) { btn.disabled = true; }
+            ctx.fillStyle = 'rgba(231, 76, 60, 0.85)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CRASH SYSTEM FAILURE', canvas.width / 2, canvas.height / 2 - 10);
+            ctx.font = '16px Arial';
+            ctx.fillText('Click Canvas Layer or Space to Reboot', canvas.width / 2, canvas.height / 2 + 25);
+        }
 
-            if (selectedIndex === currentQuestion.answer) {
-                score++;
-                feedbackElement.style.color = "#2ecc71";
-                feedbackElement.textContent = "Correct! Well done! 👍";
-            } else {
-                feedbackElement.style.color = "#e74c3c";
-                feedbackElement.textContent = `Incorrect. The right answer was: ${currentQuestion.options[currentQuestion.answer]}`;
+        // EVENT EVENT ROUTING ATTACHMENTS
+        window.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && document.getElementById('main-content').style.opacity === '1') {
+                e.preventDefault(); // Stop window scrolling downward automatically on spaces
+                triggerJump();
             }
+        });
 
-            scoreElement.textContent = score;
-
-            // Wait 2 seconds, then transition to next question
-            setTimeout(() => {
-                currentQuestionIndex++;
-                loadQuestion();
-            }, 2200);
-        }
-
-        function restartGame() {
-            currentQuestionIndex = 0;
-            score = 0;
-            restartButton.style.display = "none";
-            loadQuestion();
-        }
-
-        // Initialize game on load
-        loadQuestion();
+        canvas.addEventListener('click', function(e) {
+            e.stopPropagation();
+            triggerJump();
+        });
     </script>
 </body>
 </html>
