@@ -435,7 +435,7 @@
 
             <section id="quiz-gate">
                 <h2>04 // Complete 10 Questions to Earn a Break</h2>
-                <p style="color: #94a3b8;">Answer all 10 simple true/false or multi-choice checks below. Get a perfect streak to activate the Flappy Game console!</p>
+                <p style="color: #94a3b8;">Answer all 10 simple true/false or multi-choice checks below. Get them right to activate the Flappy Game console!</p>
                 
                 <div class="quiz-panel" id="quiz-box-container">
                     <h3 id="question-text">Loading verification check parameters...</h3>
@@ -470,7 +470,6 @@
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
-            // Re-verify context is active to clear modern browser auto-blockers
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
 
             const osc = audioCtx.createOscillator();
@@ -550,18 +549,18 @@
             }, 800);
         }
 
-        // --- 10 SIMPLE USER-FRIENDLY QUESTIONS ---
+        // --- 10 QUESTIONS WITHOUT THE LITERALLY INDICATED ANSWERS ---
         const simplifedQuiz = [
-            { q: "A website is like a collection of digital pages stored on the internet.", a: ["True (Correct)", "False"], r: 0 },
-            { q: "What does the 'WWW' abbreviation mean standardly?", a: ["Word Web Website", "World Wide Web (Correct)", "West Web World"], r: 1 },
-            { q: "Which tool helps you easily search for answers on the internet?", a: ["An Online Shop", "A Search Engine (Correct)", "A Movie Streamer"], r: 1 },
-            { q: "Amazon and eBay are best classified as what type of website?", a: ["Social Networks", "Online Shops / E-Commerce (Correct)", "Search Frameworks"], r: 1 },
-            { q: "The unique address name you type to visit a website is called a...", a: ["Server box", "Domain Name (Correct)", "HTML link"], r: 1 },
-            { q: "What basic core coding language builds the skeletal structure of a web page?", a: ["Python", "HTML (Correct)", "C++"], r: 1 },
-            { q: "We use 'CSS' mainly to add colors, fonts, and designs to our websites.", a: ["True (Correct)", "False"], r: 0 },
-            { q: "What language makes elements move and respond to button clicks?", a: ["HTML", "JavaScript (Correct)", "SQL database"], r: 1 },
-            { q: "Websites are stored on powerful internet computers called...", fill: "", a: ["Browsers", "Servers / Hosts (Correct)", "Cursors"], r: 1 },
-            { q: "YouTube, Netflix, and Spotify are examples of what?", a: ["Streaming Websites (Correct)", "Search Engines", "Personal Blogs"], r: 0 }
+            { q: "A website is like a collection of digital pages stored on the internet.", a: ["True", "False"], r: 0 },
+            { q: "What does the 'WWW' abbreviation stand for?", a: ["Word Web Website", "World Wide Web", "West Web World"], r: 1 },
+            { q: "Which tool helps you easily find answers and browse info on the internet?", a: ["An Online Shop", "A Search Engine", "A Movie Streamer"], r: 1 },
+            { q: "Amazon and eBay are best classified as what type of website?", a: ["Social Networks", "Online Shops / E-Commerce", "Search Frameworks"], r: 1 },
+            { q: "The unique address name you type to visit a website is called a...", a: ["Server Box", "Domain Name", "HTML Link"], r: 1 },
+            { q: "What basic core coding language builds the skeletal structure of a web page?", a: ["Python", "HTML", "C++"], r: 1 },
+            { q: "We use 'CSS' mainly to add colors, fonts, and designs to our websites.", a: ["True", "False"], r: 0 },
+            { q: "What language makes elements move and respond dynamically to clicks?", a: ["HTML", "JavaScript", "SQL Database"], r: 1 },
+            { q: "Websites are stored on powerful internet connected computers called...", a: ["Browsers", "Servers / Hosts", "Cursors"], r: 1 },
+            { q: "YouTube, Netflix, and Spotify are examples of what?", a: ["Streaming Websites", "Search Engines", "Personal Blogs"], r: 0 }
         ];
 
         let quizIndex = 0;
@@ -626,7 +625,6 @@
                 ctx.save();
                 ctx.translate(this.x, this.y);
                 
-                // Tilt object look according to fall physics
                 let currentAngle = Math.min(Math.max(this.velocity * 0.05, -0.4), 0.6);
                 ctx.rotate(currentAngle);
 
@@ -659,12 +657,9 @@
                 ctx.save(); ctx.shadowBlur = 8; ctx.shadowColor = '#00f0ff';
                 ctx.fillStyle = 'rgba(0, 240, 255, 0.15)'; ctx.strokeStyle = '#00f0ff'; ctx.lineWidth = 2;
                 
-                // Upper obstacle bar
                 ctx.fillRect(this.x, 0, this.w, this.topH); ctx.strokeRect(this.x, 0, this.w, this.topH);
-                // Lower obstacle bar
                 ctx.fillRect(this.x, canvas.height - this.botH, this.w, this.botH); ctx.strokeRect(this.x, canvas.height - this.botH, this.w, this.botH);
                 
-                // Highlighting danger lines
                 ctx.fillStyle = '#ff0055'; ctx.fillRect(this.x - 1, this.topH - 5, this.w + 2, 5);
                 ctx.fillRect(this.x - 1, canvas.height - this.botH, this.w + 2, 5);
                 ctx.restore();
@@ -696,7 +691,6 @@
             for (let i = pipesArray.length - 1; i >= 0; i--) {
                 pipesArray[i].movement(); pipesArray[i].render();
                 
-                // Hit detection tracking calculation
                 if (birdPlayer.x + birdPlayer.size > pipesArray[i].x && birdPlayer.x - birdPlayer.size < pipesArray[i].x + pipesArray[i].w &&
                     (birdPlayer.y - birdPlayer.size < pipesArray[i].topH || birdPlayer.y + birdPlayer.size > canvas.height - pipesArray[i].botH)) {
                     handleCrash();
