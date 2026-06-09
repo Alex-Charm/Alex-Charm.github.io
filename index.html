@@ -42,6 +42,11 @@
             100% { border-color: var(--neon-purple); box-shadow: 0 0 25px rgba(168, 85, 247, 0.3); }
         }
 
+        @keyframes pulseBorder {
+            0% { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+            100% { border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-dark);
@@ -335,6 +340,28 @@
             max-width: 100%;
         }
 
+        /* --- SECRET SERVER OVERFLOW HUD --- */
+        #secret-server-node {
+            display: none;
+            margin-top: 40px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(6, 8, 20, 0.95));
+            border: 2px dashed var(--neon-purple);
+            animation: pulseBorder 2s infinite alternate;
+        }
+
+        .key-banner {
+            background: #1e1b4b;
+            border: 1px solid var(--neon-pink);
+            color: #fff;
+            padding: 15px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -449,12 +476,32 @@
 
                 <div id="arcade-break-room">
                     <div class="arcade-headline">🕹️ GAME UNLOCKED: NEON FLAP</div>
-                    <p style="color: #94a3b8;">Nice work! Your break time is active. Use **SPACEBAR** or **CLICK INSIDE BOX** to jump and fly around the neon laser tubes.</p>
+                    <p style="color: var(--neon-pink); font-weight: bold;">🎯 CHALLENGE: REACH 20 POINTS TO UNLOCK THE SECRET SERVER!</p>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Use **SPACEBAR** or **CLICK INSIDE BOX** to jump and fly around the neon laser tubes.</p>
                     
                     <div style="font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
                         SCORE: <span id="gameScore">0</span> // BEST RECORD: <span id="gameBest">0</span>
                     </div>
                     <canvas id="gameCanvas" width="480" height="400"></canvas>
+                </div>
+
+                <div id="secret-server-node" class="quiz-panel">
+                    <div class="arcade-headline" style="color: var(--neon-blue);">📡 SECRET SERVER NODE DETECTED</div>
+                    <div class="key-banner" id="secretKeyDisplay">ACCESS KEY: [PENDING VERIFICATION]</div>
+                    
+                    <div class="image-wrapper">
+                        <img class="web-image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1100&q=80" alt="Server Room">
+                    </div>
+                    
+                    <h3>⚡ Advanced Web Infrastructure Lessons</h3>
+                    <p>Welcome to the back-end side of the internet. Here is what happens behind the scenes of complex sites:</p>
+                    
+                    <ol>
+                        <li><strong>The Databases (Data Hubs):</strong> Modern sites use hidden tables (like SQL or MongoDB) to instantly remember user login accounts, game high scores, and shop catalogs.</li>
+                        <li><strong>APIs (The Data Messenger):</strong> An API acts like a waiter carrying requests from your browser screen down into the server room and returning with dynamic content (like live weather or score states).</li>
+                        <li><strong>CDNs (Global Speed Distribution):</strong> Heavy asset pages copy their data onto thousands of global servers so content loads fast anywhere on Earth.</li>
+                    </ol>
+                    <p style="color: var(--neon-blue); font-weight: bold; text-align: center; margin-top: 15px;">🔒 Connection Status: Securely Granted.</p>
                 </div>
             </section>
 
@@ -466,7 +513,7 @@
     </div>
 
     <script>
-        // --- NATIVE RETRO AUDIO GENERATOR ENGINE (NO EXTERNAL AUDIO SAMPLES NEEDED) ---
+        // --- NATIVE RETRO AUDIO GENERATOR ENGINE ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
@@ -494,8 +541,8 @@
             } 
             else if (type === 'score') {
                 osc.type = 'square';
-                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5 note
-                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5 note
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.2);
@@ -507,6 +554,22 @@
                 gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.35);
+            }
+            else if (type === 'unlock') {
+                osc.type = 'sine';
+                let scale = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+                scale.forEach((freq, i) => {
+                    let noteOsc = audioCtx.createOscillator();
+                    let noteGain = audioCtx.createGain();
+                    noteOsc.type = 'sine';
+                    noteOsc.frequency.setValueAtTime(freq, audioCtx.currentTime + (i * 0.08));
+                    noteGain.gain.setValueAtTime(0.1, audioCtx.currentTime + (i * 0.08));
+                    noteGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.08) + 0.2);
+                    noteOsc.connect(noteGain);
+                    noteGain.connect(audioCtx.destination);
+                    noteOsc.start(audioCtx.currentTime + (i * 0.08));
+                    noteOsc.stop(audioCtx.currentTime + (i * 0.08) + 0.2);
+                });
             }
         }
 
@@ -549,7 +612,7 @@
             }, 800);
         }
 
-        // --- 10 QUESTIONS WITHOUT THE LITERALLY INDICATED ANSWERS ---
+        // --- 10 QUIZ QUESTIONS ---
         const simplifedQuiz = [
             { q: "A website is like a collection of digital pages stored on the internet.", a: ["True", "False"], r: 0 },
             { q: "What does the 'WWW' abbreviation stand for?", a: ["Word Web Website", "World Wide Web", "West Web World"], r: 1 },
@@ -587,7 +650,6 @@
                 optionsBox.appendChild(btn);
             });
 
-            // Update Progress fill bar
             const percentWidth = (quizIndex / 10) * 100;
             document.getElementById('progress-fill').style.width = `${percentWidth}%`;
             document.getElementById('count-text').textContent = `Questions Completed: ${quizIndex} / 10`;
@@ -604,7 +666,7 @@
             }
         }
 
-        // --- RETRO NEON ARCADE CORE ENGINE (FLAPPY GAME) ---
+        // --- RETRO NEON ARCADE CORE ENGINE ---
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreUI = document.getElementById('gameScore');
@@ -613,6 +675,7 @@
         let birdPlayer, pipesArray = [], frames = 0, currentScore = 0;
         let localBest = localStorage.getItem('simpleFlapBest') || 0;
         let isPlaying = false, isDead = false;
+        let keyAwarded = false;
 
         highscoreUI.textContent = localBest;
 
@@ -624,7 +687,6 @@
             render() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                
                 let currentAngle = Math.min(Math.max(this.velocity * 0.05, -0.4), 0.6);
                 ctx.rotate(currentAngle);
 
@@ -699,6 +761,12 @@
                 if (!pipesArray[i].counted && pipesArray[i].x + pipesArray[i].w < birdPlayer.x) {
                     currentScore++; pipesArray[i].counted = true; scoreUI.textContent = currentScore;
                     playSound('score');
+
+                    // Check for Server unlock condition criteria
+                    if (currentScore >= 20 && !keyAwarded) {
+                        triggerSecretServerUnlock();
+                    }
+
                     if (currentScore > localBest) {
                         localBest = currentScore; highscoreUI.textContent = localBest;
                         localStorage.setItem('simpleFlapBest', localBest);
@@ -707,6 +775,23 @@
                 if (pipesArray[i].x + pipesArray[i].w < 0) pipesArray.splice(i, 1);
             }
             frames++; requestAnimationFrame(runGameLoop);
+        }
+
+        function triggerSecretServerUnlock() {
+            keyAwarded = true;
+            playSound('unlock');
+            
+            // Render the elements visible
+            document.getElementById('secret-server-node').style.display = 'block';
+            
+            // Compute a random session encryption key value
+            let generatedKey = "SECURE_NODE_X" + Math.floor(Math.random() * 900000 + 100000) + "_RECV_2026";
+            document.getElementById('secretKeyDisplay').textContent = `DECRYPTED ACCESS KEY: ${generatedKey}`;
+            
+            // Pop an alert notifying them of success
+            setTimeout(() => {
+                alert("👑 CORE VERIFICATION PASSED! Score reached 20. Secret server records have dropped below the arcade box section!");
+            }, 50);
         }
 
         function registerInputTrigger() {
