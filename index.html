@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ultimate Web Guide & Flappy Game</title>
+    <title>Quantum Web Architecture & Neon Arcade</title>
     <style>
-        /* Modern Dark Texture & Variables */
+        /* Cyber-Industrial Core System Variables */
         :root {
-            --bg-color: #0b0f19;
-            --panel-bg: rgba(22, 28, 45, 0.6);
-            --border-glow: #00d2ff;
-            --accent-purple: #9b5de5;
-            --text-color: #f1f5f9;
+            --bg-deep: #050508;
+            --panel-cyber: rgba(10, 15, 30, 0.75);
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff0055;
+            --neon-purple: #9d00ff;
+            --text-neon: #e2e8f0;
+            --grid-color: rgba(0, 240, 255, 0.03);
         }
 
         * {
@@ -19,14 +21,31 @@
             scroll-behavior: smooth;
         }
 
+        /* Continuous Matrix Grid Flow Animation */
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        @keyframes textBreathe {
+            0% { text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2); }
+            100% { text-shadow: 0 0 20px rgba(255, 0, 85, 0.8), 0 0 40px rgba(255, 0, 85, 0.4); }
+        }
+
+        @keyframes panelPulse {
+            0% { border-color: rgba(0, 240, 255, 0.2); box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); }
+            100% { border-color: rgba(157, 0, 255, 0.5); box-shadow: 0 0 25px rgba(157, 0, 255, 0.2); }
+        }
+
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 210, 255, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(155, 93, 229, 0.15) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--text-color);
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 4s linear infinite;
+            color: var(--text-neon);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -39,246 +58,261 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #161c2d, #05070c);
+            background: radial-gradient(circle at center, #0a0f1e, #020204);
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         .intro-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px 60px;
-            border-radius: 20px;
+            background: var(--panel-cyber);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.3);
+            padding: 50px;
+            border-radius: 4px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: pulseGlow 3s infinite alternate;
+            max-width: 600px;
+            transform: scale(1);
+            transition: all 0.5s ease;
         }
 
         .intro-card h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, var(--border-glow), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            animation: textBreathe 3s infinite alternate;
         }
 
         .start-btn {
-            background: linear-gradient(45deg, #00d2ff, #0066ff);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            padding: 15px 45px;
+            font-family: inherit;
+            font-size: 1.3rem;
             font-weight: bold;
-            border-radius: 50px;
+            letter-spacing: 3px;
             cursor: pointer;
-            margin-top: 25px;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-            transition: all 0.3s ease;
+            margin-top: 35px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 0 0 rgba(0, 240, 255, 0);
         }
 
         .start-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 35px rgba(0, 210, 255, 0.8);
+            color: #000;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 30px var(--neon-cyan);
+            transform: translateY(-3px);
         }
 
-        /* --- MAIN CONTENT STYLES --- */
+        /* --- MAIN SYSTEM VIEW --- */
         #main-content {
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 1s ease;
+            display: none;
         }
 
         header {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(180deg, rgba(5,7,12,0.8) 0%, transparent 100%);
+            padding: 100px 20px 60px 20px;
         }
 
         header h1 {
-            font-size: 3rem;
-            margin: 0 0 10px 0;
-            text-shadow: 0 0 20px rgba(0,210,255,0.4);
+            font-size: 3.5rem;
+            margin: 0;
+            color: #fff;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px var(--neon-cyan);
         }
 
         nav {
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(5, 5, 8, 0.9);
+            border-bottom: 2px solid #111827;
             padding: 15px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         nav a {
-            color: #94a3b8;
+            color: #64748b;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 4px;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 8px 16px;
+            border: 1px solid transparent;
         }
 
         nav a:hover {
-            color: var(--border-glow);
-            text-shadow: 0 0 10px rgba(0,210,255,0.6);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        /* Glass Textured Panels */
+        /* High-Texture Glassmorphism Panels */
         section {
-            background: var(--panel-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: border 0.4s ease, transform 0.4s ease;
+            background: var(--panel-cyber);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            animation: panelPulse 4s infinite alternate;
         }
 
-        section:hover {
-            border-color: rgba(0, 210, 255, 0.3);
-            transform: translateY(-2px);
+        /* Tech Corner Accents for Panels */
+        section::before, section::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--neon-cyan);
         }
+        section::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        section::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
 
         h2 {
             color: #fff;
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
         }
 
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 24px;
-            background: var(--border-glow);
-            border-radius: 4px;
-            box-shadow: 0 0 10px var(--border-glow);
+        /* Upgraded Image Overlays */
+        .image-frame {
+            position: relative;
+            overflow: hidden;
+            margin: 25px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .image-frame::after {
+            content: 'SYSTEM DISPLAY ACTIVE';
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.8);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            border-left: 2px solid var(--neon-cyan);
         }
 
-        /* Upgraded Images with Tech Glow */
         .web-image {
             width: 100%;
-            max-height: 380px;
+            max-height: 400px;
             object-fit: cover;
-            border-radius: 12px;
-            margin: 20px 0;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: grayscale(30%) contrast(110%);
+            transition: all 0.5s ease;
         }
 
-        .web-image:hover {
-            transform: scale(1.02);
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 25px rgba(155, 93, 229, 0.4);
+        .image-frame:hover .web-image {
+            transform: scale(1.04) rotate(0.5deg);
+            filter: grayscale(0%) contrast(100%);
         }
 
-        /* Custom Tech Table */
+        /* Tech Grid Tables */
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: rgba(0,0,0,0.2);
-            border-radius: 8px;
-            overflow: hidden;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         th, td {
-            padding: 16px;
+            padding: 18px;
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         th {
-            background-color: rgba(255,255,255,0.05);
-            color: var(--border-glow);
-            font-weight: 600;
+            background-color: rgba(0, 240, 255, 0.05);
+            color: var(--neon-cyan);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        tr:hover {
-            background-color: rgba(255,255,255,0.02);
+        tr:hover td {
+            background-color: rgba(157, 0, 255, 0.08);
+            color: #fff;
+            border-bottom-color: var(--neon-purple);
         }
 
-        /* --- FLAPPY BIRD SECTION --- */
+        /* Sequential Processing List */
+        ol {
+            list-style: none;
+            counter-reset: tech-counter;
+            padding-left: 0;
+        }
+        ol li {
+            counter-increment: tech-counter;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.02);
+            border-left: 3px solid var(--neon-purple);
+            position: relative;
+        }
+        ol li::before {
+            content: "[NODE 0" counter(tech-counter) "]";
+            color: var(--neon-purple);
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        /* --- ADVANCED ARCADE STYLES --- */
         .game-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background: #111827;
-            border: 2px solid var(--accent-purple);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(155, 93, 229, 0.2);
+            background: #020205;
+            border: 2px solid var(--neon-magenta);
+            padding: 25px;
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.15);
+            position: relative;
         }
 
         #gameCanvas {
-            background: #70c5ce;
-            border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            background: #050b14;
+            border: 2px solid #111827;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             cursor: pointer;
-            max-width: 100%;
-        }
-
-        .game-instructions {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            color: #94a3b8;
-            text-align: center;
         }
 
         .game-score-board {
             display: flex;
-            gap: 40px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        /* Custom Animations */
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0, 210, 255, 0.2); }
-            100% { box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(155, 93, 229, 0.4); }
+            gap: 50px;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--neon-magenta);
+            text-shadow: 0 0 10px rgba(255,0,85,0.4);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
-            color: #64748b;
+            padding: 50px 20px;
+            color: #475569;
+            font-size: 0.9rem;
             border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--border-glow);
         }
     </style>
 </head>
@@ -286,175 +320,178 @@
 
     <div id="intro-overlay">
         <div class="intro-card">
-            <h1>The World of Web Development</h1>
-            <p style="color: #94a3b8; font-size: 1.1rem; max-width: 450px; margin: 0 auto;">
-                Welcome! Step inside to learn how websites work, discover their infrastructure, and play our mini flappy game.
+            <h1>CORE_NETWORK_INBOUND</h1>
+            <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">
+                System initialization complete. Access terminal pathways to download web building sequences and load interactive testing vectors.
             </p>
-            <button class="start-btn" onclick="startWebsite()">Start Learning</button>
+            <button class="start-btn" onclick="startWebsite()">INITIALIZE RUNTIME</button>
         </div>
     </div>
 
     <div id="main-content">
         <header>
-            <h1 style="background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Understanding the Web</h1>
-            <p style="color: var(--border-glow);">A high-fidelity dashboard built with modern code structures.</p>
+            <h1>QUANTUM_WEB_RESOURCES</h1>
+            <p style="color: var(--neon-cyan); letter-spacing: 2px;">Architectural Protocol Index // Live Build Ver. 3.0.26</p>
         </header>
 
         <nav>
-            <a href="#what-is-it">What is a Website?</a>
-            <a href="#types-examples">Types & Examples</a>
-            <a href="#steps">How to Create One</a>
-            <a href="#flappy-game" style="color: var(--accent-purple); border: 1px dashed var(--accent-purple);">🎮 Flappy Bird Game</a>
+            <a href="#what-is-it">// DEFINITION</a>
+            <a href="#types-examples">// GRID_MATRIX</a>
+            <a href="#steps">// DEPLOYMENT_NODES</a>
+            <a href="#flappy-game" style="color: var(--neon-magenta);">// ARCADE_MODULE</a>
         </nav>
 
         <div class="container">
 
             <section id="what-is-it">
-                <h2>What is a Website?</h2>
-                <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80" alt="Web Concept">
-                <p>A <strong>website</strong> is a central repository of publicly accessible, logically interconnected web pages tied down to a distinct domain name. Created by individuals, enterprises, or organizations, they build the framework of the global internet grid.</p>
-                <p>Cumulatively, all globally available sites construct the architectural phenomenon called the <strong>World Wide Web (WWW)</strong>.</p>
+                <h2>01 // Core Web Infrastructure</h2>
+                <div class="image-frame">
+                    <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1100&q=80" alt="Cyber Grid">
+                </div>
+                <p>A <strong>website</strong> is a cluster of high-level cloud documents, linked implicitly via structural hyper-paths sharing an exact core domain address. They translate digital protocols into active human-readable user experiences.</p>
+                <p>The system grid ecosystem spanning these millions of localized domain clusters maps the entire <strong>World Wide Web (WWW)</strong> core framework.</p>
             </section>
 
             <section id="types-examples">
-                <h2>Categories & Ecosystem Implementations</h2>
-                <p>The internet is categorized into explicit web ecosystems structured purely around their technical end-goals:</p>
+                <h2>02 // Functional Network Classification</h2>
+                <p>Network nodes parse data arrays dynamically according to structural specialization parameters:</p>
                 
                 <table>
                     <thead>
                         <tr>
-                            <th>Ecosystem Profile</th>
-                            <th>Functional Mechanics</th>
-                            <th>Native Implementations</th>
+                            <th>Classification</th>
+                            <th>Dynamic Protocol Engine</th>
+                            <th>Native Arrays</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Search Frameworks</strong></td>
-                            <td>Crawling and indexing worldwide data structures dynamically.</td>
-                            <td>Google, Bing</td>
+                            <td>Search Arrays</td>
+                            <td>Recursive algorithmic data parsers running index loops globally.</td>
+                            <td>Google Engine, Bing Hub</td>
                         </tr>
                         <tr>
-                            <td><strong>Digital Commerce</strong></td>
-                            <td>Financial transactional processors, secure ledgers, and inventory nodes.</td>
-                            <td>Amazon, eBay</td>
+                            <td>Secure Ledgers</td>
+                            <td>Encrypted merchant gateways processing point-to-point commerce.</td>
+                            <td>Amazon Grid, eBay Core</td>
                         </tr>
                         <tr>
-                            <td><strong>Social Ecosystems</strong></td>
-                            <td>High-velocity user graph networks and content streams.</td>
-                            <td>X (Twitter), Instagram</td>
+                            <td>Graph Networks</td>
+                            <td>Real-time peer-to-peer user matrices routing asset pipelines.</td>
+                            <td>X-Terminal, Instagram Feed</td>
                         </tr>
                         <tr>
-                            <td><strong>Streaming Arrays</strong></td>
-                            <td>Asynchronous data packet distribution for audio/video buffering.</td>
-                            <td>YouTube, Netflix, Spotify</td>
+                            <td>Buffer Streams</td>
+                            <td>High-bandwidth asynchronous media pipelines buffering asset frames.</td>
+                            <td>YouTube, Netflix Array</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
             <section id="steps">
-                <h2>Engineering Architecture Roadmap</h2>
-                <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1000&q=80" alt="Coding">
-                <p>Deploying a stable, scalable interface follows a rigorous engineering pipeline:</p>
-                <ol style="padding-left: 20px; line-height: 2;">
-                    <li><strong>Systems Architecture Planning:</strong> Mapping requirements and user experience interfaces.</li>
-                    <li><strong>Domain Allocation Routing:</strong> Securing a unique DNS identification label.</li>
-                    <li><strong>Server Core Cloud Infrastructure:</strong> Provisioning dedicated container blocks or web host nodes.</li>
-                    <li><strong>Front-End Interface Development:</strong> Crafting the presentation layout natively using HTML5, CSS3, and modern JavaScript engines.</li>
+                <h2>03 // Code Construction Pipeline</h2>
+                <div class="image-frame">
+                    <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1100&q=80" alt="Tech">
+                </div>
+                <p>System configuration commands require sequential operational alignment:</p>
+                <ol>
+                    <li>Structural Mapping of system assets and view-port limits.</li>
+                    <li>DNS Routing Reservation assigning global network addresses.</li>
+                    <li>Provisioning physical server matrices or containerized virtualization hosting.</li>
+                    <li>Native compiling of client-side logic using HTML5 schemas, style cascading, and JS runtime scripts.</li>
                 </ol>
             </section>
 
             <section id="flappy-game">
-                <h2>Cyber Sandbox: Flappy Bird</h2>
-                <p style="margin-bottom: 20px; color: #94a3b8;">Take a break and test your reflexes! Jump into this retro arcade canvas game integrated seamlessly right within our app layer.</p>
+                <h2>04 // Operational Arcade Layer: Vector Jump</h2>
+                <p style="color: #64748b; margin-bottom: 25px;">Testing real-time rendering capabilities inside the local browser document object engine. Keep the orb calibrated.</p>
                 
                 <div class="game-wrapper">
                     <div class="game-score-board">
-                        <div>Score: <span id="scoreDisplay">0</span></div>
-                        <div>Best Score: <span id="highScoreDisplay">0</span></div>
+                        <div>MATRIX_SCORE: <span id="scoreDisplay">0</span></div>
+                        <div>PEAK_RECORD: <span id="highScoreDisplay">0</span></div>
                     </div>
                     
-                    <canvas id="gameCanvas" width="400" height="450"></canvas>
-                    
-                    <div class="game-instructions">
-                        <strong>CONTROLS:</strong> Press <strong>SPACEBAR</strong> or <strong>CLICK inside the blue canvas box</strong> to jump. Avoid the green pipe structures!
-                    </div>
+                    <canvas id="gameCanvas" width="480" height="460"></canvas>
                 </div>
             </section>
 
         </div>
 
         <footer>
-            <p>&copy; 2026 Architectural Hub Integration. Rendered inside a Native DOM Object Engine.</p>
+            <p>&copy; 2026 Core Network Interface Terminal. System Operations Active.</p>
         </footer>
     </div>
 
     <script>
-        // 1. INTRO LAYER HANDLER
         function startWebsite() {
             const overlay = document.getElementById('intro-overlay');
             const mainContent = document.getElementById('main-content');
             
             overlay.style.opacity = '0';
-            overlay.style.visibility = 'hidden';
+            overlay.style.transform = 'translateY(-100%)';
             
-            mainContent.style.display = 'block';
             setTimeout(() => {
+                overlay.style.display = 'none';
+                mainContent.style.display = 'block';
                 mainContent.style.opacity = '1';
-                mainContent.style.visibility = 'visible';
-                // Initialize the game loop as soon as view updates
                 initGame();
-            }, 100);
+            }, 800);
         }
 
-        // 2. NATIVE CANVAS FLAPPY BIRD ENGINE
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreDisplay = document.getElementById('scoreDisplay');
         const highScoreDisplay = document.getElementById('highScoreDisplay');
 
-        // Physics variables
-        let bird;
-        let pipes = [];
-        let frameCounter = 0;
-        let score = 0;
-        let highScore = localStorage.getItem('flappyHighScore') || 0;
-        let gameActive = false;
-        let gameOver = false;
+        let bird, pipes = [], frameCounter = 0, score = 0;
+        let highScore = localStorage.getItem('cyberHighScore') || 0;
+        let gameActive = false, gameOver = false;
 
         highScoreDisplay.textContent = highScore;
 
-        class Bird {
+        class CyberBird {
             constructor() {
-                this.x = 60;
-                this.y = 150;
-                this.radius = 12;
-                this.gravity = 0.4;
+                this.x = 80;
+                this.y = 200;
+                this.radius = 14;
+                this.gravity = 0.38;
                 this.velocity = 0;
-                this.jumpStrength = -6.5;
+                this.jumpStrength = -6.8;
             }
             draw() {
-                // Draw Glowing Cyber Bird
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                
+                // Angle tilt animation based on velocity physics
+                let angle = Math.min(Math.max(this.velocity * 0.05, -0.5), 0.7);
+                ctx.rotate(angle);
+
+                // Draw Core Glowing Plasma Orb
+                let gradient = ctx.createRadialGradient(0, 0, 2, 0, 0, this.radius);
+                gradient.addColorStop(0, '#ffffff');
+                gradient.addColorStop(0.4, '#ff0055');
+                gradient.addColorStop(1, 'transparent');
+
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = '#ff007f';
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = '#ff007f';
+                ctx.arc(0, 0, this.radius + 6, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ff0055';
                 ctx.fill();
                 ctx.closePath();
-                ctx.shadowBlur = 0; // Reset shadow
+                
+                ctx.restore();
             }
             update() {
                 this.velocity += this.gravity;
                 this.y += this.velocity;
                 
-                // Ground Collision
                 if (this.y + this.radius >= canvas.height) {
                     this.y = canvas.height - this.radius;
                     endGame();
                 }
-                // Ceiling Collision
                 if (this.y - this.radius <= 0) {
                     this.y = this.radius;
                     this.velocity = 0;
@@ -465,80 +502,88 @@
             }
         }
 
-        class Pipe {
+        class TechPipe {
             constructor() {
-                this.gap = 110;
-                this.width = 55;
+                this.gap = 120;
+                this.width = 65;
                 this.x = canvas.width;
-                this.topHeight = Math.floor(Math.random() * (canvas.height - this.gap - 100)) + 40;
+                this.topHeight = Math.floor(Math.random() * (canvas.height - this.gap - 120)) + 40;
                 this.bottomHeight = canvas.height - (this.topHeight + this.gap);
                 this.passed = false;
             }
             draw() {
-                ctx.fillStyle = '#00ffcc';
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = '#00ffcc';
-                
-                // Top Pipe
+                ctx.save();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#00f0ff';
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.2)';
+                ctx.strokeStyle = '#00f0ff';
+                ctx.lineWidth = 2;
+
+                // Render Top Structure
                 ctx.fillRect(this.x, 0, this.width, this.topHeight);
-                // Bottom Pipe
+                ctx.strokeRect(this.x, 0, this.width, this.topHeight);
+
+                // Render Bottom Structure
                 ctx.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
-                
-                ctx.shadowBlur = 0; // Reset shadow
+                ctx.strokeRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
+
+                // Tech Laser Line Trims
+                ctx.fillStyle = '#ff0055';
+                ctx.fillRect(this.x - 2, this.topHeight - 6, this.width + 4, 6);
+                ctx.fillRect(this.x - 2, canvas.height - this.bottomHeight, this.width + 4, 6);
+
+                ctx.restore();
             }
             update() {
-                this.x -= 2.5; // Game speed multiplier
+                this.x -=(2.8 + (score * 0.1)); // Speed scales slowly dynamically!
             }
         }
 
         function initGame() {
-            bird = new Bird();
+            bird = new CyberBird();
             pipes = [];
             score = 0;
             frameCounter = 0;
             gameOver = false;
             scoreDisplay.textContent = score;
-            drawStartMessage();
+            drawOverlayMessage();
         }
 
-        function drawStartMessage() {
+        function drawOverlayMessage() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Render Tech background matrix
+            ctx.fillStyle = '#030712';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             bird.draw();
             
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 20px Arial';
+            ctx.fillStyle = '#00f0ff';
+            ctx.font = 'bold 16px Courier New';
             ctx.textAlign = 'center';
-            ctx.fillText('CLICK HERE OR PRESS SPACE', canvas.width / 2, canvas.height / 2 - 10);
-            ctx.font = '16px Arial';
-            ctx.fillStyle = '#00d2ff';
-            ctx.fillText('To Fly and Avoid Pipes', canvas.width / 2, canvas.height / 2 + 20);
+            ctx.fillText('>> EXECUTE TAP OR SPACEBAR TO INITIATE JUMP <<', canvas.width / 2, canvas.height / 2);
         }
 
         function gameLoop() {
             if (!gameActive || gameOver) return;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Render Background Sky Simulation dynamically 
-            ctx.fillStyle = '#203a43';
+            ctx.fillStyle = '#030712';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             bird.update();
             bird.draw();
 
-            // Pipe Spawning Strategy
-            if (frameCounter % 100 === 0) {
-                pipes.push(new Pipe());
+            if (frameCounter % 90 === 0) {
+                pipes.push(new TechPipe());
             }
 
             for (let i = pipes.length - 1; i >= 0; i--) {
                 pipes[i].update();
                 pipes[i].draw();
 
-                // Check Matrix Structural Collisions
+                // Hitbox calculations
                 if (
                     bird.x + bird.radius > pipes[i].x &&
                     bird.x - bird.radius < pipes[i].x + pipes[i].width &&
@@ -547,7 +592,6 @@
                     endGame();
                 }
 
-                // Increment Tracking Score System
                 if (!pipes[i].passed && pipes[i].x + pipes[i].width < bird.x) {
                     score++;
                     pipes[i].passed = true;
@@ -555,11 +599,10 @@
                     if (score > highScore) {
                         highScore = score;
                         highScoreDisplay.textContent = highScore;
-                        localStorage.setItem('flappyHighScore', highScore);
+                        localStorage.setItem('cyberHighScore', highScore);
                     }
                 }
 
-                // Remove Offscreen Objects Optimization
                 if (pipes[i].x + pipes[i].width < 0) {
                     pipes.splice(i, 1);
                 }
@@ -569,7 +612,7 @@
             requestAnimationFrame(gameLoop);
         }
 
-        function triggerJump() {
+        function handleInput() {
             if (!gameActive && !gameOver) {
                 gameActive = true;
                 gameLoop();
@@ -587,28 +630,32 @@
             gameOver = true;
             gameActive = false;
             
-            ctx.fillStyle = 'rgba(231, 76, 60, 0.85)';
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.85)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 28px Arial';
+            ctx.strokeStyle = var(--neon-magenta);
+            ctx.lineWidth = 3;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+            ctx.fillStyle = '#ff0055';
+            ctx.font = 'bold 24px Courier New';
             ctx.textAlign = 'center';
-            ctx.fillText('CRASH SYSTEM FAILURE', canvas.width / 2, canvas.height / 2 - 10);
-            ctx.font = '16px Arial';
-            ctx.fillText('Click Canvas Layer or Space to Reboot', canvas.width / 2, canvas.height / 2 + 25);
+            ctx.fillText('TERMINAL_CRASH: GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
+            ctx.fillStyle = '#fff';
+            ctx.font = '14px Courier New';
+            ctx.fillText('Tap Canvas Array / Space to Restart Execution Loop', canvas.width / 2, canvas.height / 2 + 30);
         }
 
-        // EVENT EVENT ROUTING ATTACHMENTS
         window.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' && document.getElementById('main-content').style.opacity === '1') {
-                e.preventDefault(); // Stop window scrolling downward automatically on spaces
-                triggerJump();
+            if (e.code === 'Space' && document.getElementById('main-content').style.display === 'block') {
+                e.preventDefault();
+                handleInput();
             }
         });
 
         canvas.addEventListener('click', function(e) {
             e.stopPropagation();
-            triggerJump();
+            handleInput();
         });
     </script>
 </body>
