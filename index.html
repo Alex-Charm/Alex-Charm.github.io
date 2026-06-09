@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Web Architecture & Neon Arcade</title>
+    <title>Fun Web Guide & Neon Arcade</title>
     <style>
-        /* Cyber-Industrial Core System Variables */
+        /* Easy-to-Read Cyber Theme Variables */
         :root {
-            --bg-deep: #050508;
-            --panel-cyber: rgba(10, 15, 30, 0.75);
-            --neon-cyan: #00f0ff;
-            --neon-magenta: #ff0055;
-            --neon-purple: #9d00ff;
-            --text-neon: #e2e8f0;
-            --grid-color: rgba(0, 240, 255, 0.03);
+            --bg-dark: #060814;
+            --panel-glass: rgba(15, 23, 42, 0.8);
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff0055;
+            --neon-purple: #a855f7;
+            --text-light: #cbd5e1;
+            --grid-line: rgba(0, 240, 255, 0.04);
         }
 
         * {
@@ -21,702 +21,722 @@
             scroll-behavior: smooth;
         }
 
-        /* Hide native cursor to prioritize custom hardware pointer tracking */
+        /* Hide regular mouse cursor to show off custom cursor tracking */
         html, body, a, button, canvas {
             cursor: none !important;
         }
 
-        /* Continuous Matrix Grid Flow Animation */
-        @keyframes gridMove {
+        /* Moving Matrix Background Grid Animation */
+        @keyframes moveGrid {
             0% { background-position: 0 0; }
-            100% { background-position: 40px 40px; }
+            100% { background-position: 50px 50px; }
         }
 
-        @keyframes textBreathe {
-            0% { text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2); }
-            100% { text-shadow: 0 0 20px rgba(255, 0, 85, 0.8), 0 0 40px rgba(255, 0, 85, 0.4); }
+        @keyframes glowingText {
+            0% { text-shadow: 0 0 10px rgba(0, 240, 255, 0.6); }
+            100% { text-shadow: 0 0 25px rgba(255, 0, 85, 0.9); }
         }
 
-        @keyframes panelPulse {
-            0% { border-color: rgba(0, 240, 255, 0.2); box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); }
-            100% { border-color: rgba(157, 0, 255, 0.5); box-shadow: 0 0 25px rgba(157, 0, 255, 0.2); }
+        @keyframes boxBreathing {
+            0% { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 0 10px rgba(0, 240, 255, 0.1); }
+            100% { border-color: var(--neon-purple); box-shadow: 0 0 25px rgba(168, 85, 247, 0.3); }
         }
 
         body {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background-color: var(--bg-deep);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
             background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: gridMove 4s linear infinite;
-            color: var(--text-neon);
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 4s linear infinite;
+            color: var(--text-light);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* --- GLOWING CUSTOM CURSOR SYSTEM --- */
-        #custom-cursor-dot {
+        /* --- GLOWING NEON CURSOR --- */
+        #cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--neon-cyan);
+            background-color: var(--neon-blue);
             position: fixed;
             border-radius: 50%;
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: width 0.1s, height 0.1s, background-color 0.1s;
+            transition: transform 0.05s ease;
         }
-        #custom-cursor-ring {
-            width: 30px;
-            height: 30px;
-            border: 2px solid var(--neon-magenta);
+        #cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--neon-pink);
             position: fixed;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: transform 0.08s ease-out, border-color 0.2s;
-            box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+            transition: transform 0.1s ease-out;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
         }
 
-        /* --- SYSTEM GATE OVERLAY --- */
-        #intro-overlay {
+        /* --- INTRO START SCREEN --- */
+        #intro-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #0a0f1e, #020204);
+            background: radial-gradient(circle at center, #0f172a, #02040a);
             z-index: 9998;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: all 0.8s cubic-bezier(0.74, 0.03, 0.23, 0.98);
         }
 
-        .intro-card {
-            background: var(--panel-cyber);
-            border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 50px rgba(0, 240, 255, 0.3);
-            padding: 50px;
-            border-radius: 4px;
+        .welcome-box {
+            background: var(--panel-glass);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+            padding: 40px;
+            border-radius: 12px;
             text-align: center;
-            max-width: 600px;
+            max-width: 550px;
         }
 
-        .intro-card h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            animation: textBreathe 3s infinite alternate;
+        .welcome-box h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+            animation: glowingText 2.5s infinite alternate;
         }
 
         .start-btn {
             background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            padding: 15px 45px;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 12px 40px;
             font-family: inherit;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            letter-spacing: 3px;
-            margin-top: 35px;
-            transition: all 0.4s ease;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
         }
 
         .start-btn:hover {
             color: #000;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 30px var(--neon-cyan);
-            transform: translateY(-3px);
+            background: var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: scale(1.05);
         }
 
-        /* --- MAIN SYSTEM VIEW --- */
-        #main-content {
+        /* --- MAIN PAGE GRAPHICS --- */
+        #main-site {
             opacity: 0;
             display: none;
         }
 
         header {
             text-align: center;
-            padding: 100px 20px 60px 20px;
+            padding: 80px 20px 40px 20px;
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin: 0;
             color: #fff;
-            letter-spacing: 4px;
-            text-shadow: 0 0 20px var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-blue);
         }
 
         nav {
-            background: rgba(5, 5, 8, 0.9);
-            border-bottom: 2px solid #111827;
+            background: rgba(6, 8, 20, 0.9);
+            border-bottom: 2px solid #1e293b;
             padding: 15px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         nav a {
-            color: #64748b;
+            color: #94a3b8;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 15px;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 8px 16px;
-            border: 1px solid transparent;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            padding: 6px 12px;
         }
 
         nav a:hover {
-            color: var(--neon-cyan);
-            border: 1px solid var(--neon-cyan);
-            background: rgba(0, 240, 255, 0.05);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            color: var(--neon-blue);
+            background: rgba(0, 240, 255, 0.08);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
+            max-width: 950px;
+            margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* High-Texture Glassmorphism Panels */
+        /* Glass Cards with Animated Borders */
         section {
-            background: var(--panel-cyber);
+            background: var(--panel-glass);
             border: 1px solid rgba(0, 240, 255, 0.2);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            margin-bottom: 50px;
-            position: relative;
-            animation: panelPulse 4s infinite alternate;
+            backdrop-filter: blur(15px);
+            padding: 35px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            animation: boxBreathing 4s infinite alternate;
         }
-
-        section::before, section::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border: 2px solid var(--neon-cyan);
-        }
-        section::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
-        section::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
 
         h2 {
             color: #fff;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-top: 0;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
         }
 
-        .image-frame {
+        /* Smooth Interactive Tech Images */
+        .image-wrapper {
             position: relative;
             overflow: hidden;
-            margin: 25px 0;
+            margin: 20px 0;
+            border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.1);
-        }
-        .image-frame::after {
-            content: 'SYSTEM DISPLAY ACTIVE';
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.8);
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            color: var(--neon-cyan);
-            border-left: 2px solid var(--neon-cyan);
         }
 
         .web-image {
             width: 100%;
-            max-height: 400px;
+            max-height: 350px;
             object-fit: cover;
-            filter: grayscale(30%) contrast(110%);
-            transition: all 0.5s ease;
+            transition: all 0.4s ease;
         }
 
-        .image-frame:hover .web-image {
-            transform: scale(1.04) rotate(0.5deg);
-            filter: grayscale(0%) contrast(100%);
+        .image-wrapper:hover .web-image {
+            transform: scale(1.03);
+            filter: brightness(1.1);
         }
 
+        /* Clean Visual Grid Tables */
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 30px 0;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.05);
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(0,0,0,0.3);
         }
 
         th, td {
-            padding: 18px;
+            padding: 15px;
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         th {
             background-color: rgba(0, 240, 255, 0.05);
-            color: var(--neon-cyan);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--neon-blue);
         }
 
         tr:hover td {
-            background-color: rgba(157, 0, 255, 0.08);
+            background-color: rgba(168, 85, 247, 0.1);
             color: #fff;
-            border-bottom-color: var(--neon-purple);
         }
 
+        /* Simplified Number Steps */
         ol {
             list-style: none;
-            counter-reset: tech-counter;
             padding-left: 0;
         }
         ol li {
-            counter-increment: tech-counter;
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.02);
-            border-left: 3px solid var(--neon-purple);
-        }
-        ol li::before {
-            content: "[NODE 0" counter(tech-counter) "]";
-            color: var(--neon-purple);
-            font-weight: bold;
-            margin-right: 15px;
+            margin-bottom: 15px;
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.01);
+            border-left: 4px solid var(--neon-purple);
+            border-radius: 0 6px 6px 0;
         }
 
-        /* --- DYNAMIC QUIZ & INTERACTION SYSTEM --- */
-        .quiz-wrapper {
-            background: rgba(5,5,10,0.6);
-            border: 1px solid var(--neon-cyan);
-            padding: 30px;
-            border-radius: 4px;
-            margin-top: 20px;
+        /* --- THE INTERACTIVE QUIZ UNIT --- */
+        .quiz-panel {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--neon-blue);
+            padding: 25px;
+            border-radius: 8px;
         }
 
-        .quiz-btn {
+        .answer-option {
             display: block;
             width: 100%;
             background: rgba(255,255,255,0.02);
-            color: var(--text-neon);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            padding: 14px;
-            margin: 12px 0;
+            color: var(--text-light);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 12px;
+            margin: 10px 0;
             text-align: left;
             font-family: inherit;
             font-size: 1rem;
+            border-radius: 4px;
             transition: all 0.2s ease;
         }
 
-        .quiz-btn:hover {
+        .answer-option:hover {
             background: rgba(0, 240, 255, 0.1);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0,240,255,0.2);
-            transform: translateX(5px);
+            border-color: var(--neon-blue);
+            transform: translateX(4px);
         }
 
-        #quiz-progress-bar {
+        #progress-container {
             width: 100%;
-            height: 6px;
-            background: #111827;
+            height: 8px;
+            background: #111424;
             margin-top: 20px;
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
         }
-        #quiz-progress-fill {
+        #progress-fill {
             width: 0%;
             height: 100%;
-            background: var(--neon-cyan);
+            background: var(--neon-blue);
             transition: width 0.3s ease;
-            box-shadow: 0 0 8px var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-blue);
         }
 
-        /* --- BREAK & ARCADE MODE PANEL --- */
-        #break-arcade-layer {
+        /* --- ARCADE GAME SYSTEM --- */
+        #arcade-break-room {
             display: none;
             margin-top: 30px;
-            border: 2px solid var(--neon-magenta);
-            background: #020205;
-            padding: 30px;
+            border: 2px solid var(--neon-pink);
+            background: #020308;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(255, 0, 85, 0.2);
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.2);
+            border-radius: 8px;
         }
 
-        .break-banner {
-            color: var(--neon-magenta);
-            font-size: 2.2rem;
-            font-weight: bold;
-            letter-spacing: 3px;
+        .arcade-headline {
+            color: var(--neon-pink);
+            font-size: 2rem;
+            letter-spacing: 2px;
             margin-bottom: 5px;
-            animation: textBreathe 2s infinite alternate;
+            animation: glowingText 1.5s infinite alternate;
         }
 
         #gameCanvas {
-            background: #050b14;
-            border: 2px solid #111827;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            margin-top: 20px;
+            background: #090e1a;
+            border: 2px solid #1e293b;
+            margin-top: 25px;
+            border-radius: 6px;
+            max-width: 100%;
         }
 
         footer {
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             color: #475569;
-            font-size: 0.9rem;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
     </style>
 </head>
 <body>
 
-    <!-- CUSTOM HARDWARE CURSORS -->
-    <div id="custom-cursor-dot"></div>
-    <div id="custom-cursor-ring"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
 
-    <!-- 1. SYSTEM GATE OVERLAY -->
-    <div id="intro-overlay">
-        <div class="intro-card">
-            <h1>CORE_NETWORK_INBOUND</h1>
-            <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">
-                System initialization complete. Access terminal pathways to download web building sequences and unlock active gaming testing phases.
+    <div id="intro-screen">
+        <div class="welcome-box">
+            <h1>Web Guide & Arcade</h1>
+            <p style="color: #94a3b8; line-height: 1.6;">
+                Welcome! Step inside to learn how websites work in simple steps, take a quick 10-question quiz, and unlock a classic Flappy Bird mini-game break.
             </p>
-            <button class="start-btn" onclick="startWebsite()">INITIALIZE RUNTIME</button>
+            <button class="start-btn" onclick="openSystemHub()">CLICK TO START</button>
         </div>
     </div>
 
-    <!-- 2. SYSTEM CONTENT INTERFACE -->
-    <div id="main-content">
+    <div id="main-site">
         <header>
-            <h1>QUANTUM_WEB_RESOURCES</h1>
-            <p style="color: var(--neon-cyan); letter-spacing: 2px;">Architectural Protocol Index // Live Build Ver. 3.0.26</p>
+            <h1>Discovering Websites</h1>
+            <p style="color: var(--neon-blue); letter-spacing: 1px;">Simple lessons, interactive tests, and gaming fun.</p>
         </header>
 
         <nav>
-            <a href="#what-is-it">// DEFINITION</a>
-            <a href="#types-examples">// GRID_MATRIX</a>
-            <a href="#steps">// DEPLOYMENT_NODES</a>
-            <a href="#verification-gate" style="color: var(--neon-magenta);">// UNLOCK_BREAK_ROOM</a>
+            <a href="#what-is-it">01. What is it?</a>
+            <a href="#types-examples">02. Examples</a>
+            <a href="#steps">03. How to Build</a>
+            <a href="#quiz-gate" style="color: var(--neon-pink);">04. Quiz & Game Room</a>
         </nav>
 
         <div class="container">
 
-            <!-- Definition Node -->
             <section id="what-is-it">
-                <h2>01 // Core Web Infrastructure</h2>
-                <div class="image-frame">
-                    <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1100&q=80" alt="Cyber Grid">
+                <h2>01 // What is a Website?</h2>
+                <div class="image-wrapper">
+                    <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1100&q=80" alt="Web Grid">
                 </div>
-                <p>A <strong>website</strong> is a cluster of high-level cloud documents, linked implicitly via structural hyper-paths sharing an exact core domain address. They translate digital protocols into active human-readable user experiences.</p>
-                <p>The system grid ecosystem spanning these millions of localized domain clusters maps the entire World Wide Web (WWW) core framework.</p>
+                <p>Think of a <strong>website</strong> like a digital book stored on the internet. Instead of paper pages, it has <strong>web pages</strong> filled with text, pictures, and buttons.</p>
+                <p>When you put all the public websites in the world together, you get the <strong>World Wide Web (WWW)</strong>!</p>
             </section>
 
-            <!-- Table Module -->
             <section id="types-examples">
-                <h2>02 // Functional Network Classification</h2>
+                <h2>02 // Types of Common Websites</h2>
+                <p>Websites are styled differently based on what they help you accomplish:</p>
+                
                 <table>
                     <thead>
                         <tr>
-                            <th>Classification</th>
-                            <th>Dynamic Protocol Engine</th>
-                            <th>Native Arrays</th>
+                            <th>Website Type</th>
+                            <th>What It Does</th>
+                            <th>Real Examples</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Search Arrays</td>
-                            <td>Recursive algorithmic data parsers running index loops globally.</td>
-                            <td>Google Engine, Bing Hub</td>
+                            <td><strong>Search Engines</strong></td>
+                            <td>Helps you find answers and information instantly.</td>
+                            <td>Google, Bing</td>
                         </tr>
                         <tr>
-                            <td>Secure Ledgers</td>
-                            <td>Encrypted merchant gateways processing point-to-point commerce.</td>
-                            <td>Amazon Grid, eBay Core</td>
+                            <td><strong>Online Shops</strong></td>
+                            <td>Lets you buy products, clothes, and games from home.</td>
+                            <td>Amazon, eBay</td>
                         </tr>
                         <tr>
-                            <td>Graph Networks</td>
-                            <td>Real-time peer-to-peer user matrices routing asset pipelines.</td>
-                            <td>X-Terminal, Instagram Feed</td>
+                            <td><strong>Social Media</strong></td>
+                            <td>Connects you with friends and allows sharing of photos.</td>
+                            <td>Instagram, X (Twitter)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Streaming Sites</strong></td>
+                            <td>Plays music and video directly on your screen.</td>
+                            <td>YouTube, Netflix, Spotify</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
-            <!-- Sequence List -->
             <section id="steps">
-                <h2>03 // Code Construction Pipeline</h2>
-                <div class="image-frame">
-                    <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1100&q=80" alt="Tech">
+                <h2>03 // Simple Steps to Create Your Own Website</h2>
+                <div class="image-wrapper">
+                    <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1100&q=80" alt="Coding">
                 </div>
-                <p>System configuration commands require sequential operational alignment:</p>
+                <p>Building a basic page takes four easy phases:</p>
                 <ol>
-                    <li>Structural Mapping of system assets and view-port limits.</li>
-                    <li>DNS Routing Reservation assigning global network addresses.</li>
-                    <li>Provisioning physical server matrices or containerized virtualization hosting.</li>
-                    <li>Native compiling of client-side logic using HTML5 schemas, style cascading, and JS runtime scripts.</li>
+                    <li><strong>Plan Content:</strong> Decide what your website is going to say or sell.</li>
+                    <li><strong>Get an Address:</strong> Buy a domain link name (like www.mywebsite.com).</li>
+                    <li><strong>Rent a Host Server:</strong> Rent space on an internet computer to hold your files.</li>
+                    <li><strong>Write the Code:</strong> Use simple building languages like <strong>HTML</strong> for structure, <strong>CSS</strong> for colors, and <strong>JavaScript</strong> for action.</li>
                 </ol>
             </section>
 
-            <!-- 10 QUESTION SYSTEM QUIZ GATEWAY -->
-            <section id="verification-gate">
-                <h2>04 // Target Node Authentication Gate</h2>
-                <p style="color: #64748b;">Answer exactly **10 technical questions** sequentially to complete authorization diagnostics and unlock your system break room reward phase.</p>
+            <section id="quiz-gate">
+                <h2>04 // Complete 10 Questions to Earn a Break</h2>
+                <p style="color: #94a3b8;">Answer all 10 simple true/false or multi-choice checks below. Get a perfect streak to activate the Flappy Game console!</p>
                 
-                <div class="quiz-wrapper" id="quiz-block">
-                    <h3 id="question-text">Loading Node Authorization Parameters...</h3>
-                    <div id="options-box"></div>
+                <div class="quiz-panel" id="quiz-box-container">
+                    <h3 id="question-text">Loading verification check parameters...</h3>
+                    <div id="options-holder"></div>
                     
-                    <div id="quiz-progress-bar">
-                        <div id="quiz-progress-fill"></div>
+                    <div id="progress-container">
+                        <div id="progress-fill"></div>
                     </div>
-                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--neon-cyan);" id="tracker-text">Node Progress: 0 / 10</p>
+                    <p style="margin-top: 12px; font-size: 0.9rem; color: var(--neon-blue);" id="count-text">Questions Completed: 0 / 10</p>
                 </div>
 
-                <!-- HIDDEN BREAK LAYER - ACTIVE ONLY POST 10 ANSWERS -->
-                <div id="break-arcade-layer">
-                    <div class="break-banner">☕ BREAK TIME PROTOCOL LOCKED IN!</div>
-                    <p style="color: #94a3b8; max-width: 600px; margin: 10px auto 25px auto;">Diagnostics finished successfully. Core processing threads shifted into idle execution status. Tap the mini matrix grid layer below to initiate Fly Matrix operations.</p>
+                <div id="arcade-break-room">
+                    <div class="arcade-headline">🕹️ GAME UNLOCKED: NEON FLAP</div>
+                    <p style="color: #94a3b8;">Nice work! Your break time is active. Use **SPACEBAR** or **CLICK INSIDE BOX** to jump and fly around the neon laser tubes.</p>
                     
-                    <div style="font-size: 1.2rem; color: var(--neon-magenta); font-weight: bold; margin-bottom: 10px;">
-                        SCORE: <span id="scoreDisplay">0</span> // PEAK: <span id="highScoreDisplay">0</span>
+                    <div style="font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
+                        SCORE: <span id="gameScore">0</span> // BEST RECORD: <span id="gameBest">0</span>
                     </div>
-                    <canvas id="gameCanvas" width="480" height="420"></canvas>
+                    <canvas id="gameCanvas" width="480" height="400"></canvas>
                 </div>
             </section>
 
         </div>
 
         <footer>
-            <p>&copy; 2026 Core Network Interface Terminal. System Operations Active.</p>
+            <p>&copy; 2026 Interactive Code Station. Clean HTML Single Page Object.</p>
         </footer>
     </div>
 
-    <!-- CORE LOGIC FRAMEWORK ENGINE -->
     <script>
-        // --- CUSTOM CURSOR TRACKER MOTOR ---
-        const cursorDot = document.getElementById('custom-cursor-dot');
-        const cursorRing = document.getElementById('custom-cursor-ring');
+        // --- NATIVE RETRO AUDIO GENERATOR ENGINE (NO EXTERNAL AUDIO SAMPLES NEEDED) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            // Re-verify context is active to clear modern browser auto-blockers
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.08);
+            } 
+            else if (type === 'jump') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(250, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(550, audioCtx.currentTime + 0.12);
+                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.12);
+            } 
+            else if (type === 'score') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5 note
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5 note
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+            } 
+            else if (type === 'crash') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(40, audioCtx.currentTime + 0.3);
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.35);
+            }
+        }
+
+        // --- HARDWARE POINTER CURSOR LOGIC ---
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
 
         document.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-            
-            // Subtle offset tracking creates elastic latency tracking illusion
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
             setTimeout(() => {
-                cursorRing.style.left = e.clientX + 'px';
-                cursorRing.style.top = e.clientY + 'px';
-            }, 30);
+                ring.style.left = e.clientX + 'px';
+                ring.style.top = e.clientY + 'px';
+            }, 35);
         });
 
         document.addEventListener('mousedown', () => {
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-            cursorRing.style.transform = 'translate(-50%, -50%) scale(1.4)';
-            cursorRing.style.borderColor = 'var(--neon-cyan)';
+            dot.style.transform = 'translate(-50%, -50%) scale(0.6)';
+            ring.style.transform = 'translate(-50%, -50%) scale(1.3)';
+            ring.style.borderColor = 'var(--neon-blue)';
         });
-
         document.addEventListener('mouseup', () => {
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorRing.style.borderColor = 'var(--neon-magenta)';
+            dot.style.transform = 'translate(-50%, -50%) scale(1)';
+            ring.style.transform = 'translate(-50%, -50%) scale(1)';
+            ring.style.borderColor = 'var(--neon-pink)';
         });
 
-
-        // --- OVERLAY LAYER INTERFACES ---
-        function startWebsite() {
-            const overlay = document.getElementById('intro-overlay');
-            const mainContent = document.getElementById('main-content');
+        // --- OVERLAY LAYER SWITCH ---
+        function openSystemHub() {
+            playSound('click');
+            const overlay = document.getElementById('intro-screen');
+            const mainHub = document.getElementById('main-site');
             overlay.style.opacity = '0';
-            overlay.style.transform = 'translateY(-100%)';
+            overlay.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 overlay.style.display = 'none';
-                mainContent.style.display = 'block';
-                mainContent.style.opacity = '1';
-                loadQuestion();
+                mainHub.style.display = 'block';
+                mainHub.style.opacity = '1';
+                loadQuizQuestion();
             }, 800);
         }
 
-        // --- 10 HARDCORE ARRAY DATA FOR THE QUIZ ---
-        const quizBank = [
-            { q: "What tag structure builds primary heading frameworks?", a: ["<h1>", "<p>", "<head>", "<div>"], r: 0 },
-            { q: "Which property dictates layout background tones?", a: ["color", "background-color", "border", "texture"], r: 1 },
-            { q: "What mechanism allocates global identity labels to sites?", a: ["Web Host", "DNS Domain Name", "HTML", "IP Packet"], r: 1 },
-            { q: "What does HTML express natively?", a: ["HyperText Markup Language", "High Tech Media Loop", "Hyper Transfer Link", "Home Terminal Management"], r: 0 },
-            { q: "CSS specializes in matching which design vector?", a: ["Database Logic", "Visual Layouts & Presentation", "Data Encryption", "Server Sockets"], r: 1 },
-            { q: "Which tag embeds structural image assets?", a: ["<link>", "<src>", "<img>", "<href>"], r: 2 },
-            { q: "Which company deploys the primary global Search Node index?", a: ["Amazon", "Google", "Netflix", "Wikipedia"], r: 1 },
-            { q: "What element holds meta headers outside visibility views?", a: ["<body>", "<nav>", "<footer>", "<head>"], r: 3 },
-            { q: "JavaScript provides which layer inside web structures?", a: ["Static Raw Texts", "Database Hosting", "Dynamic Logical Behavior", "Network Routers"], r: 2 },
-            { q: "What acronym describes the interconnected global site structure?", a: ["WWW", "FTP", "DNS", "URL"], r: 0 }
+        // --- 10 SIMPLE USER-FRIENDLY QUESTIONS ---
+        const simplifedQuiz = [
+            { q: "A website is like a collection of digital pages stored on the internet.", a: ["True (Correct)", "False"], r: 0 },
+            { q: "What does the 'WWW' abbreviation mean standardly?", a: ["Word Web Website", "World Wide Web (Correct)", "West Web World"], r: 1 },
+            { q: "Which tool helps you easily search for answers on the internet?", a: ["An Online Shop", "A Search Engine (Correct)", "A Movie Streamer"], r: 1 },
+            { q: "Amazon and eBay are best classified as what type of website?", a: ["Social Networks", "Online Shops / E-Commerce (Correct)", "Search Frameworks"], r: 1 },
+            { q: "The unique address name you type to visit a website is called a...", a: ["Server box", "Domain Name (Correct)", "HTML link"], r: 1 },
+            { q: "What basic core coding language builds the skeletal structure of a web page?", a: ["Python", "HTML (Correct)", "C++"], r: 1 },
+            { q: "We use 'CSS' mainly to add colors, fonts, and designs to our websites.", a: ["True (Correct)", "False"], r: 0 },
+            { q: "What language makes elements move and respond to button clicks?", a: ["HTML", "JavaScript (Correct)", "SQL database"], r: 1 },
+            { q: "Websites are stored on powerful internet computers called...", fill: "", a: ["Browsers", "Servers / Hosts (Correct)", "Cursors"], r: 1 },
+            { q: "YouTube, Netflix, and Spotify are examples of what?", a: ["Streaming Websites (Correct)", "Search Engines", "Personal Blogs"], r: 0 }
         ];
 
-        let currentIdx = 0;
+        let quizIndex = 0;
 
-        function loadQuestion() {
-            if (currentIdx >= 10) {
-                // Unlock break room system shift
-                document.getElementById('quiz-block').style.display = 'none';
-                document.getElementById('break-arcade-layer').style.display = 'block';
-                initGameEngine();
+        function loadQuizQuestion() {
+            if (quizIndex >= 10) {
+                document.getElementById('quiz-box-container').style.display = 'none';
+                document.getElementById('arcade-break-room').style.display = 'block';
+                initArcadeGame();
                 return;
             }
 
-            const activeNode = quizBank[currentIdx];
-            document.getElementById('question-text').textContent = `NODE_0${currentIdx + 1} // ${activeNode.q}`;
+            const currentObj = simplifedQuiz[quizIndex];
+            document.getElementById('question-text').textContent = `Question ${quizIndex + 1}: ${currentObj.q}`;
             
-            const optionsBox = document.getElementById('options-box');
+            const optionsBox = document.getElementById('options-holder');
             optionsBox.innerHTML = '';
             
-            activeNode.a.forEach((opt, idx) => {
+            currentObj.a.forEach((optionString, numericalIdx) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-btn';
-                btn.textContent = `[0${idx + 1}] -> ${opt}`;
-                btn.onclick = () => checkAnswer(idx);
+                btn.className = 'answer-option';
+                btn.textContent = optionString;
+                btn.onclick = () => verifyAnswer(numericalIdx);
                 optionsBox.appendChild(btn);
             });
 
-            // Update Progress UI bars
-            const progressPct = (currentIdx / 10) * 100;
-            document.getElementById('quiz-progress-fill').style.width = `${progressPct}%`;
-            document.getElementById('tracker-text').textContent = `Node Progress: ${currentIdx} / 10 Verification Steps`;
+            // Update Progress fill bar
+            const percentWidth = (quizIndex / 10) * 100;
+            document.getElementById('progress-fill').style.width = `${percentWidth}%`;
+            document.getElementById('count-text').textContent = `Questions Completed: ${quizIndex} / 10`;
         }
 
-        function checkAnswer(chosen) {
-            const activeNode = quizBank[currentIdx];
-            if(chosen === activeNode.r) {
-                currentIdx++;
-                loadQuestion();
+        function verifyAnswer(clickedIdx) {
+            playSound('click');
+            const validationTarget = simplifedQuiz[quizIndex];
+            if (clickedIdx === validationTarget.r) {
+                quizIndex++;
+                loadQuizQuestion();
             } else {
-                // Flash mistake indication feedback frame
-                cursorRing.style.borderColor = 'red';
-                alert("DIAGNOSTIC EXCEPTION: Wrong validation parameter sequence. Try that node parameter again.");
+                alert("Whoops, wrong answer! Let's read that carefully and choose again.");
             }
         }
 
-        // --- BREAK REWARD ARCADE ENGINE (FLAPPY MODE) ---
+        // --- RETRO NEON ARCADE CORE ENGINE (FLAPPY GAME) ---
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const highScoreDisplay = document.getElementById('highScoreDisplay');
+        const scoreUI = document.getElementById('gameScore');
+        const highscoreUI = document.getElementById('gameBest');
 
-        let bird, pipes = [], frameCounter = 0, score = 0;
-        let highScore = localStorage.getItem('cyberHighScore') || 0;
-        let gameActive = false, gameOver = false;
+        let birdPlayer, pipesArray = [], frames = 0, currentScore = 0;
+        let localBest = localStorage.getItem('simpleFlapBest') || 0;
+        let isPlaying = false, isDead = false;
 
-        highScoreDisplay.textContent = highScore;
+        highscoreUI.textContent = localBest;
 
-        class CyberBird {
+        class NeonOrb {
             constructor() {
-                this.x = 80; this.y = 200; this.radius = 14;
-                this.gravity = 0.38; this.velocity = 0; this.jumpStrength = -6.8;
+                this.x = 70; this.y = 180; this.size = 12;
+                this.gravitySpeed = 0.4; this.velocity = 0; this.jumpStrength = -6.5;
             }
-            draw() {
+            render() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                let angle = Math.min(Math.max(this.velocity * 0.05, -0.5), 0.7);
-                ctx.rotate(angle);
-                let gradient = ctx.createRadialGradient(0, 0, 2, 0, 0, this.radius);
-                gradient.addColorStop(0, '#ffffff'); gradient.addColorStop(0.4, '#ff0055'); gradient.addColorStop(1, 'transparent');
-                ctx.beginPath(); ctx.arc(0, 0, this.radius + 6, 0, Math.PI * 2); ctx.fillStyle = gradient;
-                ctx.shadowBlur = 15; ctx.shadowColor = '#ff0055'; ctx.fill(); ctx.closePath();
+                
+                // Tilt object look according to fall physics
+                let currentAngle = Math.min(Math.max(this.velocity * 0.05, -0.4), 0.6);
+                ctx.rotate(currentAngle);
+
+                let glowGrd = ctx.createRadialGradient(0, 0, 1, 0, 0, this.size);
+                glowGrd.addColorStop(0, '#ffffff');
+                glowGrd.addColorStop(0.5, '#ff0055');
+                glowGrd.addColorStop(1, 'transparent');
+
+                ctx.beginPath(); ctx.arc(0, 0, this.size + 6, 0, Math.PI * 2);
+                ctx.fillStyle = glowGrd; ctx.shadowBlur = 12; ctx.shadowColor = '#ff0055';
+                ctx.fill(); ctx.closePath();
                 ctx.restore();
             }
-            update() {
-                this.velocity += this.gravity; this.y += this.velocity;
-                if (this.y + this.radius >= canvas.height) { this.y = canvas.height - this.radius; endGame(); }
-                if (this.y - this.radius <= 0) { this.y = this.radius; this.velocity = 0; }
+            movement() {
+                this.velocity += this.gravitySpeed; this.y += this.velocity;
+                if (this.y + this.size >= canvas.height) { this.y = canvas.height - this.size; handleCrash(); }
+                if (this.y - this.size <= 0) { this.y = this.size; this.velocity = 0; }
             }
-            jump() { this.velocity = this.jumpStrength; }
+            flap() { this.velocity = this.jumpStrength; playSound('jump'); }
         }
 
-        class TechPipe {
+        class LaserPipe {
             constructor() {
-                this.gap = 125; this.width = 65; this.x = canvas.width;
-                this.topHeight = Math.floor(Math.random() * (canvas.height - this.gap - 120)) + 40;
-                this.bottomHeight = canvas.height - (this.topHeight + this.gap);
-                this.passed = false;
+                this.clearGap = 130; this.w = 60; this.x = canvas.width;
+                this.topH = Math.floor(Math.random() * (canvas.height - this.clearGap - 100)) + 30;
+                this.botH = canvas.height - (this.topH + this.clearGap);
+                this.counted = false;
             }
-            draw() {
-                ctx.save(); ctx.shadowBlur = 10; ctx.shadowColor = '#00f0ff';
-                ctx.fillStyle = 'rgba(0, 240, 255, 0.2)'; ctx.strokeStyle = '#00f0ff'; ctx.lineWidth = 2;
-                ctx.fillRect(this.x, 0, this.width, this.topHeight); ctx.strokeRect(this.x, 0, this.width, this.topHeight);
-                ctx.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
-                ctx.strokeRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
-                ctx.fillStyle = '#ff0055'; ctx.fillRect(this.x - 2, this.topHeight - 6, this.width + 4, 6);
-                ctx.fillRect(this.x - 2, canvas.height - this.bottomHeight, this.width + 4, 6);
+            render() {
+                ctx.save(); ctx.shadowBlur = 8; ctx.shadowColor = '#00f0ff';
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.15)'; ctx.strokeStyle = '#00f0ff'; ctx.lineWidth = 2;
+                
+                // Upper obstacle bar
+                ctx.fillRect(this.x, 0, this.w, this.topH); ctx.strokeRect(this.x, 0, this.w, this.topH);
+                // Lower obstacle bar
+                ctx.fillRect(this.x, canvas.height - this.botH, this.w, this.botH); ctx.strokeRect(this.x, canvas.height - this.botH, this.w, this.botH);
+                
+                // Highlighting danger lines
+                ctx.fillStyle = '#ff0055'; ctx.fillRect(this.x - 1, this.topH - 5, this.w + 2, 5);
+                ctx.fillRect(this.x - 1, canvas.height - this.botH, this.w + 2, 5);
                 ctx.restore();
             }
-            update() { this.x -= 3; }
+            movement() { this.x -= 2.6; }
         }
 
-        function initGameEngine() {
-            bird = new CyberBird(); pipes = []; score = 0; frameCounter = 0; gameOver = false;
-            scoreDisplay.textContent = score;
-            ctx.fillStyle = '#030712'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            bird.draw();
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00f0ff'; ctx.font = 'bold 15px Courier New'; ctx.textAlign = 'center';
-            ctx.fillText('>> EXECUTE TAP OR SPACEBAR TO START BREAK JUMP <<', canvas.width / 2, canvas.height / 2);
+        function initArcadeGame() {
+            birdPlayer = new NeonOrb(); pipesArray = []; currentScore = 0; frames = 0; isDead = false;
+            scoreUI.textContent = currentScore;
+            
+            ctx.fillStyle = '#050814'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            birdPlayer.render();
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.65)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00f0ff'; ctx.font = 'bold 15px monospace'; ctx.textAlign = 'center';
+            ctx.fillText('>> CLICK OR PRESS SPACEBAR TO FLY! <<', canvas.width / 2, canvas.height / 2);
         }
 
-        function gameLoop() {
-            if (!gameActive || gameOver) return;
+        function runGameLoop() {
+            if (!isPlaying || isDead) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#030712'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#050814'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            bird.update(); bird.draw();
+            birdPlayer.movement(); birdPlayer.render();
 
-            if (frameCounter % 90 === 0) pipes.push(new TechPipe());
+            if (frames % 95 === 0) pipesArray.push(new LaserPipe());
 
-            for (let i = pipes.length - 1; i >= 0; i--) {
-                pipes[i].update(); pipes[i].draw();
-                if (bird.x + bird.radius > pipes[i].x && bird.x - bird.radius < pipes[i].x + pipes[i].width &&
-                    (bird.y - bird.radius < pipes[i].topHeight || bird.y + bird.radius > canvas.height - pipes[i].bottomHeight)) {
-                    endGame();
+            for (let i = pipesArray.length - 1; i >= 0; i--) {
+                pipesArray[i].movement(); pipesArray[i].render();
+                
+                // Hit detection tracking calculation
+                if (birdPlayer.x + birdPlayer.size > pipesArray[i].x && birdPlayer.x - birdPlayer.size < pipesArray[i].x + pipesArray[i].w &&
+                    (birdPlayer.y - birdPlayer.size < pipesArray[i].topH || birdPlayer.y + birdPlayer.size > canvas.height - pipesArray[i].botH)) {
+                    handleCrash();
                 }
-                if (!pipes[i].passed && pipes[i].x + pipes[i].width < bird.x) {
-                    score++; pipes[i].passed = true; scoreDisplay.textContent = score;
-                    if (score > highScore) {
-                        highScore = score; highScoreDisplay.textContent = highScore;
-                        localStorage.setItem('cyberHighScore', highScore);
+
+                if (!pipesArray[i].counted && pipesArray[i].x + pipesArray[i].w < birdPlayer.x) {
+                    currentScore++; pipesArray[i].counted = true; scoreUI.textContent = currentScore;
+                    playSound('score');
+                    if (currentScore > localBest) {
+                        localBest = currentScore; highscoreUI.textContent = localBest;
+                        localStorage.setItem('simpleFlapBest', localBest);
                     }
                 }
-                if (pipes[i].x + pipes[i].width < 0) pipes.splice(i, 1);
+                if (pipesArray[i].x + pipesArray[i].w < 0) pipesArray.splice(i, 1);
             }
-            frameCounter++; requestAnimationFrame(gameLoop);
+            frames++; requestAnimationFrame(runGameLoop);
         }
 
-        function handleInput() {
-            if (!gameActive && !gameOver) { gameActive = true; gameLoop(); }
-            if (gameOver) { initGameEngine(); gameActive = true; gameLoop(); return; }
-            bird.jump();
+        function registerInputTrigger() {
+            if (!isPlaying && !isDead) { isPlaying = true; runGameLoop(); }
+            if (isDead) { initArcadeGame(); isPlaying = true; runGameLoop(); return; }
+            birdPlayer.flap();
         }
 
-        function endGame() {
-            gameOver = true; gameActive = false;
-            ctx.fillStyle = 'rgba(5, 5, 8, 0.9)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#ff0055'; ctx.font = 'bold 20px Courier New'; ctx.textAlign = 'center';
-            ctx.fillText('BREAK OVER: CRASH DETECTED', canvas.width / 2, canvas.height / 2 - 10);
-            ctx.fillStyle = '#fff'; ctx.font = '13px Courier New';
-            ctx.fillText('Tap Canvas / Spacebar to Re-Initialize Break Session', canvas.width / 2, canvas.height / 2 + 25);
+        function handleCrash() {
+            isDead = true; isPlaying = false;
+            playSound('crash');
+            ctx.fillStyle = 'rgba(10, 5, 15, 0.85)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff0055'; ctx.font = 'bold 22px monospace'; ctx.textAlign = 'center';
+            ctx.fillText('CRASH! GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
+            ctx.fillStyle = '#fff'; ctx.font = '13px monospace';
+            ctx.fillText('Tap Canvas or Spacebar to try again!', canvas.width / 2, canvas.height / 2 + 25);
         }
 
         window.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && document.getElementById('break-arcade-layer').style.display === 'block') {
-                e.preventDefault(); handleInput();
+            if (e.code === 'Space' && document.getElementById('arcade-break-room').style.display === 'block') {
+                e.preventDefault(); registerInputTrigger();
             }
         });
-        canvas.addEventListener('click', (e) => { e.stopPropagation(); handleInput(); });
+        canvas.addEventListener('click', (e) => { e.stopPropagation(); registerInputTrigger(); });
     </script>
 </body>
 </html>
