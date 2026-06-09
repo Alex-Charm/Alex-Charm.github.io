@@ -15,89 +15,115 @@
             color: #333;
             overflow-x: hidden;
         }
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 40px 0;
-            text-align: center;
-            position: relative;
-        }
         
-        /* Smooth CSS Animations */
-        header h1 {
-            margin: 0;
-            animation: slideDown 1s ease-out;
+        /* Keyframe Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        header p {
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: #ffffff;
+            padding: 60px 0;
+            text-align: center;
             animation: fadeIn 1.5s ease-out;
         }
-        
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
         nav {
             background-color: #34495e;
-            padding: 12px;
+            padding: 15px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         nav a {
             color: white;
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
-            transition: color 0.3s, transform 0.3s;
-            display: inline-block;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
         }
-        /* Link Hover Animation */
         nav a:hover {
             color: #1abc9c;
-            transform: scale(1.1);
         }
-        
+        /* Navigation Underline Animation */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #1abc9c;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Main Container & Sections */
         .container {
             max-width: 900px;
-            margin: 20px auto;
+            margin: 30px auto;
             padding: 20px;
             background: #ffffff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-radius: 8px;
         }
-        
-        /* Section Animation Entry */
         section {
-            animation: fadeInUp 1s ease-out;
             padding: 20px 0;
+            /* Applies the scroll/load fade-in animation to sections */
+            animation: fadeInUp 1s ease-out both;
         }
-        
         h2 {
             color: #2c3e50;
             border-bottom: 2px solid #ecf0f1;
             padding-bottom: 10px;
         }
-        
-        /* Image Layout & Effects */
-        .image-container {
-            text-align: center;
-            margin: 25px 0;
-        }
+
+        /* Images & Hover Animations */
         .web-image {
-            max-width: 100%;
-            height: auto;
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        /* Image Hover Zoom Animation */
         .web-image:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-        
+
+        /* Table Styles */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: #fff;
         }
         table, th, td {
             border: 1px solid #bdc3c7;
@@ -105,29 +131,19 @@
         th, td {
             padding: 12px;
             text-align: left;
-            transition: background-color 0.3s;
         }
         th {
             background-color: #f2f2f2;
         }
-        /* Table Row Hover Animation */
-        tbody tr:hover td {
-            background-color: #f1f9f7;
-        }
         
+        /* Lists */
         ol, ul {
             padding-left: 20px;
         }
         li {
             margin-bottom: 10px;
-            transition: transform 0.2s;
         }
-        /* List Item Hover Shift */
-        li:hover {
-            transform: translateX(5px);
-            color: #1abc9c;
-        }
-        
+
         footer {
             text-align: center;
             padding: 20px;
@@ -135,27 +151,13 @@
             color: white;
             margin-top: 40px;
         }
-
-        /* Keyframes Definitions */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Understanding the Web</h1>
-        <p>A interactive guide to what websites are, their uses, and how to make them.</p>
+        <p>A beautifully animated guide to what websites are, their uses, and how to make them.</p>
     </header>
 
     <nav>
@@ -167,21 +169,18 @@
 
     <div class="container">
 
-        <section id="what-is-it">
+        <section id="what-is-it" style="animation-delay: 0.2s;">
             <h2>What is a Website?</h2>
+            <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=900&q=80" alt="Web Design Concept">
             <p>A <strong>website</strong> is a collection of publicly accessible, interlinked web pages that share a single domain name. Websites can be created and maintained by an individual, group, business, or organization to serve a variety of purposes.</p>
             <p>Together, all publicly accessible websites constitute the <strong>World Wide Web (WWW)</strong>.</p>
-            
-            <div class="image-container">
-                <img src="http://googleusercontent.com/image_generation_content/0" alt="Website UI Displayed on Mobile Device" class="web-image">
-            </div>
         </section>
 
         <hr>
 
-        <section id="types-examples">
+        <section id="types-examples" style="animation-delay: 0.4s;">
             <h2>Types of Websites & Examples</h2>
-            <p>Websites come in many shapes and sizes depending on their goals. Hover over the table rows to explore them:</p>
+            <p>Websites come in many shapes and sizes depending on their goals. Here are the most common types:</p>
             
             <table>
                 <thead>
@@ -223,9 +222,10 @@
 
         <hr>
 
-        <section id="uses">
+        <section id="uses" style="animation-delay: 0.6s;">
             <h2>What Do We Use Websites For?</h2>
-            <p>Websites have completely transformed how society functions. Hover over the points below:</p>
+            <img class="web-image" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Using Website Analytics">
+            <p>Websites have completely transformed how society functions. We primarily use them for:</p>
             <ul>
                 <li><strong>Information Sharing:</strong> Finding answers to questions, reading the news, and learning new skills.</li>
                 <li><strong>Communication:</strong> Staying in touch with friends, family, and colleagues globally.</li>
@@ -237,8 +237,9 @@
 
         <hr>
 
-        <section id="steps">
+        <section id="steps" style="animation-delay: 0.8s;">
             <h2>5 Basic Steps to Create a Website</h2>
+            <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=900&q=80" alt="Coding a Website">
             <p>Building a website is easier than ever. Here is the standard roadmap to getting your site live on the internet:</p>
             <ol>
                 <li>
@@ -251,15 +252,15 @@
                 </li>
                 <li>
                     <strong>Choose a Web Hosting Provider:</strong> 
-                    A web host provides the server space where your website's files live so people around the world can access it.
+                    A web host provides the server space where your website's files live so people can access it.
                 </li>
                 <li>
                     <strong>Build the Site:</strong> 
-                    You can code the site yourself using <strong>HTML, CSS, and JavaScript</strong>, or use a Content Management System (CMS).
+                    You can code the site yourself using <strong>HTML, CSS, and JavaScript</strong>, or use a CMS like WordPress or Wix.
                 </li>
                 <li>
                     <strong>Publish and Maintain:</strong> 
-                    Upload your files to your host to take the website live. Regularly update your content to keep it running smoothly.
+                    Upload your files to your host to take it live, and keep your content updated!
                 </li>
             </ol>
         </section>
@@ -267,7 +268,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Web Guide Website. Built with HTML, CSS & Dynamic Animations.</p>
+        <p>&copy; 2026 Web Guide Website. Built with HTML, CSS, & Animations.</p>
     </footer>
 
 </body>
