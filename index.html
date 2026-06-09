@@ -21,6 +21,11 @@
             scroll-behavior: smooth;
         }
 
+        /* Hide native cursor to prioritize custom hardware pointer tracking */
+        html, body, a, button, canvas {
+            cursor: none !important;
+        }
+
         /* Continuous Matrix Grid Flow Animation */
         @keyframes gridMove {
             0% { background-position: 0 0; }
@@ -51,7 +56,32 @@
             overflow-x: hidden;
         }
 
-        /* --- INTRO SCREEN OVERLAY --- */
+        /* --- GLOWING CUSTOM CURSOR SYSTEM --- */
+        #custom-cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--neon-cyan);
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: width 0.1s, height 0.1s, background-color 0.1s;
+        }
+        #custom-cursor-ring {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--neon-magenta);
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out, border-color 0.2s;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+        }
+
+        /* --- SYSTEM GATE OVERLAY --- */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -59,7 +89,7 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at center, #0a0f1e, #020204);
-            z-index: 9999;
+            z-index: 9998;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -75,8 +105,6 @@
             border-radius: 4px;
             text-align: center;
             max-width: 600px;
-            transform: scale(1);
-            transition: all 0.5s ease;
         }
 
         .intro-card h1 {
@@ -95,12 +123,8 @@
             font-size: 1.3rem;
             font-weight: bold;
             letter-spacing: 3px;
-            cursor: pointer;
             margin-top: 35px;
-            position: relative;
-            overflow: hidden;
             transition: all 0.4s ease;
-            box-shadow: inset 0 0 0 rgba(0, 240, 255, 0);
         }
 
         .start-btn:hover {
@@ -175,7 +199,6 @@
             animation: panelPulse 4s infinite alternate;
         }
 
-        /* Tech Corner Accents for Panels */
         section::before, section::after {
             content: '';
             position: absolute;
@@ -195,7 +218,6 @@
             padding-bottom: 15px;
         }
 
-        /* Upgraded Image Overlays */
         .image-frame {
             position: relative;
             overflow: hidden;
@@ -227,7 +249,6 @@
             filter: grayscale(0%) contrast(100%);
         }
 
-        /* Tech Grid Tables */
         table {
             width: 100%;
             border-collapse: separate;
@@ -257,7 +278,6 @@
             border-bottom-color: var(--neon-purple);
         }
 
-        /* Sequential Processing List */
         ol {
             list-style: none;
             counter-reset: tech-counter;
@@ -269,7 +289,6 @@
             padding: 15px 20px;
             background: rgba(255,255,255,0.02);
             border-left: 3px solid var(--neon-purple);
-            position: relative;
         }
         ol li::before {
             content: "[NODE 0" counter(tech-counter) "]";
@@ -278,33 +297,77 @@
             margin-right: 15px;
         }
 
-        /* --- ADVANCED ARCADE STYLES --- */
-        .game-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #020205;
+        /* --- DYNAMIC QUIZ & INTERACTION SYSTEM --- */
+        .quiz-wrapper {
+            background: rgba(5,5,10,0.6);
+            border: 1px solid var(--neon-cyan);
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .quiz-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255,255,255,0.02);
+            color: var(--text-neon);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 14px;
+            margin: 12px 0;
+            text-align: left;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0,240,255,0.2);
+            transform: translateX(5px);
+        }
+
+        #quiz-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #111827;
+            margin-top: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        #quiz-progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        /* --- BREAK & ARCADE MODE PANEL --- */
+        #break-arcade-layer {
+            display: none;
+            margin-top: 30px;
             border: 2px solid var(--neon-magenta);
-            padding: 25px;
-            box-shadow: 0 0 35px rgba(255, 0, 85, 0.15);
-            position: relative;
+            background: #020205;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 0, 85, 0.2);
+        }
+
+        .break-banner {
+            color: var(--neon-magenta);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            animation: textBreathe 2s infinite alternate;
         }
 
         #gameCanvas {
             background: #050b14;
             border: 2px solid #111827;
             box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            cursor: pointer;
-        }
-
-        .game-score-board {
-            display: flex;
-            gap: 50px;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: var(--neon-magenta);
-            text-shadow: 0 0 10px rgba(255,0,85,0.4);
+            margin-top: 20px;
         }
 
         footer {
@@ -318,16 +381,22 @@
 </head>
 <body>
 
+    <!-- CUSTOM HARDWARE CURSORS -->
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-ring"></div>
+
+    <!-- 1. SYSTEM GATE OVERLAY -->
     <div id="intro-overlay">
         <div class="intro-card">
             <h1>CORE_NETWORK_INBOUND</h1>
             <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">
-                System initialization complete. Access terminal pathways to download web building sequences and load interactive testing vectors.
+                System initialization complete. Access terminal pathways to download web building sequences and unlock active gaming testing phases.
             </p>
             <button class="start-btn" onclick="startWebsite()">INITIALIZE RUNTIME</button>
         </div>
     </div>
 
+    <!-- 2. SYSTEM CONTENT INTERFACE -->
     <div id="main-content">
         <header>
             <h1>QUANTUM_WEB_RESOURCES</h1>
@@ -338,24 +407,24 @@
             <a href="#what-is-it">// DEFINITION</a>
             <a href="#types-examples">// GRID_MATRIX</a>
             <a href="#steps">// DEPLOYMENT_NODES</a>
-            <a href="#flappy-game" style="color: var(--neon-magenta);">// ARCADE_MODULE</a>
+            <a href="#verification-gate" style="color: var(--neon-magenta);">// UNLOCK_BREAK_ROOM</a>
         </nav>
 
         <div class="container">
 
+            <!-- Definition Node -->
             <section id="what-is-it">
                 <h2>01 // Core Web Infrastructure</h2>
                 <div class="image-frame">
                     <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1100&q=80" alt="Cyber Grid">
                 </div>
                 <p>A <strong>website</strong> is a cluster of high-level cloud documents, linked implicitly via structural hyper-paths sharing an exact core domain address. They translate digital protocols into active human-readable user experiences.</p>
-                <p>The system grid ecosystem spanning these millions of localized domain clusters maps the entire <strong>World Wide Web (WWW)</strong> core framework.</p>
+                <p>The system grid ecosystem spanning these millions of localized domain clusters maps the entire World Wide Web (WWW) core framework.</p>
             </section>
 
+            <!-- Table Module -->
             <section id="types-examples">
                 <h2>02 // Functional Network Classification</h2>
-                <p>Network nodes parse data arrays dynamically according to structural specialization parameters:</p>
-                
                 <table>
                     <thead>
                         <tr>
@@ -380,15 +449,11 @@
                             <td>Real-time peer-to-peer user matrices routing asset pipelines.</td>
                             <td>X-Terminal, Instagram Feed</td>
                         </tr>
-                        <tr>
-                            <td>Buffer Streams</td>
-                            <td>High-bandwidth asynchronous media pipelines buffering asset frames.</td>
-                            <td>YouTube, Netflix Array</td>
-                        </tr>
                     </tbody>
                 </table>
             </section>
 
+            <!-- Sequence List -->
             <section id="steps">
                 <h2>03 // Code Construction Pipeline</h2>
                 <div class="image-frame">
@@ -403,17 +468,30 @@
                 </ol>
             </section>
 
-            <section id="flappy-game">
-                <h2>04 // Operational Arcade Layer: Vector Jump</h2>
-                <p style="color: #64748b; margin-bottom: 25px;">Testing real-time rendering capabilities inside the local browser document object engine. Keep the orb calibrated.</p>
+            <!-- 10 QUESTION SYSTEM QUIZ GATEWAY -->
+            <section id="verification-gate">
+                <h2>04 // Target Node Authentication Gate</h2>
+                <p style="color: #64748b;">Answer exactly **10 technical questions** sequentially to complete authorization diagnostics and unlock your system break room reward phase.</p>
                 
-                <div class="game-wrapper">
-                    <div class="game-score-board">
-                        <div>MATRIX_SCORE: <span id="scoreDisplay">0</span></div>
-                        <div>PEAK_RECORD: <span id="highScoreDisplay">0</span></div>
-                    </div>
+                <div class="quiz-wrapper" id="quiz-block">
+                    <h3 id="question-text">Loading Node Authorization Parameters...</h3>
+                    <div id="options-box"></div>
                     
-                    <canvas id="gameCanvas" width="480" height="460"></canvas>
+                    <div id="quiz-progress-bar">
+                        <div id="quiz-progress-fill"></div>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--neon-cyan);" id="tracker-text">Node Progress: 0 / 10</p>
+                </div>
+
+                <!-- HIDDEN BREAK LAYER - ACTIVE ONLY POST 10 ANSWERS -->
+                <div id="break-arcade-layer">
+                    <div class="break-banner">☕ BREAK TIME PROTOCOL LOCKED IN!</div>
+                    <p style="color: #94a3b8; max-width: 600px; margin: 10px auto 25px auto;">Diagnostics finished successfully. Core processing threads shifted into idle execution status. Tap the mini matrix grid layer below to initiate Fly Matrix operations.</p>
+                    
+                    <div style="font-size: 1.2rem; color: var(--neon-magenta); font-weight: bold; margin-bottom: 10px;">
+                        SCORE: <span id="scoreDisplay">0</span> // PEAK: <span id="highScoreDisplay">0</span>
+                    </div>
+                    <canvas id="gameCanvas" width="480" height="420"></canvas>
                 </div>
             </section>
 
@@ -424,22 +502,108 @@
         </footer>
     </div>
 
+    <!-- CORE LOGIC FRAMEWORK ENGINE -->
     <script>
+        // --- CUSTOM CURSOR TRACKER MOTOR ---
+        const cursorDot = document.getElementById('custom-cursor-dot');
+        const cursorRing = document.getElementById('custom-cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            
+            // Subtle offset tracking creates elastic latency tracking illusion
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            }, 30);
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+            cursorRing.style.transform = 'translate(-50%, -50%) scale(1.4)';
+            cursorRing.style.borderColor = 'var(--neon-cyan)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorRing.style.borderColor = 'var(--neon-magenta)';
+        });
+
+
+        // --- OVERLAY LAYER INTERFACES ---
         function startWebsite() {
             const overlay = document.getElementById('intro-overlay');
             const mainContent = document.getElementById('main-content');
-            
             overlay.style.opacity = '0';
             overlay.style.transform = 'translateY(-100%)';
-            
             setTimeout(() => {
                 overlay.style.display = 'none';
                 mainContent.style.display = 'block';
                 mainContent.style.opacity = '1';
-                initGame();
+                loadQuestion();
             }, 800);
         }
 
+        // --- 10 HARDCORE ARRAY DATA FOR THE QUIZ ---
+        const quizBank = [
+            { q: "What tag structure builds primary heading frameworks?", a: ["<h1>", "<p>", "<head>", "<div>"], r: 0 },
+            { q: "Which property dictates layout background tones?", a: ["color", "background-color", "border", "texture"], r: 1 },
+            { q: "What mechanism allocates global identity labels to sites?", a: ["Web Host", "DNS Domain Name", "HTML", "IP Packet"], r: 1 },
+            { q: "What does HTML express natively?", a: ["HyperText Markup Language", "High Tech Media Loop", "Hyper Transfer Link", "Home Terminal Management"], r: 0 },
+            { q: "CSS specializes in matching which design vector?", a: ["Database Logic", "Visual Layouts & Presentation", "Data Encryption", "Server Sockets"], r: 1 },
+            { q: "Which tag embeds structural image assets?", a: ["<link>", "<src>", "<img>", "<href>"], r: 2 },
+            { q: "Which company deploys the primary global Search Node index?", a: ["Amazon", "Google", "Netflix", "Wikipedia"], r: 1 },
+            { q: "What element holds meta headers outside visibility views?", a: ["<body>", "<nav>", "<footer>", "<head>"], r: 3 },
+            { q: "JavaScript provides which layer inside web structures?", a: ["Static Raw Texts", "Database Hosting", "Dynamic Logical Behavior", "Network Routers"], r: 2 },
+            { q: "What acronym describes the interconnected global site structure?", a: ["WWW", "FTP", "DNS", "URL"], r: 0 }
+        ];
+
+        let currentIdx = 0;
+
+        function loadQuestion() {
+            if (currentIdx >= 10) {
+                // Unlock break room system shift
+                document.getElementById('quiz-block').style.display = 'none';
+                document.getElementById('break-arcade-layer').style.display = 'block';
+                initGameEngine();
+                return;
+            }
+
+            const activeNode = quizBank[currentIdx];
+            document.getElementById('question-text').textContent = `NODE_0${currentIdx + 1} // ${activeNode.q}`;
+            
+            const optionsBox = document.getElementById('options-box');
+            optionsBox.innerHTML = '';
+            
+            activeNode.a.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-btn';
+                btn.textContent = `[0${idx + 1}] -> ${opt}`;
+                btn.onclick = () => checkAnswer(idx);
+                optionsBox.appendChild(btn);
+            });
+
+            // Update Progress UI bars
+            const progressPct = (currentIdx / 10) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progressPct}%`;
+            document.getElementById('tracker-text').textContent = `Node Progress: ${currentIdx} / 10 Verification Steps`;
+        }
+
+        function checkAnswer(chosen) {
+            const activeNode = quizBank[currentIdx];
+            if(chosen === activeNode.r) {
+                currentIdx++;
+                loadQuestion();
+            } else {
+                // Flash mistake indication feedback frame
+                cursorRing.style.borderColor = 'red';
+                alert("DIAGNOSTIC EXCEPTION: Wrong validation parameter sequence. Try that node parameter again.");
+            }
+        }
+
+        // --- BREAK REWARD ARCADE ENGINE (FLAPPY MODE) ---
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreDisplay = document.getElementById('scoreDisplay');
@@ -453,210 +617,106 @@
 
         class CyberBird {
             constructor() {
-                this.x = 80;
-                this.y = 200;
-                this.radius = 14;
-                this.gravity = 0.38;
-                this.velocity = 0;
-                this.jumpStrength = -6.8;
+                this.x = 80; this.y = 200; this.radius = 14;
+                this.gravity = 0.38; this.velocity = 0; this.jumpStrength = -6.8;
             }
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                
-                // Angle tilt animation based on velocity physics
                 let angle = Math.min(Math.max(this.velocity * 0.05, -0.5), 0.7);
                 ctx.rotate(angle);
-
-                // Draw Core Glowing Plasma Orb
                 let gradient = ctx.createRadialGradient(0, 0, 2, 0, 0, this.radius);
-                gradient.addColorStop(0, '#ffffff');
-                gradient.addColorStop(0.4, '#ff0055');
-                gradient.addColorStop(1, 'transparent');
-
-                ctx.beginPath();
-                ctx.arc(0, 0, this.radius + 6, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = '#ff0055';
-                ctx.fill();
-                ctx.closePath();
-                
+                gradient.addColorStop(0, '#ffffff'); gradient.addColorStop(0.4, '#ff0055'); gradient.addColorStop(1, 'transparent');
+                ctx.beginPath(); ctx.arc(0, 0, this.radius + 6, 0, Math.PI * 2); ctx.fillStyle = gradient;
+                ctx.shadowBlur = 15; ctx.shadowColor = '#ff0055'; ctx.fill(); ctx.closePath();
                 ctx.restore();
             }
             update() {
-                this.velocity += this.gravity;
-                this.y += this.velocity;
-                
-                if (this.y + this.radius >= canvas.height) {
-                    this.y = canvas.height - this.radius;
-                    endGame();
-                }
-                if (this.y - this.radius <= 0) {
-                    this.y = this.radius;
-                    this.velocity = 0;
-                }
+                this.velocity += this.gravity; this.y += this.velocity;
+                if (this.y + this.radius >= canvas.height) { this.y = canvas.height - this.radius; endGame(); }
+                if (this.y - this.radius <= 0) { this.y = this.radius; this.velocity = 0; }
             }
-            jump() {
-                this.velocity = this.jumpStrength;
-            }
+            jump() { this.velocity = this.jumpStrength; }
         }
 
         class TechPipe {
             constructor() {
-                this.gap = 120;
-                this.width = 65;
-                this.x = canvas.width;
+                this.gap = 125; this.width = 65; this.x = canvas.width;
                 this.topHeight = Math.floor(Math.random() * (canvas.height - this.gap - 120)) + 40;
                 this.bottomHeight = canvas.height - (this.topHeight + this.gap);
                 this.passed = false;
             }
             draw() {
-                ctx.save();
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = '#00f0ff';
-                ctx.fillStyle = 'rgba(0, 240, 255, 0.2)';
-                ctx.strokeStyle = '#00f0ff';
-                ctx.lineWidth = 2;
-
-                // Render Top Structure
-                ctx.fillRect(this.x, 0, this.width, this.topHeight);
-                ctx.strokeRect(this.x, 0, this.width, this.topHeight);
-
-                // Render Bottom Structure
+                ctx.save(); ctx.shadowBlur = 10; ctx.shadowColor = '#00f0ff';
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.2)'; ctx.strokeStyle = '#00f0ff'; ctx.lineWidth = 2;
+                ctx.fillRect(this.x, 0, this.width, this.topHeight); ctx.strokeRect(this.x, 0, this.width, this.topHeight);
                 ctx.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
                 ctx.strokeRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
-
-                // Tech Laser Line Trims
-                ctx.fillStyle = '#ff0055';
-                ctx.fillRect(this.x - 2, this.topHeight - 6, this.width + 4, 6);
+                ctx.fillStyle = '#ff0055'; ctx.fillRect(this.x - 2, this.topHeight - 6, this.width + 4, 6);
                 ctx.fillRect(this.x - 2, canvas.height - this.bottomHeight, this.width + 4, 6);
-
                 ctx.restore();
             }
-            update() {
-                this.x -=(2.8 + (score * 0.1)); // Speed scales slowly dynamically!
-            }
+            update() { this.x -= 3; }
         }
 
-        function initGame() {
-            bird = new CyberBird();
-            pipes = [];
-            score = 0;
-            frameCounter = 0;
-            gameOver = false;
+        function initGameEngine() {
+            bird = new CyberBird(); pipes = []; score = 0; frameCounter = 0; gameOver = false;
             scoreDisplay.textContent = score;
-            drawOverlayMessage();
-        }
-
-        function drawOverlayMessage() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // Render Tech background matrix
-            ctx.fillStyle = '#030712';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#030712'; ctx.fillRect(0, 0, canvas.width, canvas.height);
             bird.draw();
-            
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#00f0ff';
-            ctx.font = 'bold 16px Courier New';
-            ctx.textAlign = 'center';
-            ctx.fillText('>> EXECUTE TAP OR SPACEBAR TO INITIATE JUMP <<', canvas.width / 2, canvas.height / 2);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00f0ff'; ctx.font = 'bold 15px Courier New'; ctx.textAlign = 'center';
+            ctx.fillText('>> EXECUTE TAP OR SPACEBAR TO START BREAK JUMP <<', canvas.width / 2, canvas.height / 2);
         }
 
         function gameLoop() {
             if (!gameActive || gameOver) return;
-
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#030712';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#030712'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            bird.update();
-            bird.draw();
+            bird.update(); bird.draw();
 
-            if (frameCounter % 90 === 0) {
-                pipes.push(new TechPipe());
-            }
+            if (frameCounter % 90 === 0) pipes.push(new TechPipe());
 
             for (let i = pipes.length - 1; i >= 0; i--) {
-                pipes[i].update();
-                pipes[i].draw();
-
-                // Hitbox calculations
-                if (
-                    bird.x + bird.radius > pipes[i].x &&
-                    bird.x - bird.radius < pipes[i].x + pipes[i].width &&
-                    (bird.y - bird.radius < pipes[i].topHeight || bird.y + bird.radius > canvas.height - pipes[i].bottomHeight)
-                ) {
+                pipes[i].update(); pipes[i].draw();
+                if (bird.x + bird.radius > pipes[i].x && bird.x - bird.radius < pipes[i].x + pipes[i].width &&
+                    (bird.y - bird.radius < pipes[i].topHeight || bird.y + bird.radius > canvas.height - pipes[i].bottomHeight)) {
                     endGame();
                 }
-
                 if (!pipes[i].passed && pipes[i].x + pipes[i].width < bird.x) {
-                    score++;
-                    pipes[i].passed = true;
-                    scoreDisplay.textContent = score;
+                    score++; pipes[i].passed = true; scoreDisplay.textContent = score;
                     if (score > highScore) {
-                        highScore = score;
-                        highScoreDisplay.textContent = highScore;
+                        highScore = score; highScoreDisplay.textContent = highScore;
                         localStorage.setItem('cyberHighScore', highScore);
                     }
                 }
-
-                if (pipes[i].x + pipes[i].width < 0) {
-                    pipes.splice(i, 1);
-                }
+                if (pipes[i].x + pipes[i].width < 0) pipes.splice(i, 1);
             }
-
-            frameCounter++;
-            requestAnimationFrame(gameLoop);
+            frameCounter++; requestAnimationFrame(gameLoop);
         }
 
         function handleInput() {
-            if (!gameActive && !gameOver) {
-                gameActive = true;
-                gameLoop();
-            }
-            if (gameOver) {
-                initGame();
-                gameActive = true;
-                gameLoop();
-                return;
-            }
+            if (!gameActive && !gameOver) { gameActive = true; gameLoop(); }
+            if (gameOver) { initGameEngine(); gameActive = true; gameLoop(); return; }
             bird.jump();
         }
 
         function endGame() {
-            gameOver = true;
-            gameActive = false;
-            
-            ctx.fillStyle = 'rgba(5, 5, 8, 0.85)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.strokeStyle = var(--neon-magenta);
-            ctx.lineWidth = 3;
-            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
-
-            ctx.fillStyle = '#ff0055';
-            ctx.font = 'bold 24px Courier New';
-            ctx.textAlign = 'center';
-            ctx.fillText('TERMINAL_CRASH: GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
-            ctx.fillStyle = '#fff';
-            ctx.font = '14px Courier New';
-            ctx.fillText('Tap Canvas Array / Space to Restart Execution Loop', canvas.width / 2, canvas.height / 2 + 30);
+            gameOver = true; gameActive = false;
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.9)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff0055'; ctx.font = 'bold 20px Courier New'; ctx.textAlign = 'center';
+            ctx.fillText('BREAK OVER: CRASH DETECTED', canvas.width / 2, canvas.height / 2 - 10);
+            ctx.fillStyle = '#fff'; ctx.font = '13px Courier New';
+            ctx.fillText('Tap Canvas / Spacebar to Re-Initialize Break Session', canvas.width / 2, canvas.height / 2 + 25);
         }
 
-        window.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' && document.getElementById('main-content').style.display === 'block') {
-                e.preventDefault();
-                handleInput();
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && document.getElementById('break-arcade-layer').style.display === 'block') {
+                e.preventDefault(); handleInput();
             }
         });
-
-        canvas.addEventListener('click', function(e) {
-            e.stopPropagation();
-            handleInput();
-        });
+        canvas.addEventListener('click', (e) => { e.stopPropagation(); handleInput(); });
     </script>
 </body>
 </html>
