@@ -33,6 +33,12 @@
             to { opacity: 1; }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
         /* Header & Navigation */
         header {
             background: linear-gradient(135deg, #2c3e50, #3498db);
@@ -66,7 +72,6 @@
         nav a:hover {
             color: #1abc9c;
         }
-        /* Navigation Underline Animation */
         nav a::after {
             content: '';
             position: absolute;
@@ -95,7 +100,6 @@
         }
         section {
             padding: 20px 0;
-            /* Applies the scroll/load fade-in animation to sections */
             animation: fadeInUp 1s ease-out both;
         }
         h2 {
@@ -104,7 +108,7 @@
             padding-bottom: 10px;
         }
 
-        /* Images & Hover Animations */
+        /* Images */
         .web-image {
             width: 100%;
             max-height: 400px;
@@ -119,7 +123,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
-        /* Table Styles */
+        /* Table */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -144,6 +148,65 @@
             margin-bottom: 10px;
         }
 
+        /* --- MINI GAME STYLES --- */
+        .game-box {
+            background-color: #f8f9fa;
+            border: 2px dashed #3498db;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .game-title {
+            color: #e74c3c;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        .quiz-option {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 12px;
+            background-color: #fff;
+            border: 2px solid #34495e;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            background-color: #34495e;
+            color: white;
+            animation: pulse 0.4s infinite alternate;
+        }
+        #quiz-feedback {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 15px;
+            min-height: 30px;
+        }
+        .score-display {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+        .restart-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: none;
+        }
+        .restart-btn:hover {
+            background-color: #27ae60;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -157,7 +220,7 @@
 
     <header>
         <h1>Understanding the Web</h1>
-        <p>A beautifully animated guide to what websites are, their uses, and how to make them.</p>
+        <p>An interactive, animated guide to websites, their uses, and how to build them.</p>
     </header>
 
     <nav>
@@ -165,6 +228,7 @@
         <a href="#types-examples">Types & Examples</a>
         <a href="#uses">Why We Use Them</a>
         <a href="#steps">How to Create One</a>
+        <a href="#mini-game" style="color: #e74c3c;">★ Mini Game ★</a>
     </nav>
 
     <div class="container">
@@ -178,7 +242,7 @@
 
         <hr>
 
-        <section id="types-examples" style="animation-delay: 0.4s;">
+        <section id="types-examples" style="animation-delay: 0.3s;">
             <h2>Types of Websites & Examples</h2>
             <p>Websites come in many shapes and sizes depending on their goals. Here are the most common types:</p>
             
@@ -222,54 +286,145 @@
 
         <hr>
 
-        <section id="uses" style="animation-delay: 0.6s;">
+        <section id="uses" style="animation-delay: 0.4s;">
             <h2>What Do We Use Websites For?</h2>
             <img class="web-image" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Using Website Analytics">
-            <p>Websites have completely transformed how society functions. We primarily use them for:</p>
-            <ul>
-                <li><strong>Information Sharing:</strong> Finding answers to questions, reading the news, and learning new skills.</li>
-                <li><strong>Communication:</strong> Staying in touch with friends, family, and colleagues globally.</li>
-                <li><strong>Business & Commerce:</strong> Allowing companies to market products, handle customer service, and process sales 24/7.</li>
-                <li><strong>Entertainment:</strong> Watching movies, listening to music, playing games, and reading blogs.</li>
-                <li><strong>Education:</strong> Accessing online courses (e-learning), research papers, and digital libraries.</li>
-            </ul>
+            <p>Websites have completely transformed how society functions. We primarily use them for information sharing, communication, business, entertainment, and education.</p>
         </section>
 
         <hr>
 
-        <section id="steps" style="animation-delay: 0.8s;">
+        <section id="steps" style="animation-delay: 0.5s;">
             <h2>5 Basic Steps to Create a Website</h2>
             <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=900&q=80" alt="Coding a Website">
-            <p>Building a website is easier than ever. Here is the standard roadmap to getting your site live on the internet:</p>
             <ol>
-                <li>
-                    <strong>Plan Your Website:</strong> 
-                    Define your website's purpose (e.g., a personal portfolio) and map out what pages you will need.
-                </li>
-                <li>
-                    <strong>Register a Domain Name:</strong> 
-                    Your domain name is your website's address on the internet (like <code>www.yourname.com</code>).
-                </li>
-                <li>
-                    <strong>Choose a Web Hosting Provider:</strong> 
-                    A web host provides the server space where your website's files live so people can access it.
-                </li>
-                <li>
-                    <strong>Build the Site:</strong> 
-                    You can code the site yourself using <strong>HTML, CSS, and JavaScript</strong>, or use a CMS like WordPress or Wix.
-                </li>
-                <li>
-                    <strong>Publish and Maintain:</strong> 
-                    Upload your files to your host to take it live, and keep your content updated!
-                </li>
+                <li><strong>Plan Your Website:</strong> Map out its purpose and pages.</li>
+                <li><strong>Register a Domain Name:</strong> Buy your web address (e.g., www.site.com).</li>
+                <li><strong>Choose a Web Hosting Provider:</strong> Rent space on a server.</li>
+                <li><strong>Build the Site:</strong> Use HTML, CSS, and JS or a website builder.</li>
+                <li><strong>Publish and Maintain:</strong> Push it live and update it.</li>
             </ol>
+        </section>
+
+        <hr>
+
+        <section id="mini-game" style="animation-delay: 0.6s;">
+            <div class="game-box">
+                <h2 class="game-title">🎮 Web Master Quiz Game</h2>
+                <p>Test your knowledge! Can you answer these questions based on the info above?</p>
+                
+                <div id="quiz-container">
+                    <h3 id="quiz-question">Loading question...</h3>
+                    <div id="quiz-options">
+                        </div>
+                    <div id="quiz-feedback"></div>
+                    <div class="score-display">Score: <span id="current-score">0</span> / <span id="total-questions">0</span></div>
+                    <button class="restart-btn" id="restart-btn" onclick="restartGame()">Play Again</button>
+                </div>
+            </div>
         </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Web Guide Website. Built with HTML, CSS, & Animations.</p>
+        <p>&copy; 2026 Web Guide Website. Built with HTML, CSS, JS & Fun.</p>
     </footer>
 
+    <script>
+        const quizData = [
+            {
+                question: "1. What does the 'WWW' stand for?",
+                options: ["World Wide Web", "Web Web Web", "Word Wide Website", "Working Web Way"],
+                answer: 0
+            },
+            {
+                question: "2. Which of the following is an example of an E-Commerce website?",
+                options: ["Wikipedia", "Netflix", "Amazon", "Google"],
+                answer: 2
+            },
+            {
+                question: "3. What core coding languages are used to build a website from scratch?",
+                options: ["Python & C++", "HTML, CSS, and JavaScript", "Java only", "WordPress and Wix"],
+                answer: 1
+            },
+            {
+                question: "4. What acts as your website's 'home address' on the internet?",
+                options: ["A server", "A content manager", "A domain name", "A browser"],
+                answer: 2
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById("quiz-question");
+        const optionsContainer = document.getElementById("quiz-options");
+        const feedbackElement = document.getElementById("quiz-feedback");
+        const scoreElement = document.getElementById("current-score");
+        const totalElement = document.getElementById("total-questions");
+        const restartButton = document.getElementById("restart-btn");
+
+        function loadQuestion() {
+            feedbackElement.textContent = "";
+            optionsContainer.innerHTML = "";
+            totalElement.textContent = quizData.length;
+            scoreElement.textContent = score;
+
+            if (currentQuestionIndex >= quizData.length) {
+                // Game finished
+                questionElement.textContent = "🎉 Quiz Complete!";
+                feedbackElement.style.color = "#2ecc71";
+                feedbackElement.textContent = `Excellent! Final score: ${score} out of ${quizData.length}`;
+                restartButton.style.display = "inline-block";
+                return;
+            }
+
+            let currentQuestion = quizData[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.className = "quiz-option";
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            let currentQuestion = quizData[currentQuestionIndex];
+            
+            // Disable further option clicks for this question
+            const buttons = document.getElementsByClassName("quiz-option");
+            for(let btn of buttons) { btn.disabled = true; }
+
+            if (selectedIndex === currentQuestion.answer) {
+                score++;
+                feedbackElement.style.color = "#2ecc71";
+                feedbackElement.textContent = "Correct! Well done! 👍";
+            } else {
+                feedbackElement.style.color = "#e74c3c";
+                feedbackElement.textContent = `Incorrect. The right answer was: ${currentQuestion.options[currentQuestion.answer]}`;
+            }
+
+            scoreElement.textContent = score;
+
+            // Wait 2 seconds, then transition to next question
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 2200);
+        }
+
+        function restartGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            restartButton.style.display = "none";
+            loadQuestion();
+        }
+
+        // Initialize game on load
+        loadQuestion();
+    </script>
 </body>
 </html>
