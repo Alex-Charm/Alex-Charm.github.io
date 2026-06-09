@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All About Websites</title>
     <style>
+        /* Base Styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -12,45 +13,91 @@
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            overflow-x: hidden;
         }
         header {
             background-color: #2c3e50;
             color: #ffffff;
-            padding: 20px 0;
+            padding: 40px 0;
             text-align: center;
+            position: relative;
         }
+        
+        /* Smooth CSS Animations */
+        header h1 {
+            margin: 0;
+            animation: slideDown 1s ease-out;
+        }
+        header p {
+            animation: fadeIn 1.5s ease-out;
+        }
+        
         nav {
             background-color: #34495e;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         nav a {
             color: white;
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
         }
+        /* Link Hover Animation */
         nav a:hover {
-            text-color: #1abc9c;
-            text-decoration: underline;
+            color: #1abc9c;
+            transform: scale(1.1);
         }
+        
         .container {
             max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background: #ffffff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             border-radius: 8px;
         }
+        
+        /* Section Animation Entry */
+        section {
+            animation: fadeInUp 1s ease-out;
+            padding: 20px 0;
+        }
+        
         h2 {
             color: #2c3e50;
             border-bottom: 2px solid #ecf0f1;
             padding-bottom: 10px;
         }
+        
+        /* Image Layout & Effects */
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .web-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        /* Image Hover Zoom Animation */
+        .web-image:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            background: #fff;
         }
         table, th, td {
             border: 1px solid #bdc3c7;
@@ -58,16 +105,29 @@
         th, td {
             padding: 12px;
             text-align: left;
+            transition: background-color 0.3s;
         }
         th {
             background-color: #f2f2f2;
         }
+        /* Table Row Hover Animation */
+        tbody tr:hover td {
+            background-color: #f1f9f7;
+        }
+        
         ol, ul {
             padding-left: 20px;
         }
         li {
             margin-bottom: 10px;
+            transition: transform 0.2s;
         }
+        /* List Item Hover Shift */
+        li:hover {
+            transform: translateX(5px);
+            color: #1abc9c;
+        }
+        
         footer {
             text-align: center;
             padding: 20px;
@@ -75,13 +135,27 @@
             color: white;
             margin-top: 40px;
         }
+
+        /* Keyframes Definitions */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Understanding the Web</h1>
-        <p>A guide to what websites are, their uses, and how to make them.</p>
+        <p>A interactive guide to what websites are, their uses, and how to make them.</p>
     </header>
 
     <nav>
@@ -97,13 +171,17 @@
             <h2>What is a Website?</h2>
             <p>A <strong>website</strong> is a collection of publicly accessible, interlinked web pages that share a single domain name. Websites can be created and maintained by an individual, group, business, or organization to serve a variety of purposes.</p>
             <p>Together, all publicly accessible websites constitute the <strong>World Wide Web (WWW)</strong>.</p>
+            
+            <div class="image-container">
+                <img src="http://googleusercontent.com/image_generation_content/0" alt="Website UI Displayed on Mobile Device" class="web-image">
+            </div>
         </section>
 
         <hr>
 
         <section id="types-examples">
             <h2>Types of Websites & Examples</h2>
-            <p>Websites come in many shapes and sizes depending on their goals. Here are the most common types:</p>
+            <p>Websites come in many shapes and sizes depending on their goals. Hover over the table rows to explore them:</p>
             
             <table>
                 <thead>
@@ -127,7 +205,7 @@
                     <tr>
                         <td><strong>Social Media</strong></td>
                         <td>To connect, communicate, and share content with others.</td>
-                        <td>Facebook.com, X.com (Twitter), Instagram.com</td>
+                        <td>Facebook.com, X.com, Instagram.com</td>
                     </tr>
                     <tr>
                         <td><strong>Informational / Media</strong></td>
@@ -147,7 +225,7 @@
 
         <section id="uses">
             <h2>What Do We Use Websites For?</h2>
-            <p>Websites have completely transformed how society functions. We primarily use them for:</p>
+            <p>Websites have completely transformed how society functions. Hover over the points below:</p>
             <ul>
                 <li><strong>Information Sharing:</strong> Finding answers to questions, reading the news, and learning new skills.</li>
                 <li><strong>Communication:</strong> Staying in touch with friends, family, and colleagues globally.</li>
@@ -165,11 +243,11 @@
             <ol>
                 <li>
                     <strong>Plan Your Website:</strong> 
-                    Define your website's purpose (e.g., a personal blog, a portfolio, or an online store) and map out what pages you will need.
+                    Define your website's purpose (e.g., a personal portfolio) and map out what pages you will need.
                 </li>
                 <li>
                     <strong>Register a Domain Name:</strong> 
-                    Your domain name is your website's address on the internet (like <code>www.yourname.com</code>). You can purchase this through a domain registrar.
+                    Your domain name is your website's address on the internet (like <code>www.yourname.com</code>).
                 </li>
                 <li>
                     <strong>Choose a Web Hosting Provider:</strong> 
@@ -177,11 +255,11 @@
                 </li>
                 <li>
                     <strong>Build the Site:</strong> 
-                    You can code the site yourself using <strong>HTML, CSS, and JavaScript</strong>, or use a Content Management System (CMS) like WordPress, Wix, or Squarespace if you prefer not to code.
+                    You can code the site yourself using <strong>HTML, CSS, and JavaScript</strong>, or use a Content Management System (CMS).
                 </li>
                 <li>
                     <strong>Publish and Maintain:</strong> 
-                    Upload your files to your host to take the website live. Regularly update your content and check for broken links to keep it running smoothly.
+                    Upload your files to your host to take the website live. Regularly update your content to keep it running smoothly.
                 </li>
             </ol>
         </section>
@@ -189,7 +267,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Web Guide Website. Built with HTML & CSS.</p>
+        <p>&copy; 2026 Web Guide Website. Built with HTML, CSS & Dynamic Animations.</p>
     </footer>
 
 </body>
