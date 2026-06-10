@@ -370,7 +370,7 @@
         #secret-server-node {
             display: none;
             margin-top: 40px;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(6, 8, 20, 0.95));
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(6, 8, 20, 0.98));
             border: 2px dashed var(--neon-purple);
             animation: pulseBorder 2s infinite alternate;
         }
@@ -391,10 +391,32 @@
         .terminal-block {
             background: rgba(0,0,0,0.6);
             border-left: 3px solid var(--neon-blue);
-            padding: 15px;
-            margin: 15px 0;
-            font-family: monospace;
+            padding: 20px;
+            margin: 25px 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             border-radius: 0 6px 6px 0;
+            line-height: 1.7;
+        }
+
+        .terminal-block h4 {
+            margin-top: 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .terminal-block p {
+            margin-bottom: 12px;
+            color: #94a3b8;
+        }
+
+        .terminal-block ul {
+            padding-left: 20px;
+            color: #cbd5e1;
+        }
+
+        .terminal-block ul li {
+            margin-bottom: 8px;
         }
 
         footer {
@@ -512,7 +534,7 @@
 
                 <div id="arcade-break-room">
                     <div class="arcade-headline">🕹️ GAME UNLOCKED: NEON FLAP</div>
-                    <p style="color: var(--neon-pink); font-weight: bold;">🎯 CHALLENGE: REACH 20 POINTS TO UNLOCK THE SECRET SERVER!</p>
+                    <p style="color: var(--neon-pink); font-weight: bold;">🎯 CHALLENGE: REACH 20 POINTS TO UNLOCK THE MASTER SERVER CRYPT!</p>
                     <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Use **SPACEBAR** or **CLICK INSIDE BOX** to jump and fly around the neon laser tubes.</p>
                     
                     <div style="font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
@@ -522,37 +544,55 @@
                 </div>
 
                 <div id="secret-server-node" class="quiz-panel">
-                    <div class="arcade-headline" style="color: var(--neon-blue);">📡 SECRET ARCHITECTURE SERVER UNLOCKED</div>
+                    <div class="arcade-headline" style="color: var(--neon-blue);">📡 INTERNET CORE COMPENDIUM UNLOCKED</div>
                     <div class="key-banner" id="secretKeyDisplay">ACCESS KEY: [DECRYPTING...]</div>
                     
                     <div class="image-wrapper">
                         <img class="web-image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1100&q=80" alt="Server Room">
                     </div>
                     
-                    <h3>⚡ Advanced Web Infrastructure Lessons</h3>
-                    <p>Welcome to the core system. Now that you have bypassed basic training, here is how world-scale web apps actually process traffic:</p>
+                    <h3>⚡ Full-Scale Enterprise Architecture Blueprints</h3>
+                    <p style="color: #a7f3d0;">Congratulations, engineer. Bypassing the 20-point execution threshold has granted your browser session elevated administrative clearance. Below lies the deep technical breakdown of global internet scaling, distributed operations, and data integrity systems.</p>
                     
                     <div class="terminal-block">
-                        <strong style="color: var(--neon-pink);">[1] Back-End Architecture & Logic Units</strong><br>
-                        While HTML/CSS run inside your local browser layout engine (The Client-Side), servers execute deep scripts via setups like Node.js, Python, or Go. These applications build custom dynamic pages on-the-fly depending on who logged in.
+                        <h4 style="color: var(--neon-pink);">[1] The Client-Server Runtime Bifurcation</h4>
+                        <p>When analyzing high-scale web infrastructures, the system must be cleanly divided into the <strong>Client-Side (Frontend)</strong> and the <strong>Server-Side (Backend)</strong>. The frontend includes everything processed directly by the local user hardware inside web engines like Chromium or WebKit. This layer handles visual layouts, paint rendering cycles, asset layout compositions, and short-term interface state tracking using HTML5 DOM nodes, CSS rulesets, and client-side JavaScript execution contexts.</p>
+                        <p>Conversely, the Server-Side operates on remote computing hardware, entirely divorced from the end-user's device visibility. While a client-side layout is inherently public and editable by using device development tools, backend code executes within isolated operating systems (frequently specialized Linux distributions like Alpine, Ubuntu Server, or Red Hat). The main purpose of the backend is to evaluate raw structural queries, compute mathematical business rules, manage access tokens, and securely compile requested payloads before packaging them into standardized HTTP communication structures.</p>
                     </div>
 
                     <div class="terminal-block">
-                        <strong style="color: var(--neon-blue);">[2] Databases & Persistent Storage Systems</strong><br>
-                        Web applications can't store data inside simple files safely. They deploy relational structures like <strong>PostgreSQL</strong> or document arrays like <strong>MongoDB</strong>. These configurations verify secure encrypted passwords, run transactional web-store shopping cards, and store real-time global game scores instantly.
+                        <h4 style="color: var(--neon-blue);">[2] Back-End Architecture & Runtime Environments</h4>
+                        <p>Modern backend platforms do not merely read pre-written text files from a hard drive; they programmatically build dynamic data streams for every incoming request. Developers deploy several prominent software stacks to coordinate this logic:</p>
+                        <ul>
+                            <li><strong>Node.js & Deno:</strong> V8-powered runtimes that allow developers to execute JavaScript on the server, leveraging single-threaded event loops and asynchronous event handlers to process tens of thousands of connections concurrently.</li>
+                            <li><strong>Python (Django & FastPI):</strong> Renowned for rapid development paradigms and clean code syntax, these web engines supply robust data validation layers, automated object-relational mapping, and instant background administration pipelines.</li>
+                            <li><strong>Go (Golang):</strong> Created by Google to build high-performance distributed microservices. Go compiles down directly into machine code, bypassing intermediate runtime virtual layers and leveraging native "goroutines" to manage memory efficiently under massive request loads.</li>
+                        </ul>
+                        <p>These runtime engines process inbound HTTP packets, parse the request parameters (such as verifying cookie states, tracking active sessions, or evaluating request bodies), and select appropriate code routes to fulfill the operation.</p>
                     </div>
 
                     <div class="terminal-block">
-                        <strong style="color: var(--neon-purple);">[3] API Integrations (Application Programming Interfaces)</strong><br>
-                        APIs serve as architectural channels connecting external apps together. For example, when a custom site loads a mapping interface or live credit card checkout window, it calls remote third-party systems behind the scenes using structured JSON data objects.
+                        <h4 style="color: var(--neon-purple);">[3] Persistent Storage Paradigms & Database Clustering</h4>
+                        <p>A website cannot store persistent user assets inside local memory variables, because server instances are ephemeral—they scale up, scale down, or crash when hardware components fail. Therefore, state stability requires independent database systems, which are generally grouped into two major architectural models:</p>
+                        <p><strong>Relational Databases (RDBMS):</strong> Systems like PostgreSQL and MySQL store application properties inside highly organized, strict tabular structures. These systems rely fundamentally on SQL (Structured Query Language) and guarantee perfect transaction safety via ACID compliance (Atomicity, Consistency, Isolation, Durability). This ensures that if a financial transfer or an e-commerce order fails midway through an operation, the entire database rollbacks to a pristine state, preventing data corruption.</p>
+                        <p><strong>Non-Relational Databases (NoSQL):</strong> Engine options like MongoDB, Redis, or Apache Cassandra discard rigid table rules in favor of flexible document storage layouts (like nested JSON objects) or lightning-fast Key-Value pairings. Redis, for example, operates completely inside system RAM rather than slow magnetic disks, acting as an ultra-fast temporary storage cache to serve repetitive database lookups (like an active player high-score dashboard) within microseconds.</p>
                     </div>
 
                     <div class="terminal-block">
-                        <strong style="color: #10b981;">[4] Content Delivery Networks (CDNs) & Load Balancers</strong><br>
-                        When millions of users access a page simultaneously, a single server crashes. Global tech companies copy static image files across CDNs (like Cloudflare or AWS CloudFront) located in different countries. Traffic routers then automatically forward your requests to the nearest machine!
+                        <h4 style="color: #10b981;">[4] RESTful & GraphQL API Interconnection Matrices</h4>
+                        <p>An API (Application Programming Interface) is the structural contract that allows separate computer systems to talk to one another over the network without manual human intervention. Whenever a webpage updates a live component without reloading the entire window, it is executing background network requests against a remote API gateway.</p>
+                        <p>The standard model for web communications is <strong>REST (Representational State Transfer)</strong>. REST uses standard HTTP request verbs like <code>GET</code> to fetch files, <code>POST</code> to create records, <code>PUT</code> to overwrite settings, and <code>DELETE</code> to wipe out structural fields. Data passed back and forth is uniformly structured as lightweight text strings using <strong>JSON (JavaScript Object Notation)</strong> syntax. For complex applications, engineering teams often migrate toward <strong>GraphQL</strong> API frameworks. GraphQL enables the frontend to request exactly the data fields it requires in a single query, significantly reducing network bandwidth and avoiding data over-fetching across slower mobile cell towers.</p>
                     </div>
 
-                    <p style="color: var(--neon-blue); font-weight: bold; text-align: center; margin-top: 25px; font-size: 1.1rem;">🔒 Connection Status: Elevated Administrator Access Active.</p>
+                    <div class="terminal-block">
+                        <h4 style="color: #f59e0b;">[5] Distributed Edge Networks, Load Balancing, and CDNs</h4>
+                        <p>When a massive web application receives traffic from fifty million worldwide users simultaneously, a single server node will experience immediate thread exhaustion, CPU thermal throttling, or total networking failure. To circumvent this physical limitation, elite platforms deploy horizontally scalable server clusters orchestrated by <strong>Reverse Proxies and Load Balancers</strong> (such as NGINX, HAProxy, or AWS ALB).</p>
+                        <p>The incoming traffic hit hits a central load balancer first. This specialized router acts as a traffic traffic cop, evaluating network health metrics and using balancing algorithms (like Round Robin or Least Connections) to split the incoming traffic across hundreds of redundant background server machines. To optimize speed even further, <strong>CDNs (Content Delivery Networks)</strong> like Cloudflare or Fastly are positioned around the globe. CDNs keep cached copies of static assets (images, stylesheets, media assets) directly on hundreds of edge servers worldwide. When a user requests a page, the data is pulled from a local data center just miles away rather than traveling halfway across the globe, bringing latency down to the absolute physical limits of fiber-optic cabling.</p>
+                    </div>
+
+                    <p style="color: var(--neon-pink); font-weight: bold; text-align: center; margin-top: 30px; font-size: 1.2rem; font-family: monospace; letter-spacing: 2px;">
+                        [▼ SYSTEM LOG TERMINATED // ACCESS EXTENDED INDEFINITELY ▼]
+                    </p>
                 </div>
             </section>
 
@@ -839,10 +879,10 @@
                 glitcher.classList.remove('run-glitch');
                 document.getElementById('secret-server-node').style.display = 'block';
                 
-                let generatedKey = "DEEP_NET_NODE_X" + Math.floor(Math.random() * 900000 + 100000) + "_RECV_2026";
-                document.getElementById('secretKeyDisplay').textContent = `DECRYPTED CODENAME ACCESS KEY: ${generatedKey}`;
+                let generatedKey = "ULTRA_NODE_ALPHA_" + Math.floor(Math.random() * 900000 + 100000) + "_SYS_2026";
+                document.getElementById('secretKeyDisplay').textContent = `DECRYPTED ADMIN MASTER ACCESS KEY: ${generatedKey}`;
                 
-                // Smooth scroll down right to the newly revealed server node context
+                // Smooth scroll right to the top of the unlocked encyclopedia
                 document.getElementById('secret-server-node').scrollIntoView({ behavior: 'smooth' });
             }, 1200);
         }
