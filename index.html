@@ -12,6 +12,7 @@
             --neon-blue: #00f0ff;
             --neon-pink: #ff0055;
             --neon-purple: #a855f7;
+            --neon-green: #10b981;
             --text-light: #cbd5e1;
             --grid-line: rgba(0, 240, 255, 0.04);
         }
@@ -21,12 +22,10 @@
             scroll-behavior: smooth;
         }
 
-        /* Hide regular mouse cursor to show off custom cursor tracking */
         html, body, a, button, canvas {
             cursor: none !important;
         }
 
-        /* Moving Matrix Background Grid Animation */
         @keyframes moveGrid {
             0% { background-position: 0 0; }
             100% { background-position: 50px 50px; }
@@ -47,7 +46,6 @@
             100% { border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
         }
 
-        /* Matrix Breach Overlay Effect Animation */
         @keyframes terminalGlitch {
             0% { background: rgba(0, 240, 255, 0.15); opacity: 1; }
             20% { background: rgba(255, 0, 85, 0.3); }
@@ -71,7 +69,6 @@
             overflow-x: hidden;
         }
 
-        /* --- GLOWING NEON CURSOR --- */
         #cursor-dot {
             width: 8px;
             height: 8px;
@@ -96,7 +93,6 @@
             box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
         }
 
-        /* --- GLITCH TERMINAL SCREEN OVERLAY --- */
         #glitch-overlay {
             display: none;
             position: fixed;
@@ -116,13 +112,9 @@
             animation: terminalGlitch 1.2s steps(8) forwards;
         }
 
-        /* --- INTRO START SCREEN --- */
         #intro-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #0f172a, #02040a);
             z-index: 9998;
             display: flex;
@@ -170,7 +162,6 @@
             transform: scale(1.05);
         }
 
-        /* --- MAIN PAGE GRAPHICS --- */
         #main-site {
             opacity: 0;
             display: none;
@@ -253,11 +244,6 @@
             transition: all 0.4s ease;
         }
 
-        .image-wrapper:hover .web-image {
-            transform: scale(1.03);
-            filter: brightness(1.1);
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -276,11 +262,6 @@
             color: var(--neon-blue);
         }
 
-        tr:hover td {
-            background-color: rgba(168, 85, 247, 0.1);
-            color: #fff;
-        }
-
         ol {
             list-style: none;
             padding-left: 0;
@@ -293,7 +274,6 @@
             border-radius: 0 6px 6px 0;
         }
 
-        /* --- THE INTERACTIVE QUIZ UNIT --- */
         .quiz-panel {
             background: rgba(0,0,0,0.4);
             border: 1px solid var(--neon-blue);
@@ -338,8 +318,8 @@
             box-shadow: 0 0 10px var(--neon-blue);
         }
 
-        /* --- ARCADE GAME SYSTEM --- */
-        #arcade-break-room {
+        /* --- ARCADE BREAK ROOMS --- */
+        #arcade-break-room, #geometry-break-room {
             display: none;
             margin-top: 30px;
             border: 2px solid var(--neon-pink);
@@ -350,6 +330,11 @@
             border-radius: 8px;
         }
 
+        #geometry-break-room {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.2);
+        }
+
         .arcade-headline {
             color: var(--neon-pink);
             font-size: 2rem;
@@ -358,7 +343,7 @@
             animation: glowingText 1.5s infinite alternate;
         }
 
-        #gameCanvas {
+        canvas {
             background: #090e1a;
             border: 2px solid #1e293b;
             margin-top: 25px;
@@ -366,13 +351,18 @@
             max-width: 100%;
         }
 
-        /* --- SECRET SERVER OVERFLOW HUD --- */
-        #secret-server-node {
+        /* --- SECRET SERVERS --- */
+        #secret-server-node, #super-secret-server-node {
             display: none;
             margin-top: 40px;
             background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(6, 8, 20, 0.98));
             border: 2px dashed var(--neon-purple);
             animation: pulseBorder 2s infinite alternate;
+        }
+
+        #super-secret-server-node {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 8, 20, 0.98));
+            border: 2px dashed var(--neon-green);
         }
 
         .key-banner {
@@ -396,6 +386,7 @@
             font-family: 'Segoe UI', system-ui, sans-serif;
             border-radius: 0 6px 6px 0;
             line-height: 1.7;
+            text-align: left;
         }
 
         .terminal-block h4 {
@@ -437,7 +428,7 @@
         <div class="welcome-box">
             <h1>Web Guide & Arcade</h1>
             <p style="color: #94a3b8; line-height: 1.6;">
-                Welcome! Step inside to learn how websites work in simple steps, take a quick 10-question quiz, and unlock a classic Flappy Bird mini-game break.
+                Step inside to learn how websites work, conquer interactive games, and unlock layers of deep computer architecture.
             </p>
             <button class="start-btn" onclick="openSystemHub()">CLICK TO START</button>
         </div>
@@ -453,7 +444,7 @@
             <a href="#what-is-it">01. What is it?</a>
             <a href="#types-examples">02. Examples</a>
             <a href="#steps">03. How to Build</a>
-            <a href="#quiz-gate" style="color: var(--neon-pink);">04. Quiz & Game Room</a>
+            <a href="#quiz-gate" style="color: var(--neon-pink);">04. Arcade Arenas</a>
         </nav>
 
         <div class="container">
@@ -464,79 +455,43 @@
                     <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1100&q=80" alt="Web Grid">
                 </div>
                 <p>Think of a <strong>website</strong> like a digital book stored on the internet. Instead of paper pages, it has <strong>web pages</strong> filled with text, pictures, and buttons.</p>
-                <p>When you put all the public websites in the world together, you get the <strong>World Wide Web (WWW)</strong>!</p>
             </section>
 
             <section id="types-examples">
                 <h2>02 // Types of Common Websites</h2>
-                <p>Websites are styled differently based on what they help you accomplish:</p>
-                
                 <table>
                     <thead>
-                        <tr>
-                            <th>Website Type</th>
-                            <th>What It Does</th>
-                            <th>Real Examples</th>
-                        </tr>
+                        <tr><th>Website Type</th><th>What It Does</th><th>Real Examples</th></tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>Search Engines</strong></td>
-                            <td>Helps you find answers and information instantly.</td>
-                            <td>Google, Bing</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Online Shops</strong></td>
-                            <td>Lets you buy products, clothes, and games from home.</td>
-                            <td>Amazon, eBay</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Social Media</strong></td>
-                            <td>Connects you with friends and allows sharing of photos.</td>
-                            <td>Instagram, X (Twitter)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Streaming Sites</strong></td>
-                            <td>Plays music and video directly on your screen.</td>
-                            <td>YouTube, Netflix, Spotify</td>
-                        </tr>
+                        <tr><td><strong>Search Engines</strong></td><td>Helps you find answers and information instantly.</td><td>Google, Bing</td></tr>
+                        <tr><td><strong>Online Shops</strong></td><td>Lets you buy products from home.</td><td>Amazon, eBay</td></tr>
+                        <tr><td><strong>Streaming Sites</strong></td><td>Plays music and video directly on your screen.</td><td>YouTube, Netflix</td></tr>
                     </tbody>
                 </table>
             </section>
 
             <section id="steps">
                 <h2>03 // Simple Steps to Create Your Own Website</h2>
-                <div class="image-wrapper">
-                    <img class="web-image" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1100&q=80" alt="Coding">
-                </div>
-                <p>Building a basic page takes four easy phases:</p>
                 <ol>
                     <li><strong>Plan Content:</strong> Decide what your website is going to say or sell.</li>
                     <li><strong>Get an Address:</strong> Buy a domain link name (like www.mywebsite.com).</li>
                     <li><strong>Rent a Host Server:</strong> Rent space on an internet computer to hold your files.</li>
-                    <li><strong>Write the Code:</strong> Use simple building languages like <strong>HTML</strong> for structure, <strong>CSS</strong> for colors, and <strong>JavaScript</strong> for action.</li>
                 </ol>
             </section>
 
             <section id="quiz-gate">
                 <h2>04 // Complete 10 Questions to Earn a Break</h2>
-                <p style="color: #94a3b8;">Answer all 10 simple true/false or multi-choice checks below. Get them right to activate the Flappy Game console!</p>
-                
                 <div class="quiz-panel" id="quiz-box-container">
                     <h3 id="question-text">Loading verification check parameters...</h3>
                     <div id="options-holder"></div>
-                    
-                    <div id="progress-container">
-                        <div id="progress-fill"></div>
-                    </div>
+                    <div id="progress-container"><div id="progress-fill"></div></div>
                     <p style="margin-top: 12px; font-size: 0.9rem; color: var(--neon-blue);" id="count-text">Questions Completed: 0 / 10</p>
                 </div>
 
                 <div id="arcade-break-room">
-                    <div class="arcade-headline">🕹️ GAME UNLOCKED: NEON FLAP</div>
-                    <p style="color: var(--neon-pink); font-weight: bold;">🎯 CHALLENGE: REACH 20 POINTS TO UNLOCK THE MASTER SERVER CRYPT!</p>
-                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Use **SPACEBAR** or **CLICK INSIDE BOX** to jump and fly around the neon laser tubes.</p>
-                    
+                    <div class="arcade-headline">🕹️ STAGE 1 UNLOCKED: NEON FLAP (EASY)</div>
+                    <p style="color: var(--neon-pink); font-weight: bold;">🎯 CHALLENGE: REACH 20 POINTS TO UNLOCK SERVERS & STAGE 2!</p>
                     <div style="font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
                         SCORE: <span id="gameScore">0</span> // BEST RECORD: <span id="gameBest">0</span>
                     </div>
@@ -547,12 +502,7 @@
                     <div class="arcade-headline" style="color: var(--neon-blue);">📡 INTERNET CORE COMPENDIUM UNLOCKED</div>
                     <div class="key-banner" id="secretKeyDisplay">ACCESS KEY: [DECRYPTING...]</div>
                     
-                    <div class="image-wrapper">
-                        <img class="web-image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1100&q=80" alt="Server Room">
-                    </div>
-                    
                     <h3>⚡ Full-Scale Enterprise Architecture Blueprints</h3>
-                    <p style="color: #a7f3d0;">Congratulations, engineer. Bypassing the 20-point execution threshold has granted your browser session elevated administrative clearance. Below lies the deep technical breakdown of global internet scaling, distributed operations, and data integrity systems.</p>
                     
                     <div class="terminal-block">
                         <h4 style="color: var(--neon-pink);">[1] The Client-Server Runtime Bifurcation</h4>
@@ -565,37 +515,55 @@
                         <p>Modern backend platforms do not merely read pre-written text files from a hard drive; they programmatically build dynamic data streams for every incoming request. Developers deploy several prominent software stacks to coordinate this logic:</p>
                         <ul>
                             <li><strong>Node.js & Deno:</strong> V8-powered runtimes that allow developers to execute JavaScript on the server, leveraging single-threaded event loops and asynchronous event handlers to process tens of thousands of connections concurrently.</li>
-                            <li><strong>Python (Django & FastPI):</strong> Renowned for rapid development paradigms and clean code syntax, these web engines supply robust data validation layers, automated object-relational mapping, and instant background administration pipelines.</li>
-                            <li><strong>Go (Golang):</strong> Created by Google to build high-performance distributed microservices. Go compiles down directly into machine code, bypassing intermediate runtime virtual layers and leveraging native "goroutines" to manage memory efficiently under massive request loads.</li>
+                            <li><strong>Python (Django & FastAPI):</strong> Renowned for rapid development paradigms and clean code syntax, these web engines supply robust data validation layers, automated object-relational mapping, and instant background administration pipelines.</li>
                         </ul>
-                        <p>These runtime engines process inbound HTTP packets, parse the request parameters (such as verifying cookie states, tracking active sessions, or evaluating request bodies), and select appropriate code routes to fulfill the operation.</p>
                     </div>
 
                     <div class="terminal-block">
                         <h4 style="color: var(--neon-purple);">[3] Persistent Storage Paradigms & Database Clustering</h4>
                         <p>A website cannot store persistent user assets inside local memory variables, because server instances are ephemeral—they scale up, scale down, or crash when hardware components fail. Therefore, state stability requires independent database systems, which are generally grouped into two major architectural models:</p>
-                        <p><strong>Relational Databases (RDBMS):</strong> Systems like PostgreSQL and MySQL store application properties inside highly organized, strict tabular structures. These systems rely fundamentally on SQL (Structured Query Language) and guarantee perfect transaction safety via ACID compliance (Atomicity, Consistency, Isolation, Durability). This ensures that if a financial transfer or an e-commerce order fails midway through an operation, the entire database rollbacks to a pristine state, preventing data corruption.</p>
-                        <p><strong>Non-Relational Databases (NoSQL):</strong> Engine options like MongoDB, Redis, or Apache Cassandra discard rigid table rules in favor of flexible document storage layouts (like nested JSON objects) or lightning-fast Key-Value pairings. Redis, for example, operates completely inside system RAM rather than slow magnetic disks, acting as an ultra-fast temporary storage cache to serve repetitive database lookups (like an active player high-score dashboard) within microseconds.</p>
+                        <p><strong>Relational Databases (RDBMS):</strong> Systems like PostgreSQL and MySQL store application properties inside highly organized, strict tabular structures. These systems rely fundamentally on SQL (Structured Query Language) and guarantee perfect transaction safety via ACID compliance (Atomicity, Consistency, Isolation, Durability).</p>
+                    </div>
+
+                    <div id="geometry-break-room">
+                        <div class="arcade-headline" style="color: var(--neon-green);">🔺 STAGE 2 UNLOCKED: CYBER DASH</div>
+                        <p style="color: var(--neon-green); font-weight: bold;">🎯 CHALLENGE: DODGE 15 OBSTACLES TO UNLOCK VAULT LEVEL 2!</p>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Press **SPACEBAR**, **W**, or **CLICK INSIDE BOX** to jump over coming lasers.</p>
+                        <div style="font-size: 1.3rem; color: var(--neon-green); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
+                            DODGES: <span id="dashScore">0</span> / 15
+                        </div>
+                        <canvas id="dashCanvas" width="600" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div id="super-secret-server-node" class="quiz-panel">
+                    <div class="arcade-headline" style="color: var(--neon-green);">⚙️ MASTER VAULT LEVEL II: DEVOPS & CYBERSECURITY</div>
+                    <div class="key-banner" id="superSecretKeyDisplay" style="border-color: var(--neon-green);">ACCESS KEY: [DECRYPTING GLOBAL CRYPTO...]</div>
+                    
+                    <div class="terminal-block">
+                        <h4 style="color: var(--neon-green);">[4] Containerization, Microservices & Kubernetes Orchestration</h4>
+                        <p>In classical web hosting, apps suffered from "it works on my machine" syndrome. Modern infrastructure packages code inside **Docker containers**. A container bundles the application code along with its exact operating system dependencies, engine versions, and libraries. This guarantees uniform behavior across development laptops and cloud cloud engines.</p>
+                        <p>When deployments scale to thousands of containers, organizations utilize **Kubernetes (K8s)**. Kubernetes acts as a planetary-scale cloud conductor, monitoring container lifecycles, executing automated zero-downtime rollouts, routing microservice endpoints, and tracking physical health vectors. If a server pod drops offline due to memory exhaustion, Kubernetes instantly spins up an identical replacement container in fractions of a second.</p>
                     </div>
 
                     <div class="terminal-block">
-                        <h4 style="color: #10b981;">[4] RESTful & GraphQL API Interconnection Matrices</h4>
-                        <p>An API (Application Programming Interface) is the structural contract that allows separate computer systems to talk to one another over the network without manual human intervention. Whenever a webpage updates a live component without reloading the entire window, it is executing background network requests against a remote API gateway.</p>
-                        <p>The standard model for web communications is <strong>REST (Representational State Transfer)</strong>. REST uses standard HTTP request verbs like <code>GET</code> to fetch files, <code>POST</code> to create records, <code>PUT</code> to overwrite settings, and <code>DELETE</code> to wipe out structural fields. Data passed back and forth is uniformly structured as lightweight text strings using <strong>JSON (JavaScript Object Notation)</strong> syntax. For complex applications, engineering teams often migrate toward <strong>GraphQL</strong> API frameworks. GraphQL enables the frontend to request exactly the data fields it requires in a single query, significantly reducing network bandwidth and avoiding data over-fetching across slower mobile cell towers.</p>
+                        <h4 style="color: var(--neon-blue);">[5] Cryptographic Handshakes, SSL/TLS, and Asymmetric Hardening</h4>
+                        <p>Data flowing over public web highways is exposed to intercept threats. **HTTPS** secures these paths through Transport Layer Security (TLS). The handshake relies on **Asymmetric Cryptography**. The server broadcasts a public key that anyone can see, but retains a strictly guarded private key.</p>
+                        <p>When your browser opens a link, it uses the server's public key to encrypt a newly generated random string. This package can only be unlocked by the server's unique private key. Once this identity check completes, both systems establish a symmetrical block cipher (like AES-256) to encode all traffic, ensuring that credit cards, secure health accounts, and admin passwords remain invisible to malicious sniffing entities along the network path.</p>
                     </div>
 
                     <div class="terminal-block">
-                        <h4 style="color: #f59e0b;">[5] Distributed Edge Networks, Load Balancing, and CDNs</h4>
-                        <p>When a massive web application receives traffic from fifty million worldwide users simultaneously, a single server node will experience immediate thread exhaustion, CPU thermal throttling, or total networking failure. To circumvent this physical limitation, elite platforms deploy horizontally scalable server clusters orchestrated by <strong>Reverse Proxies and Load Balancers</strong> (such as NGINX, HAProxy, or AWS ALB).</p>
-                        <p>The incoming traffic hit hits a central load balancer first. This specialized router acts as a traffic traffic cop, evaluating network health metrics and using balancing algorithms (like Round Robin or Least Connections) to split the incoming traffic across hundreds of redundant background server machines. To optimize speed even further, <strong>CDNs (Content Delivery Networks)</strong> like Cloudflare or Fastly are positioned around the globe. CDNs keep cached copies of static assets (images, stylesheets, media assets) directly on hundreds of edge servers worldwide. When a user requests a page, the data is pulled from a local data center just miles away rather than traveling halfway across the globe, bringing latency down to the absolute physical limits of fiber-optic cabling.</p>
+                        <h4 style="color: var(--neon-pink);">[6] CI/CD Automation Pipelines & DevSecOps Strategy</h4>
+                        <p>Elite technology companies release software updates dozens of times per day without taking their websites offline. This velocity is achieved through automated **Continuous Integration and Continuous Deployment (CI/CD)** pipelines (built via tools like GitHub Actions, GitLab CI, or Jenkins).</p>
+                        <p>Every time an engineer updates the source codebase, automated hooks trigger a cloud deployment cycle. First, syntax linters check for code formatting errors. Second, unit tests simulate user behavior to ensure nothing is broken. Third, vulnerability parsers check dependencies for known security weaknesses. If all gates pass, code builds into a new production server cluster automatically. DevSecOps injects rigorous automated security testing directly into this engineering pipeline, verifying compliance checks before a single line of script hits real public traffic nodes.</p>
                     </div>
-
-                    <p style="color: var(--neon-pink); font-weight: bold; text-align: center; margin-top: 30px; font-size: 1.2rem; font-family: monospace; letter-spacing: 2px;">
-                        [▼ SYSTEM LOG TERMINATED // ACCESS EXTENDED INDEFINITELY ▼]
+                    
+                    <p style="color: var(--neon-green); font-weight: bold; text-align: center; margin-top: 30px; font-size: 1.2rem; font-family: monospace; letter-spacing: 2px;">
+                        [▼ SYSTEM LOG COMPLETED // CORE NET MASTER ACQUIRED ▼]
                     </p>
                 </div>
-            </section>
 
+            </section>
         </div>
 
         <footer>
@@ -604,106 +572,56 @@
     </div>
 
     <script>
-        // --- NATIVE RETRO AUDIO GENERATOR ENGINE ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
-
             const osc = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
+            osc.connect(gainNode); gainNode.connect(audioCtx.destination);
 
             if (type === 'click') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(600, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.08);
-            } 
-            else if (type === 'jump') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(250, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(550, audioCtx.currentTime + 0.12);
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.12);
-            } 
-            else if (type === 'score') {
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08);
+            } else if (type === 'jump') {
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.1);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-            } 
-            else if (type === 'crash') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-                osc.frequency.linearRampToValueAtTime(40, audioCtx.currentTime + 0.3);
-                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.35);
-            }
-            else if (type === 'unlock') {
-                osc.type = 'sine';
-                let scale = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
-                scale.forEach((freq, i) => {
-                    let noteOsc = audioCtx.createOscillator();
-                    let noteGain = audioCtx.createGain();
-                    noteOsc.type = 'sine';
-                    noteOsc.frequency.setValueAtTime(freq, audioCtx.currentTime + (i * 0.08));
-                    noteGain.gain.setValueAtTime(0.1, audioCtx.currentTime + (i * 0.08));
-                    noteGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.08) + 0.2);
-                    noteOsc.connect(noteGain);
-                    noteGain.connect(audioCtx.destination);
-                    noteOsc.start(audioCtx.currentTime + (i * 0.08));
-                    noteOsc.stop(audioCtx.currentTime + (i * 0.08) + 0.2);
-                });
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'score') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.07);
+                gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+            } else if (type === 'crash') {
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(90, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.3);
             }
         }
 
-        // --- HARDWARE POINTER CURSOR LOGIC ---
+        // CUSTOM CURSOR
         const dot = document.getElementById('cursor-dot');
         const ring = document.getElementById('cursor-ring');
-
         document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-            setTimeout(() => {
-                ring.style.left = e.clientX + 'px';
-                ring.style.top = e.clientY + 'px';
-            }, 35);
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 35);
         });
 
-        document.addEventListener('mousedown', () => {
-            dot.style.transform = 'translate(-50%, -50%) scale(0.6)';
-            ring.style.transform = 'translate(-50%, -50%) scale(1.3)';
-            ring.style.borderColor = 'var(--neon-blue)';
-        });
-        document.addEventListener('mouseup', () => {
-            dot.style.transform = 'translate(-50%, -50%) scale(1)';
-            ring.style.transform = 'translate(-50%, -50%) scale(1)';
-            ring.style.borderColor = 'var(--neon-pink)';
-        });
-
-        // --- OVERLAY LAYER SWITCH ---
         function openSystemHub() {
             playSound('click');
-            const overlay = document.getElementById('intro-screen');
-            const mainHub = document.getElementById('main-site');
-            overlay.style.opacity = '0';
-            overlay.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                mainHub.style.display = 'block';
-                mainHub.style.opacity = '1';
-                loadQuizQuestion();
-            }, 800);
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('main-site').style.display = 'block';
+            document.getElementById('main-site').style.opacity = '1';
+            loadQuizQuestion();
         }
 
-        // --- 10 QUIZ QUESTIONS ---
+        // QUIZ SYSTEM
         const simplifedQuiz = [
             { q: "A website is like a collection of digital pages stored on the internet.", a: ["True", "False"], r: 0 },
             { q: "What does the 'WWW' abbreviation stand for?", a: ["Word Web Website", "World Wide Web", "West Web World"], r: 1 },
@@ -716,199 +634,187 @@
             { q: "Websites are stored on powerful internet connected computers called...", a: ["Browsers", "Servers / Hosts", "Cursors"], r: 1 },
             { q: "YouTube, Netflix, and Spotify are examples of what?", a: ["Streaming Websites", "Search Engines", "Personal Blogs"], r: 0 }
         ];
-
         let quizIndex = 0;
 
         function loadQuizQuestion() {
             if (quizIndex >= 10) {
                 document.getElementById('quiz-box-container').style.display = 'none';
                 document.getElementById('arcade-break-room').style.display = 'block';
-                initArcadeGame();
-                return;
+                initArcadeGame(); return;
             }
-
             const currentObj = simplifedQuiz[quizIndex];
             document.getElementById('question-text').textContent = `Question ${quizIndex + 1}: ${currentObj.q}`;
-            
-            const optionsBox = document.getElementById('options-holder');
-            optionsBox.innerHTML = '';
-            
-            currentObj.a.forEach((optionString, numericalIdx) => {
-                const btn = document.createElement('button');
-                btn.className = 'answer-option';
-                btn.textContent = optionString;
-                btn.onclick = () => verifyAnswer(numericalIdx);
+            const optionsBox = document.getElementById('options-holder'); optionsBox.innerHTML = '';
+            currentObj.a.forEach((opt, idx) => {
+                const btn = document.createElement('button'); btn.className = 'answer-option'; btn.textContent = opt;
+                btn.onclick = () => { if (idx === currentObj.r) { quizIndex++; loadQuizQuestion(); } else { alert("Try again!"); } };
                 optionsBox.appendChild(btn);
             });
-
-            const percentWidth = (quizIndex / 10) * 100;
-            document.getElementById('progress-fill').style.width = `${percentWidth}%`;
+            document.getElementById('progress-fill').style.width = `${(quizIndex / 10) * 100}%`;
             document.getElementById('count-text').textContent = `Questions Completed: ${quizIndex} / 10`;
         }
 
-        function verifyAnswer(clickedIdx) {
-            playSound('click');
-            const validationTarget = simplifedQuiz[quizIndex];
-            if (clickedIdx === validationTarget.r) {
-                quizIndex++;
-                loadQuizQuestion();
-            } else {
-                alert("Whoops, wrong answer! Let's read that carefully and choose again.");
+        // --- STAGE 1: EASY FLAPPY BIRD ENGINE ---
+        const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+        let bird, pipes = [], f1 = 0, sc1 = 0, isP1 = false, isD1 = false, locked1 = true;
+
+        class EasyBird {
+            constructor() { this.x = 70; this.y = 180; this.size = 11; this.gravity = 0.22; this.velocity = 0; this.lift = -5.0; }
+            draw() {
+                ctx.save(); ctx.translate(this.x, this.y);
+                let g = ctx.createRadialGradient(0,0,1, 0,0,this.size);
+                g.addColorStop(0, '#fff'); g.addColorStop(0.6, '#ff0055'); g.addColorStop(1, 'transparent');
+                ctx.beginPath(); ctx.arc(0,0,this.size+6,0,Math.PI*2); ctx.fillStyle = g; ctx.fill(); ctx.restore();
+            }
+            update() {
+                this.velocity += this.gravity; this.y += this.velocity;
+                if (this.y >= canvas.height) handleD1();
+                if (this.y <= 0) { this.y = 0; this.velocity = 0; }
             }
         }
 
-        // --- RETRO NEON ARCADE CORE ENGINE ---
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const scoreUI = document.getElementById('gameScore');
-        const highscoreUI = document.getElementById('gameBest');
-
-        let birdPlayer, pipesArray = [], frames = 0, currentScore = 0;
-        let localBest = localStorage.getItem('simpleFlapBest') || 0;
-        let isPlaying = false, isDead = false;
-        let keyAwarded = false;
-
-        highscoreUI.textContent = localBest;
-
-        class NeonOrb {
-            constructor() {
-                this.x = 70; this.y = 180; this.size = 12;
-                this.gravitySpeed = 0.4; this.velocity = 0; this.jumpStrength = -6.5;
+        class EasyPipe {
+            constructor() { this.gap = 160; this.w = 55; this.x = canvas.width; this.top = Math.random()*(canvas.height-this.gap-80)+40; this.passed = false; }
+            draw() {
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.2)'; ctx.strokeStyle = '#00f0ff'; ctx.lineWidth = 2;
+                ctx.fillRect(this.x, 0, this.w, this.top); ctx.strokeRect(this.x, 0, this.w, this.top);
+                ctx.fillRect(this.x, this.top+this.gap, this.w, canvas.height); ctx.strokeRect(this.x, this.top+this.gap, this.w, canvas.height);
             }
-            render() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                let currentAngle = Math.min(Math.max(this.velocity * 0.05, -0.4), 0.6);
-                ctx.rotate(currentAngle);
-
-                let glowGrd = ctx.createRadialGradient(0, 0, 1, 0, 0, this.size);
-                glowGrd.addColorStop(0, '#ffffff');
-                glowGrd.addColorStop(0.5, '#ff0055');
-                glowGrd.addColorStop(1, 'transparent');
-
-                ctx.beginPath(); ctx.arc(0, 0, this.size + 6, 0, Math.PI * 2);
-                ctx.fillStyle = glowGrd; ctx.shadowBlur = 12; ctx.shadowColor = '#ff0055';
-                ctx.fill(); ctx.closePath();
-                ctx.restore();
-            }
-            movement() {
-                this.velocity += this.gravitySpeed; this.y += this.velocity;
-                if (this.y + this.size >= canvas.height) { this.y = canvas.height - this.size; handleCrash(); }
-                if (this.y - this.size <= 0) { this.y = this.size; this.velocity = 0; }
-            }
-            flap() { this.velocity = this.jumpStrength; playSound('jump'); }
-        }
-
-        class LaserPipe {
-            constructor() {
-                this.clearGap = 130; this.w = 60; this.x = canvas.width;
-                this.topH = Math.floor(Math.random() * (canvas.height - this.clearGap - 100)) + 30;
-                this.botH = canvas.height - (this.topH + this.clearGap);
-                this.counted = false;
-            }
-            render() {
-                ctx.save(); ctx.shadowBlur = 8; ctx.shadowColor = '#00f0ff';
-                ctx.fillStyle = 'rgba(0, 240, 255, 0.15)'; ctx.strokeStyle = '#00f0ff'; ctx.lineWidth = 2;
-                
-                ctx.fillRect(this.x, 0, this.w, this.topH); ctx.strokeRect(this.x, 0, this.w, this.topH);
-                ctx.fillRect(this.x, canvas.height - this.botH, this.w, this.botH); ctx.strokeRect(this.x, canvas.height - this.botH, this.w, this.botH);
-                
-                ctx.fillStyle = '#ff0055'; ctx.fillRect(this.x - 1, this.topH - 5, this.w + 2, 5);
-                ctx.fillRect(this.x - 1, canvas.height - this.botH, this.w + 2, 5);
-                ctx.restore();
-            }
-            movement() { this.x -= 2.6; }
+            update() { this.x -= 1.8; }
         }
 
         function initArcadeGame() {
-            birdPlayer = new NeonOrb(); pipesArray = []; currentScore = 0; frames = 0; isDead = false;
-            scoreUI.textContent = currentScore;
-            
-            ctx.fillStyle = '#050814'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            birdPlayer.render();
-            
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.65)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00f0ff'; ctx.font = 'bold 15px monospace'; ctx.textAlign = 'center';
-            ctx.fillText('>> CLICK OR PRESS SPACEBAR TO FLY! <<', canvas.width / 2, canvas.height / 2);
+            bird = new EasyBird(); pipes = []; sc1 = 0; f1 = 0; isD1 = false;
+            document.getElementById('gameScore').textContent = sc1;
+            ctx.fillStyle = '#050814'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            bird.draw();
+            ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = '#00f0ff'; ctx.font = 'bold 14px monospace'; ctx.textAlign = 'center';
+            ctx.fillText('CLICK OR SPACE TO JUMP (EASY MODE)', canvas.width/2, canvas.height/2);
         }
 
-        function runGameLoop() {
-            if (!isPlaying || isDead) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#050814'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            birdPlayer.movement(); birdPlayer.render();
-
-            if (frames % 95 === 0) pipesArray.push(new LaserPipe());
-
-            for (let i = pipesArray.length - 1; i >= 0; i--) {
-                pipesArray[i].movement(); pipesArray[i].render();
-                
-                if (birdPlayer.x + birdPlayer.size > pipesArray[i].x && birdPlayer.x - birdPlayer.size < pipesArray[i].x + pipesArray[i].w &&
-                    (birdPlayer.y - birdPlayer.size < pipesArray[i].topH || birdPlayer.y + birdPlayer.size > canvas.height - pipesArray[i].botH)) {
-                    handleCrash();
+        function loopFlappy() {
+            if (!isP1 || isD1) return;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = '#050814'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            bird.update(); bird.draw();
+            if (f1 % 110 === 0) pipes.push(new EasyPipe());
+            for(let i=pipes.length-1; i>=0; i--) {
+                pipes[i].update(); pipes[i].draw();
+                if (bird.x + bird.size > pipes[i].x && bird.x - bird.size < pipes[i].x + pipes[i].w && (bird.y - bird.size < pipes[i].top || bird.y + bird.size > pipes[i].top + pipes[i].gap)) handleD1();
+                if (!pipes[i].passed && pipes[i].x + pipes[i].w < bird.x) {
+                    sc1++; pipes[i].passed = true; document.getElementById('gameScore').textContent = sc1; playSound('score');
+                    if (sc1 >= 20 && locked1) unlockVault1();
                 }
-
-                if (!pipesArray[i].counted && pipesArray[i].x + pipesArray[i].w < birdPlayer.x) {
-                    currentScore++; pipesArray[i].counted = true; scoreUI.textContent = currentScore;
-                    playSound('score');
-
-                    if (currentScore >= 20 && !keyAwarded) {
-                        triggerSecretServerUnlock();
-                    }
-
-                    if (currentScore > localBest) {
-                        localBest = currentScore; highscoreUI.textContent = localBest;
-                        localStorage.setItem('simpleFlapBest', localBest);
-                    }
-                }
-                if (pipesArray[i].x + pipesArray[i].w < 0) pipesArray.splice(i, 1);
+                if (pipes[i].x + pipes[i].w < 0) pipes.splice(i,1);
             }
-            frames++; requestAnimationFrame(runGameLoop);
+            f1++; requestAnimationFrame(loopFlappy);
         }
 
-        function triggerSecretServerUnlock() {
-            keyAwarded = true;
-            playSound('unlock');
-            
-            // Trigger Glitch Terminal CSS Overlay Event Animation
-            const glitcher = document.getElementById('glitch-overlay');
-            glitcher.classList.add('run-glitch');
-            
+        function handleD1() { isD1 = true; isP1 = false; playSound('crash'); initArcadeGame(); }
+
+        function unlockVault1() {
+            locked1 = false; playSound('score');
+            const glitcher = document.getElementById('glitch-overlay'); glitcher.classList.add('run-glitch');
             setTimeout(() => {
                 glitcher.classList.remove('run-glitch');
                 document.getElementById('secret-server-node').style.display = 'block';
-                
-                let generatedKey = "ULTRA_NODE_ALPHA_" + Math.floor(Math.random() * 900000 + 100000) + "_SYS_2026";
-                document.getElementById('secretKeyDisplay').textContent = `DECRYPTED ADMIN MASTER ACCESS KEY: ${generatedKey}`;
-                
-                // Smooth scroll right to the top of the unlocked encyclopedia
+                document.getElementById('secretKeyDisplay').textContent = "DECRYPTED ACCESS KEY: NODE_LVL1_" + Math.floor(Math.random()*8999+1000);
+                document.getElementById('geometry-break-room').style.display = 'block';
+                initDashGame();
                 document.getElementById('secret-server-node').scrollIntoView({ behavior: 'smooth' });
             }, 1200);
         }
 
-        function registerInputTrigger() {
-            if (!isPlaying && !isDead) { isPlaying = true; runGameLoop(); }
-            if (isDead) { initArcadeGame(); isPlaying = true; runGameLoop(); return; }
-            birdPlayer.flap();
+        // --- STAGE 2: GEOMETRY DASH ENGINE ---
+        const cDash = document.getElementById('dashCanvas'); const ctxD = cDash.getContext('2d');
+        let playerY = 0, playerV = 0, playerG = 0.6, isJumping = false;
+        let obstacles = [], f2 = 0, sc2 = 0, isP2 = false, isD2 = false, locked2 = true;
+        const groundY = 160;
+
+        class DashObstacle {
+            constructor() { this.x = cDash.width; this.w = 15; this.h = 24; this.passed = false; }
+            draw() {
+                ctxD.fillStyle = '#ff0055'; ctxD.shadowBlur = 10; ctxD.shadowColor = '#ff0055';
+                ctxD.beginPath(); ctxD.moveTo(this.x, groundY); ctxD.lineTo(this.x + this.w/2, groundY - this.h); ctxD.lineTo(this.x + this.w, groundY); ctxD.closePath(); ctxD.fill();
+            }
+            update() { this.x -= 4; }
         }
 
-        function handleCrash() {
-            isDead = true; isPlaying = false;
-            playSound('crash');
-            ctx.fillStyle = 'rgba(10, 5, 15, 0.85)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#ff0055'; ctx.font = 'bold 22px monospace'; ctx.textAlign = 'center';
-            ctx.fillText('CRASH! GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
-            ctx.fillStyle = '#fff'; ctx.font = '13px monospace';
-            ctx.fillText('Tap Canvas or Spacebar to try again!', canvas.width / 2, canvas.height / 2 + 25);
+        function initDashGame() {
+            playerY = groundY - 20; playerV = 0; obstacles = []; sc2 = 0; f2 = 0; isD2 = false; isP2 = false;
+            document.getElementById('dashScore').textContent = sc2;
+            renderDashStatic();
         }
 
+        function renderDashStatic() {
+            ctxD.fillStyle = '#050814'; ctxD.fillRect(0,0,cDash.width,cDash.height);
+            ctxD.strokeStyle = 'rgba(0, 240, 255, 0.4)'; ctxD.lineWidth = 3; ctxD.beginPath(); ctxD.moveTo(0, groundY); ctxD.lineTo(cDash.width, groundY); ctxD.stroke();
+            ctxD.fillStyle = '#00f0ff'; ctxD.fillRect(50, playerY, 20, 20);
+            if(!isP2) {
+                ctxD.fillStyle = '#00f0ff'; ctxD.font = 'bold 13px monospace'; ctxD.textAlign = 'center';
+                ctxD.fillText('CLICK OR SPACEBAR TO JUMP OBSTACLES', cDash.width/2, cDash.height/2);
+            }
+        }
+
+        function loopDash() {
+            if (!isP2 || isD2) return;
+            ctxD.clearRect(0,0,cDash.width,cDash.height);
+            ctxD.fillStyle = '#050814'; ctxD.fillRect(0,0,cDash.width,cDash.height);
+            
+            ctxD.strokeStyle = 'rgba(0, 240, 255, 0.4)'; ctxD.lineWidth = 3; ctxD.beginPath(); ctxD.moveTo(0, groundY); ctxD.lineTo(cDash.width, groundY); ctxD.stroke();
+
+            playerV += playerG; playerY += playerV;
+            if (playerY >= groundY - 20) { playerY = groundY - 20; playerV = 0; isJumping = false; }
+
+            ctxD.save(); ctxD.fillStyle = '#00f0ff'; ctxD.shadowBlur = 10; ctxD.shadowColor = '#00f0ff';
+            ctxD.fillRect(50, playerY, 20, 20); ctxD.restore();
+
+            if (f2 % 90 === 0) obstacles.push(new DashObstacle());
+
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].update(); obstacles[i].draw();
+                if (50 + 20 > obstacles[i].x && 50 < obstacles[i].x + obstacles[i].w && playerY + 20 > groundY - obstacles[i].h) {
+                    isD2 = true; isP2 = false; playSound('crash'); initDashGame(); return;
+                }
+                if (!obstacles[i].passed && obstacles[i].x + obstacles[i].w < 50) {
+                    sc2++; obstacles[i].passed = true; document.getElementById('dashScore').textContent = sc2; playSound('score');
+                    if (sc2 >= 15 && locked2) unlockVault2();
+                }
+                if (obstacles[i].x < -20) obstacles.splice(i, 1);
+            }
+            f2++; requestAnimationFrame(loopDash);
+        }
+
+        function unlockVault2() {
+            locked2 = false; playSound('score');
+            const glitcher = document.getElementById('glitch-overlay'); glitcher.classList.add('run-glitch');
+            setTimeout(() => {
+                glitcher.classList.remove('run-glitch');
+                document.getElementById('super-secret-server-node').style.display = 'block';
+                document.getElementById('superSecretKeyDisplay').textContent = "DECRYPTED QUANTUM CORE MASTER KEY: CORE_SEC_QUANTUM_" + Math.floor(Math.random()*89999+10000);
+                document.getElementById('super-secret-server-node').scrollIntoView({ behavior: 'smooth' });
+            }, 1200);
+        }
+
+        function jumpDash() {
+            if (!isP2) { isP2 = true; loopDash(); return; }
+            if (!isJumping) { playerV = -9.5; isJumping = true; playSound('jump'); }
+        }
+
+        // UNIVERSAL CONTROL OVERRIDES
         window.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && document.getElementById('arcade-break-room').style.display === 'block') {
-                e.preventDefault(); registerInputTrigger();
+            if (e.code === 'Space' || e.code === 'KeyW') {
+                if (document.getElementById('geometry-break-room').style.display === 'block' && window.scrollY > document.getElementById('secret-server-node').offsetTop) {
+                    e.preventDefault(); jumpDash();
+                } else if (document.getElementById('arcade-break-room').style.display === 'block') {
+                    e.preventDefault(); if(!isP1) { isP1 = true; loopFlappy(); } bird.lift = -5.0; bird.velocity = bird.lift; playSound('jump');
+                }
             }
         });
-        canvas.addEventListener('click', (e) => { e.stopPropagation(); registerInputTrigger(); });
+
+        canvas.addEventListener('click', (e) => { e.stopPropagation(); if(!isP1) { isP1 = true; loopFlappy(); } bird.velocity = -5.0; playSound('jump'); });
+        cDash.addEventListener('click', (e) => { e.stopPropagation(); jumpDash(); });
     </script>
 </body>
 </html>
