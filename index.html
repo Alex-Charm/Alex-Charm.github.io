@@ -47,6 +47,16 @@
             100% { border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
         }
 
+        /* Matrix Breach Overlay Effect Animation */
+        @keyframes terminalGlitch {
+            0% { background: rgba(0, 240, 255, 0.15); opacity: 1; }
+            20% { background: rgba(255, 0, 85, 0.3); }
+            40% { background: rgba(168, 85, 247, 0.2); }
+            60% { background: rgba(0, 240, 255, 0.4); }
+            80% { background: rgba(2, 3, 8, 0.9); }
+            100% { background: transparent; opacity: 0; display: none; }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-dark);
@@ -84,6 +94,26 @@
             transform: translate(-50%, -50%);
             transition: transform 0.1s ease-out;
             box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+        }
+
+        /* --- GLITCH TERMINAL SCREEN OVERLAY --- */
+        #glitch-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            font-size: 3rem;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 0 20px #fff;
+        }
+        .run-glitch {
+            display: flex !important;
+            animation: terminalGlitch 1.2s steps(8) forwards;
         }
 
         /* --- INTRO START SCREEN --- */
@@ -190,7 +220,6 @@
             padding: 0 20px;
         }
 
-        /* Glass Cards with Animated Borders */
         section {
             background: var(--panel-glass);
             border: 1px solid rgba(0, 240, 255, 0.2);
@@ -209,7 +238,6 @@
             padding-bottom: 10px;
         }
 
-        /* Smooth Interactive Tech Images */
         .image-wrapper {
             position: relative;
             overflow: hidden;
@@ -230,7 +258,6 @@
             filter: brightness(1.1);
         }
 
-        /* Clean Visual Grid Tables */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -254,7 +281,6 @@
             color: #fff;
         }
 
-        /* Simplified Number Steps */
         ol {
             list-style: none;
             padding-left: 0;
@@ -362,6 +388,15 @@
             word-break: break-all;
         }
 
+        .terminal-block {
+            background: rgba(0,0,0,0.6);
+            border-left: 3px solid var(--neon-blue);
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            border-radius: 0 6px 6px 0;
+        }
+
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -374,6 +409,7 @@
 
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
+    <div id="glitch-overlay">OVERRIDING_SECURITY_GATE...</div>
 
     <div id="intro-screen">
         <div class="welcome-box">
@@ -486,22 +522,37 @@
                 </div>
 
                 <div id="secret-server-node" class="quiz-panel">
-                    <div class="arcade-headline" style="color: var(--neon-blue);">📡 SECRET SERVER NODE DETECTED</div>
-                    <div class="key-banner" id="secretKeyDisplay">ACCESS KEY: [PENDING VERIFICATION]</div>
+                    <div class="arcade-headline" style="color: var(--neon-blue);">📡 SECRET ARCHITECTURE SERVER UNLOCKED</div>
+                    <div class="key-banner" id="secretKeyDisplay">ACCESS KEY: [DECRYPTING...]</div>
                     
                     <div class="image-wrapper">
                         <img class="web-image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1100&q=80" alt="Server Room">
                     </div>
                     
                     <h3>⚡ Advanced Web Infrastructure Lessons</h3>
-                    <p>Welcome to the back-end side of the internet. Here is what happens behind the scenes of complex sites:</p>
+                    <p>Welcome to the core system. Now that you have bypassed basic training, here is how world-scale web apps actually process traffic:</p>
                     
-                    <ol>
-                        <li><strong>The Databases (Data Hubs):</strong> Modern sites use hidden tables (like SQL or MongoDB) to instantly remember user login accounts, game high scores, and shop catalogs.</li>
-                        <li><strong>APIs (The Data Messenger):</strong> An API acts like a waiter carrying requests from your browser screen down into the server room and returning with dynamic content (like live weather or score states).</li>
-                        <li><strong>CDNs (Global Speed Distribution):</strong> Heavy asset pages copy their data onto thousands of global servers so content loads fast anywhere on Earth.</li>
-                    </ol>
-                    <p style="color: var(--neon-blue); font-weight: bold; text-align: center; margin-top: 15px;">🔒 Connection Status: Securely Granted.</p>
+                    <div class="terminal-block">
+                        <strong style="color: var(--neon-pink);">[1] Back-End Architecture & Logic Units</strong><br>
+                        While HTML/CSS run inside your local browser layout engine (The Client-Side), servers execute deep scripts via setups like Node.js, Python, or Go. These applications build custom dynamic pages on-the-fly depending on who logged in.
+                    </div>
+
+                    <div class="terminal-block">
+                        <strong style="color: var(--neon-blue);">[2] Databases & Persistent Storage Systems</strong><br>
+                        Web applications can't store data inside simple files safely. They deploy relational structures like <strong>PostgreSQL</strong> or document arrays like <strong>MongoDB</strong>. These configurations verify secure encrypted passwords, run transactional web-store shopping cards, and store real-time global game scores instantly.
+                    </div>
+
+                    <div class="terminal-block">
+                        <strong style="color: var(--neon-purple);">[3] API Integrations (Application Programming Interfaces)</strong><br>
+                        APIs serve as architectural channels connecting external apps together. For example, when a custom site loads a mapping interface or live credit card checkout window, it calls remote third-party systems behind the scenes using structured JSON data objects.
+                    </div>
+
+                    <div class="terminal-block">
+                        <strong style="color: #10b981;">[4] Content Delivery Networks (CDNs) & Load Balancers</strong><br>
+                        When millions of users access a page simultaneously, a single server crashes. Global tech companies copy static image files across CDNs (like Cloudflare or AWS CloudFront) located in different countries. Traffic routers then automatically forward your requests to the nearest machine!
+                    </div>
+
+                    <p style="color: var(--neon-blue); font-weight: bold; text-align: center; margin-top: 25px; font-size: 1.1rem;">🔒 Connection Status: Elevated Administrator Access Active.</p>
                 </div>
             </section>
 
@@ -762,7 +813,6 @@
                     currentScore++; pipesArray[i].counted = true; scoreUI.textContent = currentScore;
                     playSound('score');
 
-                    // Check for Server unlock condition criteria
                     if (currentScore >= 20 && !keyAwarded) {
                         triggerSecretServerUnlock();
                     }
@@ -781,17 +831,20 @@
             keyAwarded = true;
             playSound('unlock');
             
-            // Render the elements visible
-            document.getElementById('secret-server-node').style.display = 'block';
+            // Trigger Glitch Terminal CSS Overlay Event Animation
+            const glitcher = document.getElementById('glitch-overlay');
+            glitcher.classList.add('run-glitch');
             
-            // Compute a random session encryption key value
-            let generatedKey = "SECURE_NODE_X" + Math.floor(Math.random() * 900000 + 100000) + "_RECV_2026";
-            document.getElementById('secretKeyDisplay').textContent = `DECRYPTED ACCESS KEY: ${generatedKey}`;
-            
-            // Pop an alert notifying them of success
             setTimeout(() => {
-                alert("👑 CORE VERIFICATION PASSED! Score reached 20. Secret server records have dropped below the arcade box section!");
-            }, 50);
+                glitcher.classList.remove('run-glitch');
+                document.getElementById('secret-server-node').style.display = 'block';
+                
+                let generatedKey = "DEEP_NET_NODE_X" + Math.floor(Math.random() * 900000 + 100000) + "_RECV_2026";
+                document.getElementById('secretKeyDisplay').textContent = `DECRYPTED CODENAME ACCESS KEY: ${generatedKey}`;
+                
+                // Smooth scroll down right to the newly revealed server node context
+                document.getElementById('secret-server-node').scrollIntoView({ behavior: 'smooth' });
+            }, 1200);
         }
 
         function registerInputTrigger() {
