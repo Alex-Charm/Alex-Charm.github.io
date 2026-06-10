@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Web Academy & Arcade Matrix</title>
+    <title>Enterprise Web Academy & High-Fidelity Arcade Matrix</title>
     <style>
-        /* Easy-to-Read Cyber Theme Variables */
         :root {
             --bg-dark: #040610;
-            --panel-glass: rgba(10, 16, 32, 0.85);
+            --panel-glass: rgba(10, 16, 32, 0.92);
             --neon-blue: #00f0ff;
             --neon-pink: #ff0055;
             --neon-purple: #a855f7;
             --neon-green: #10b981;
             --text-light: #cbd5e1;
-            --grid-line: rgba(0, 240, 255, 0.05);
+            --text-dim: #94a3b8;
+            --grid-line: rgba(0, 240, 255, 0.04);
         }
 
         * {
@@ -70,11 +70,12 @@
                 linear-gradient(var(--grid-line) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: 50px 50px;
-            animation: moveGrid 6s linear infinite;
+            animation: moveGrid 8s linear infinite;
             color: var(--text-light);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            line-height: 1.7;
         }
 
         /* --- PRETTY CUSTOM CURSOR --- */
@@ -152,7 +153,6 @@
             animation: glowingText 2.5s infinite alternate;
         }
 
-        /* INTRO MINIGAME STYLING */
         .minigame-container {
             background: rgba(0,0,0,0.4);
             border: 1px dashed rgba(0, 240, 255, 0.3);
@@ -208,14 +208,14 @@
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin: 0;
             color: #fff;
             text-shadow: 0 0 20px var(--neon-blue);
         }
 
         nav {
-            background: rgba(6, 8, 20, 0.9);
+            background: rgba(6, 8, 20, 0.95);
             border-bottom: 2px solid #1e293b;
             padding: 15px;
             text-align: center;
@@ -227,11 +227,11 @@
         nav button {
             background: transparent;
             border: none;
-            color: #94a3b8;
+            color: var(--text-dim);
             font-weight: bold;
             font-size: 1rem;
             transition: all 0.2s ease;
-            padding: 8px 16px;
+            padding: 10px 20px;
             margin: 0 5px;
             border-radius: 4px;
         }
@@ -248,21 +248,21 @@
         }
 
         .container {
-            max-width: 950px;
-            margin: 30px auto;
-            padding: 0 20px;
-            min-height: 65vh;
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 24px;
+            min-height: 70vh;
         }
 
         /* --- VIRTUAL MULTI-PAGE VIEWS --- */
         .app-page {
             display: none;
             background: var(--panel-glass);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            backdrop-filter: blur(15px);
-            padding: 35px;
-            border-radius: 10px;
-            animation: boxBreathing 4s infinite alternate;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 45px;
+            border-radius: 12px;
+            animation: boxBreathing 5s infinite alternate;
         }
 
         .app-page.active-page {
@@ -271,23 +271,31 @@
 
         h2 {
             color: #fff;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             margin-top: 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
         }
 
         .image-wrapper {
             position: relative;
             overflow: hidden;
-            margin: 20px 0;
+            margin: 25px 0;
             border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .web-image {
             width: 100%;
-            max-height: 350px;
+            max-height: 380px;
             object-fit: cover;
             transition: all 0.4s ease;
         }
@@ -295,37 +303,40 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
-            background: rgba(0,0,0,0.3);
+            margin: 30px 0;
+            background: rgba(0,0,0,0.4);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th, td {
-            padding: 15px;
+            padding: 18px;
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         th {
-            background-color: rgba(0, 240, 255, 0.05);
+            background-color: rgba(0, 240, 255, 0.07);
             color: var(--neon-blue);
+            font-weight: 600;
         }
 
-        ol {
+        .deep-list {
             list-style: none;
             padding-left: 0;
         }
-        ol li {
-            margin-bottom: 15px;
-            padding: 12px 18px;
-            background: rgba(255,255,255,0.01);
+        .deep-list li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
             border-left: 4px solid var(--neon-purple);
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 8px 8px 0;
         }
 
         .quiz-panel {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             border: 1px solid var(--neon-blue);
-            padding: 25px;
+            padding: 30px;
             border-radius: 8px;
         }
 
@@ -335,8 +346,8 @@
             background: rgba(255,255,255,0.02);
             color: var(--text-light);
             border: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 12px;
-            margin: 10px 0;
+            padding: 15px;
+            margin: 12px 0;
             text-align: left;
             font-family: inherit;
             font-size: 1rem;
@@ -347,15 +358,15 @@
         .answer-option:hover {
             background: rgba(0, 240, 255, 0.1);
             border-color: var(--neon-blue);
-            transform: translateX(4px);
+            transform: translateX(6px);
         }
 
         #progress-container {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: #111424;
-            margin-top: 20px;
-            border-radius: 4px;
+            margin-top: 25px;
+            border-radius: 5px;
             overflow: hidden;
         }
         #progress-fill {
@@ -368,10 +379,10 @@
 
         /* --- ARCADE GAME MODULE HOUSING --- */
         .arcade-cabinet {
-            margin-top: 15px;
+            margin-top: 25px;
             border: 2px solid var(--neon-pink);
             background: #020308;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
             box-shadow: 0 0 35px rgba(255, 0, 85, 0.2);
             border-radius: 8px;
@@ -384,9 +395,10 @@
 
         .arcade-headline {
             color: var(--neon-pink);
-            font-size: 2rem;
+            font-size: 2.2rem;
             letter-spacing: 2px;
             margin-bottom: 5px;
+            font-weight: 800;
             animation: glowingText 1.5s infinite alternate;
         }
 
@@ -400,11 +412,11 @@
 
         /* --- UNDERGROUND DATABASES --- */
         .secret-server-node {
-            margin-top: 40px;
+            margin-top: 50px;
             background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(6, 8, 20, 0.98));
             border: 2px dashed var(--neon-purple);
             animation: pulseBorder 2s infinite alternate;
-            padding: 25px;
+            padding: 35px;
             border-radius: 8px;
         }
 
@@ -417,52 +429,55 @@
             background: #1e1b4b;
             border: 1px solid var(--neon-pink);
             color: #fff;
-            padding: 15px;
+            padding: 18px;
             font-family: monospace;
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 25px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             border-radius: 4px;
             word-break: break-all;
+            text-align: center;
         }
 
         .terminal-block {
             background: rgba(0,0,0,0.6);
-            border-left: 3px solid var(--neon-blue);
-            padding: 20px;
-            margin: 25px 0;
+            border-left: 4px solid var(--neon-blue);
+            padding: 25px;
+            margin: 30px 0;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            border-radius: 0 6px 6px 0;
-            line-height: 1.7;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.8;
             text-align: left;
         }
 
         .terminal-block h4 {
             margin-top: 0;
-            font-family: monospace;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            font-size: 1.3rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
         .terminal-block p {
-            margin-bottom: 12px;
-            color: #94a3b8;
+            margin-bottom: 15px;
+            color: var(--text-light);
         }
 
         .terminal-block ul {
             padding-left: 20px;
-            color: #cbd5e1;
+            color: var(--text-light);
         }
 
         .terminal-block ul li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             color: #475569;
             border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -472,11 +487,12 @@
     <div id="cursor-ring"></div>
     <div id="glitch-overlay">OVERRIDING_SECURITY_GATE...</div>
 
+    <!-- 1. INTRO SCREEN WITH MINIGAME MECHANIC -->
     <div id="intro-screen">
         <div class="welcome-box">
-            <h1>Web Guide & Arcade</h1>
-            <p style="color: #94a3b8; line-height: 1.6; margin-bottom: 10px;">
-                Mainframe core is locked down. Complete the bypass sequence below to initialize the system guide and gain access to the application views.
+            <h1>Web Academy Matrix</h1>
+            <p style="color: var(--text-dim); line-height: 1.6; margin-bottom: 10px;">
+                Mainframe core is locked down. Complete the multi-node bypass protocol below to compile user views and unlock chapter systems.
             </p>
             
             <div class="minigame-container">
@@ -493,111 +509,179 @@
         </div>
     </div>
 
+    <!-- 2. MAIN APPLICATION LAYER -->
     <div id="main-site">
-        <header>
-            <h1>Discovering Websites</h1>
-            <p style="color: var(--neon-blue); letter-spacing: 1px;">Simple lessons, virtual environments, and automated gaming fun.</p>
-        </header>
-
         <nav id="app-navigation">
-            <button class="nav-btn active" onclick="navigateToPage('page-what-is-it', this)">01. What is it?</button>
-            <button class="nav-btn" onclick="navigateToPage('page-types-examples', this)">02. Examples</button>
-            <button class="nav-btn" onclick="navigateToPage('page-steps', this)">03. How to Build</button>
+            <button class="nav-btn active" onclick="navigateToPage('page-what-is-it', this)">01. What is a Website?</button>
+            <button class="nav-btn" onclick="navigateToPage('page-types-examples', this)">02. Web Ecosystem Examples</button>
+            <button class="nav-btn" onclick="navigateToPage('page-steps', this)">03. How to Build Systems</button>
             <button class="nav-btn" onclick="navigateToPage('page-quiz-gate', this)" style="color: var(--neon-pink);">04. Verification Gate</button>
-            <button class="nav-btn locked-nav" id="nav-arcade" onclick="navigateToPage('page-arcade-arenas', this)" disabled>05. Arcade Dashboard [LOCKED]</button>
+            <button class="nav-btn locked-nav" id="nav-arcade" onclick="navigateToPage('page-arcade-arenas', this)" disabled>05. Arcade & Server Vaults [LOCKED]</button>
         </nav>
 
         <div class="container">
 
+            <!-- VIRTUAL PAGE 1: WHAT IS A WEBSITE? (COMPREHENSIVE PAGE-LONG ESSAY) -->
             <div id="page-what-is-it" class="app-page active-page">
                 <h2>01 // What is a Website?</h2>
                 <div class="image-wrapper">
                     <img class="web-image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1100&q=80" alt="Web Grid">
                 </div>
-                <p>Think of a <strong>website</strong> like a digital book stored on the internet. Instead of paper pages, it has <strong>web pages</strong> filled with text, pictures, animations, and computational systems.</p>
-                <p>Every website you load is delivered across global data lines from specialized remote systems directly into your personal client browser window.</p>
+                
+                <h3>The Foundational Architecture of the World Wide Web</h3>
+                <p>At its absolute core, a <strong>website</strong> is a collective assembly of globally accessible, interlinked digital documents sharing a single, unique domain name. These collections are stored, compiled, and served on specialized computers known as web servers. When you interact with a website, you are engaging with a massive global infrastructure network built on the foundational rules of the Client-Server model.</p>
+                
+                <p>To truly understand how this function operates, think of the web browser running on your computer or mobile device as the <strong>Client</strong>. When you type a address link into your browser, you aren't opening a file directly on your machine. Instead, you are sending an explicit request across global data networks to a remote machine, the <strong>Server</strong>. This machine handles security filters, searches its hardware storage disks, and returns data codes written in HTML, CSS, and JavaScript. Your local web browser reads those text files and instantly translates them into a beautiful, operational visual display.</p>
+
+                <h3>Hyperlinks, IP Address Routing, and the Domain Name System</h3>
+                <p>The magic that joins separate web files into a cohesive network is the <strong>hyperlink</strong>. Hyperlinks allow users to navigate seamlessly from one document to another, regardless of whether those files live on the same computer or are housed on servers across opposite sides of the globe. This web of connections forms what we know as the internet ecosystem.</p>
+                
+                <p>Computers do not identify websites by readable names like Google or Wikipedia. Instead, every machine hooked up to the internet possesses a unique string of numbers called an <strong>IP (Internet Protocol) Address</strong>. Because remembering strings of numbers is highly impractical for humans, engineers created the <strong>DNS (Domain Name System)</strong>. The DNS serves as the digital phonebook of the internet. When you type a web destination into your browser, a background lookup converts that human text into an IP address in milliseconds, guiding your connection directly to the precise physical server containing the requested files.</p>
             </div>
 
+            <!-- VIRTUAL PAGE 2: TYPES AND EXAMPLES (COMPREHENSIVE ANALYSIS) -->
             <div id="page-types-examples" class="app-page">
-                <h2>02 // Types of Common Websites</h2>
-                <p>Web properties scale from basic single-user documents up to global cloud software clusters running dynamic logic updates in micro-seconds.</p>
+                <h2>02 // Web Ecosystem Examples</h2>
+                <p>Web implementations scale across a massive range of engineering complexity. While static informative blogs require minimal overhead, global enterprise platforms run on complex cloud networks processing billions of real-time transactions daily.</p>
+                
+                <h3>Detailed Architectural Matrix</h3>
                 <table>
                     <thead>
-                        <tr><th>Website Type</th><th>What It Does</th><th>Real Examples</th></tr>
+                        <tr><th>Platform Archetype</th><th>Primary Engineering Purpose</th><th>Core Architectural Technologies</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Search Engines</strong></td><td>Helps you find answers and information instantly.</td><td>Google, Bing</td></tr>
-                        <tr><td><strong>Online Shops</strong></td><td>Lets you buy products from home.</td><td>Amazon, eBay</td></tr>
-                        <tr><td><strong>Streaming Sites</strong></td><td>Plays music and video directly on your screen.</td><td>YouTube, Netflix</td></tr>
+                        <tr><td><strong>Search Infrastructure</strong></td><td>Indexes massive quantities of global web pages and resolves natural text queries instantly.</td><td>Distributed crawlers, reverse index tracking databases, AI sorting models.</td></tr>
+                        <tr><td><strong>E-Commerce Engines</strong></td><td>Manages real-time inventories, processes financial transactions, and builds personal user shopping paths.</td><td>Relational data clusters, encrypted payment gateways, user session tokens.</td></tr>
+                        <tr><td><strong>Streaming Networks</strong></td><td>Delivers multi-gigabyte media streams directly to concurrent global users without lag.</td><td>Content Delivery Networks (CDNs), video encoding pipelines, adaptive bitrate logic.</td></tr>
                     </tbody>
                 </table>
+
+                <h3>Deep Dive: Real-World Web System Deployments</h3>
+                
+                <h4>1. E-Commerce Matrix (e.g., Amazon, eBay)</h4>
+                <p>An enterprise-level online shopping portal is vastly more complex than a simple product display page. These engines must track hundreds of thousands of active items simultaneously. When a user adds an item to their cart, dedicated real-time microservices instantly communicate with storage databases to verify availability, recalculate regional logistics taxes, pull up secure delivery profiles, and open encrypted conduits to financial clearance clearinghouses. All of this must finish within milliseconds to ensure the shopper experiences zero system slowdown.</p>
+
+                <h4>2. Social Interactivity Clusters (e.g., Facebook, Instagram)</h4>
+                <p>Social systems are built to handle massive numbers of concurrent data writes. Every second, millions of photos, comments, and post updates are submitted to these web servers globally. To prevent complete platform collapse under heavy traffic loads, these applications use complex database sharding techniques and real-time synchronization pipelines. Instead of pulling up a single static page, the system constructs a customized webpage tailored specifically to your exact profile history every single time you open the app.</p>
+
+                <h4>3. Media Distribution Platforms (e.g., YouTube, Netflix)</h4>
+                <p>Video streaming platforms require highly specialized optimization strategies due to the massive file sizes involved. If a platform tried to serve every single video file from a single central headquarters server, global bandwidth links would instantly overload. To solve this, streaming platforms deploy thousands of local caching boxes inside <strong>CDNs (Content Delivery Networks)</strong> scattered throughout global cities. When you click play, the system dynamically delivers the file from the physical server box nearest to your house.</p>
             </div>
 
+            <!-- VIRTUAL PAGE 3: HOW TO BUILD SYSTEMS (STEP-BY-STEP BLUEPRINT) -->
             <div id="page-steps" class="app-page">
-                <h2>03 // Simple Steps to Create Your Own Website</h2>
-                <ol>
-                    <li><strong>Plan Content:</strong> Decide what your website is going to say, show, sell, or calculate.</li>
-                    <li><strong>Get an Address:</strong> Buy a domain link name framework (like www.mywebsite.com).</li>
-                    <li><strong>Rent a Host Server:</strong> Rent secure infrastructure computing space on an internet connected mainframe machine to hold your physical data files.</li>
-                </ol>
+                <h2>03 // How to Build Web Systems</h2>
+                <p>Creating a highly stable web application requires following a structured engineering lifecycle. Below is a detailed, end-to-end breakdown of how a professional web platform progresses from a basic concept to a live global launch.</p>
+                
+                <ul class="deep-list">
+                    <li>
+                        <strong>Phase One: Architecture Planning & Interface Wireframing</strong>
+                        <p>Before writing a single line of production code, web developers must fully map out the logical data flows and layout designs of the application. Developers build low-fidelity mockups called wireframes to outline precisely where images, navigation elements, inputs, and interactive modules will sit. Simultaneously, database engineers construct structural diagrams to define exactly how tables will connect, ensuring the platform can grow smoothly without encountering structural data deadlocks later on.</p>
+                    </li>
+                    <li>
+                        <strong>Phase Two: Frontend Assembly & Behavioral Programming</strong>
+                        <p>Once layouts are finalized, engineers begin writing code that runs directly inside the client's web browser. First, **HTML5** is utilized to establish the structural skeleton of the webpage. Next, **CSS3** rulesets are integrated to control the visual aesthetics, managing responsive layout parameters, spacing matrices, typography styles, and adaptive animations across varying screen sizes. Finally, **JavaScript** is injected to create functional, responsive elements, handling operations like click captures, form field checking, and real-time server communications.</p>
+                    </li>
+                    <li>
+                        <strong>Phase Three: Domain Acquisition & Nameserver Assignment</strong>
+                        <p>To make the application reachable for general users, developers must secure a brand namespace from a central registrar. This registration gives you ownership over a user-friendly domain name (like www.example.com). After purchase, the domain must be configured with custom Authoritative Nameservers. This step ensures that whenever an external user looks up your domain name, the global Domain Name System accurately directs them to your hosting infrastructure.</p>
+                    </li>
+                    <li>
+                        <strong>Phase Four: Host Infrastructure Allocation & Server Deployment</strong>
+                        <p>The final step involves choosing where your files will permanently live. For simple projects, shared web hosting providers might suffice, but professional-grade applications require renting virtual cloud instances from platforms like AWS, Google Cloud, or Microsoft Azure. Developers upload the application code, launch backend server runtimes, initialize production-ready database clusters, and set up **SSL/TLS Certificates** to encrypt all incoming and outgoing data traffic. Once these steps are complete, the web application is fully initialized and live for global users.</p>
+                    </li>
+                </ul>
             </div>
 
+            <!-- VIRTUAL PAGE 4: VERIFICATION QUIZ GATE -->
             <div id="page-quiz-gate" class="app-page">
                 <h2>04 // Complete 10 Questions to Initialize Arcade Access</h2>
                 <div class="quiz-panel" id="quiz-box-container">
                     <h3 id="question-text">Loading verification check parameters...</h3>
                     <div id="options-holder"></div>
                     <div id="progress-container"><div id="progress-fill"></div></div>
-                    <p style="margin-top: 12px; font-size: 0.9rem; color: var(--neon-blue);" id="count-text">Questions Completed: 0 / 10</p>
+                    <p style="margin-top: 15px; font-size: 0.95rem; color: var(--neon-blue);" id="count-text">Questions Completed: 0 / 10</p>
                 </div>
-                <div id="quiz-success-message" style="display: none; text-align: center; padding: 20px;">
+                <div id="quiz-success-message" style="display: none; text-align: center; padding: 25px;">
                     <h3 style="color: var(--neon-green);">✔️ IDENTITY CHECK PASSED</h3>
-                    <p>Navigation to Chapter 05 [Arcade Dashboard] has been permanently unlocked in your top utility bar.</p>
+                    <p>Navigation to Chapter 05 [Arcade & Server Vaults] has been permanently unlocked in your top utility bar.</p>
                 </div>
             </div>
 
+            <!-- PAGES 5 & 6 (COMBINED DASHBOARD OVERVIEW): ARCADE MODULES AND EXPANDED DATABASES -->
             <div id="page-arcade-arenas" class="app-page">
-                <h2>05 // Terminal Arcade Breakroom & Database Nodes</h2>
+                <h2>05 // Terminal Arcade Breakroom & Deep Database Nodes</h2>
                 
+                <!-- EASY FLAPPY BIRD GAME CABINET -->
                 <div class="arcade-cabinet" id="arcade-break-room">
                     <div class="arcade-headline">🕹️ STAGE 1: NEON FLAP (EASY MODE)</div>
                     <p style="color: var(--neon-pink); font-weight: bold;">🎯 CHALLENGE: REACH 20 POINTS TO REVEAL ENTERPRISE COMPENDIUM & STAGE 2!</p>
-                    <div style="font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
+                    <div style="font-size: 1.4rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 12px; font-family: monospace;">
                         SCORE: <span id="gameScore">0</span> // BEST RECORD: <span id="gameBest">0</span>
                     </div>
                     <canvas id="gameCanvas" width="480" height="400"></canvas>
                 </div>
 
+                <!-- ARCHITECTURE SERVER VAULT 1 (EXTENSIVELY EXPANDED) -->
                 <div id="secret-server-node" class="secret-server-node" style="display: none;">
                     <div class="arcade-headline" style="color: var(--neon-blue);">📡 INTERNET CORE COMPENDIUM UNLOCKED</div>
                     <div class="key-banner" id="secretKeyDisplay">ACCESS KEY: [DECRYPTING...]</div>
                     
                     <h3>⚡ Full-Scale Enterprise Architecture Blueprints</h3>
+                    
                     <div class="terminal-block">
-                        <h4 style="color: var(--neon-pink);">[1] The Client-Server Runtime Bifurcation</h4>
-                        <p>The system is cleanly divided into the <strong>Client-Side (Frontend)</strong> and the <strong>Server-Side (Backend)</strong>. The frontend handles visual layouts using HTML5 DOM nodes, CSS rulesets, and client-side JavaScript execution contexts inside browsers like Chromium or WebKit.</p>
-                        <p>Conversely, the Server-Side operates on remote computing hardware. Backend code executes within isolated operating systems (frequently specialized Linux distributions like Alpine, Ubuntu Server, or Red Hat) to evaluate raw database structural queries and process data securely.</p>
+                        <h4 style="color: var(--neon-pink);">[1.1] The Client-Side (Frontend) Compilation Layer</h4>
+                        <p>The modern frontend runtime environment is no longer just a collection of simple text sheets. Enterprise development leverages comprehensive application bundles built using progressive frameworks like React, Vue.js, or Angular. These systems maintain an internal **Virtual DOM (Document Object Model)** tree to track changes in UI state.</p>
+                        <p>When state changes occur, a high-performance reconciliation algorithm calculates the minimal number of structural modifications required, batching DOM updates to maximize rendering efficiency. This production code is run through minimization pipelines that compress variable layouts, strip debug metrics, and transpile cutting-edge syntax into backward-compatible formats that any legacy browser can execute perfectly.</p>
                     </div>
 
+                    <div class="terminal-block">
+                        <h4 style="color: var(--neon-blue);">[1.2] The Server-Side (Backend) Distributed Engine</h4>
+                        <p>The backend environment handles business logic execution and security policy enforcement. Unlike the frontend, which must run inside the user's browser, backend workloads execute on isolated cloud compute instances running specialized Linux distributions. These environments run high-efficiency network runtimes like Node.js, Python FastAPI, Go, or Java Spring Boot.</p>
+                        <p>When an API call hits the server infrastructure, it is processed through a high-throughput **Reverse Proxy (e.g., Nginx)**. This layer manages SSL decryption, filters out malicious security exploits, balances traffic loads across internal worker systems, and formats data payloads before handing them off to the application core.</p>
+                    </div>
+
+                    <div class="terminal-block">
+                        <h4 style="color: var(--neon-purple);">[1.3] Database Storage Clusters & Caching Matrices</h4>
+                        <p>Applications rely on multi-tier storage layers to maintain high operational speeds. Permanent transactional records are safely committed to **Relational Database Management Systems (RDBMS)** like PostgreSQL or MySQL. These databases use advanced indexing structures to retrieve complex data records in milliseconds.</p>
+                        <p>To reduce strain on primary storage arrays during high-traffic periods, engineering teams deploy an in-memory **Caching Layer (like Redis)** directly between the application server and the database. By keeping frequently requested data in volatile RAM instead of fetching it from storage disks every time, system read speeds see immense performance gains.</p>
+                    </div>
+
+                    <!-- GEOMETRY DASH GAME CABINET -->
                     <div class="arcade-cabinet" id="geometry-break-room" style="display: none;">
                         <div class="arcade-headline" style="color: var(--neon-green);">🔺 STAGE 2: CYBER DASH (HYPER MODE)</div>
                         <p style="color: var(--neon-pink); font-weight: bold;">⚠️ WARNING: SPEED MULTIPLIERS, ELEVATED NEON BLOCKS, HIGH GRAVITY TRAPS!</p>
-                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Press **SPACEBAR**, **W**, or **CLICK INSIDE CANVAS** to jump.</p>
-                        <div style="font-size: 1.3rem; color: var(--neon-green); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 5px;">Press **SPACEBAR**, **W**, or **CLICK INSIDE CANVAS** to jump over components.</p>
+                        <div style="font-size: 1.4rem; color: var(--neon-green); font-weight: bold; margin-bottom: 12px; font-family: monospace;">
                             DODGES: <span id="dashScore">0</span> / 15 // SPEED FACTOR: <span id="dashSpeedDisplay">1.0x</span>
                         </div>
                         <canvas id="dashCanvas" width="600" height="200"></canvas>
                     </div>
                 </div>
 
+                <!-- DEEP QUANTUM VAULT LEVEL 2 (EXTENSIVELY EXPANDED) -->
                 <div id="super-secret-server-node" class="secret-server-node" style="display: none;">
                     <div class="arcade-headline" style="color: var(--neon-green);">⚙️ MASTER VAULT LEVEL II: DEVOPS & CYBERSECURITY</div>
                     <div class="key-banner" id="superSecretKeyDisplay" style="border-color: var(--neon-green);">ACCESS KEY: [DECRYPTING GLOBAL CRYPTO...]</div>
                     
+                    <h3>🔒 Advanced Cloud Operations & Infrastructure Security</h3>
+
                     <div class="terminal-block">
-                        <h4 style="color: var(--neon-green);">[2] Containerization, Microservices & Kubernetes</h4>
-                        <p>Modern infrastructures package code inside **Docker containers**. A container bundles application logic along with its exact operating system dependencies to guarantee uniform behavior across development laptops and production clouds.</p>
-                        <p>When deployments scale to thousands of containers, organizations utilize **Kubernetes (K8s)** to orchestrate execution, manage data paths, and spin up identical container environments instantly when infrastructure dropping faults are detected.</p>
+                        <h4 style="color: var(--neon-green);">[2.1] Container Architecture & Microservice Segregation</h4>
+                        <p>Modern applications move away from monolithic styles in favor of isolated microservices. Every discrete functional component—such as user authorization, payment processing, or notifications—is packaged inside its own independent **Docker Container**.</p>
+                        <p>A container wraps application logic alongside its explicit operating system dependencies and binary runtimes. This isolation completely eliminates configuration inconsistencies across environments, ensuring that if a bug crashes the payment module, the rest of the application ecosystem stays completely online and fully functional.</p>
+                    </div>
+
+                    <div class="terminal-block">
+                        <h4 style="color: var(--neon-blue);">[2.2] Kubernetes Orchestration & Auto-Scaling Control Loops</h4>
+                        <p>When application footprints scale to hundreds of individual containers, manual administration becomes impossible. Teams utilize **Kubernetes (K8s)** to manage these deployments automatically. Kubernetes constantly monitors the health of running container clusters via dedicated control loops.</p>
+                        <p>If a compute instance encounters a hardware fault and drops offline, Kubernetes immediately catches the failure and spins up replacement containers on healthy hardware within seconds. Furthermore, when system traffic surges, the orchestrator scales up container counts automatically to handle the extra load, shrinking them back down once demand drops to save on infrastructure costs.</p>
+                    </div>
+
+                    <div class="terminal-block">
+                        <h4 style="color: var(--neon-purple);">[2.3] Continuous Integration & Automated Delivery (CI/CD)</h4>
+                        <p>To roll out system updates without causing application downtime, teams implement automated **CI/CD Pipelines**. Whenever a developer pushes code modifications to a centralized repository, automated webhooks instantly trigger comprehensive testing workflows.</p>
+                        <p>The pipeline automatically compiles the codebase, checks for security flaws, runs a series of performance benchmarks, and builds a fresh container image. If all tests pass successfully, the pipeline orchestrates a gradual, zero-downtime rolling update across production clusters, ensuring end-users never experience a single second of service disruption.</p>
                     </div>
                 </div>
 
@@ -605,7 +689,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 Interactive Code Station. Clean SPA Multi-Page Virtual Array.</p>
+            <p>&copy; 2026 Interactive Code Station. Clean SPA Multi-Page Virtual Array Architecture.</p>
         </footer>
     </div>
 
@@ -652,26 +736,22 @@
         // --- VIRTUAL MULTI-PAGE VIEW ROUTER ---
         function navigateToPage(pageId, navButton) {
             playSound('click');
-            // Hide all views
             const allPages = document.querySelectorAll('.app-page');
             allPages.forEach(page => page.classList.remove('active-page'));
             
-            // Highlight explicit targeted button
             const allBtns = document.querySelectorAll('.nav-btn');
             allBtns.forEach(btn => btn.classList.remove('active'));
             
-            // Render visible state target
             document.getElementById(pageId).classList.add('active-page');
             if(navButton) navButton.classList.add('active');
 
-            // Explicit engine rendering loops resets depending on visible page layout matrices
             if(pageId === 'page-arcade-arenas') {
                 initArcadeGame();
-                if(!document.getElementById('geometry-break-room').style.display !== 'none') {
+                if(document.getElementById('geometry-break-room').style.display !== 'none') {
                     initDashGame();
                 }
             } else {
-                isP1 = false; isP2 = false; // Stop background execution loops when away
+                isP1 = false; isP2 = false; 
             }
         }
 
@@ -733,7 +813,6 @@
                 document.getElementById('quiz-box-container').style.display = 'none';
                 document.getElementById('quiz-success-message').style.display = 'block';
                 
-                // Unlock Virtual Page 5 in navigation links
                 const arcNav = document.getElementById('nav-arcade');
                 arcNav.classList.remove('locked-nav');
                 arcNav.removeAttribute('disabled');
@@ -835,7 +914,6 @@
             if (!isP1 || isD1) return;
             
             ctx.fillStyle = '#050711'; ctx.fillRect(0,0,canvas.width,canvas.height);
-            
             ctx.strokeStyle = 'rgba(0,240,255,0.02)'; ctx.lineWidth = 1;
             for(let j = 0; j < canvas.width; j+=20) { ctx.beginPath(); ctx.moveTo(j, 0); ctx.lineTo(j, canvas.height); ctx.stroke(); }
 
@@ -873,7 +951,7 @@
             }, 1200);
         }
 
-        // --- STAGE 2: GEOMETRY DASH ENGINE (HARDER & FASTER ENGINE MODE) ---
+        // --- STAGE 2: GEOMETRY DASH ENGINE ---
         const cDash = document.getElementById('dashCanvas'); const ctxD = cDash.getContext('2d');
         let playerY = 0, playerV = 0, playerG = 0.95, isJumping = false;
         let obstacles = [], dashParticles = [], f2 = 0, sc2 = 0, isP2 = false, isD2 = false, locked2 = true;
@@ -937,7 +1015,6 @@
             if (!isP2 || isD2) return;
             ctxD.clearRect(0,0,cDash.width,cDash.height);
             ctxD.fillStyle = '#050711'; ctxD.fillRect(0,0,cDash.width,cDash.height);
-            
             ctxD.strokeStyle = 'rgba(0, 240, 255, 0.5)'; ctxD.lineWidth = 3; ctxD.beginPath(); ctxD.moveTo(0, groundY); ctxD.lineTo(cDash.width, groundY); ctxD.stroke();
 
             playerV += playerG; playerY += playerV;
@@ -1007,7 +1084,6 @@
                 const activeView = document.querySelector('.app-page.active-page');
                 if (activeView && activeView.id === 'page-arcade-arenas') {
                     e.preventDefault();
-                    // Choose route loop based on user focus area context height properties
                     if (window.scrollY > 400 && document.getElementById('geometry-break-room').style.display !== 'none') {
                         jumpDash();
                     } else {
