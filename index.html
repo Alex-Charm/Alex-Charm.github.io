@@ -410,7 +410,7 @@
             font-size: 1.1rem;
             margin-bottom: 25px;
             border-radius: 4px;
-            word-break: break-all;
+Word-break: break-all;
         }
 
         .terminal-block {
@@ -581,11 +581,11 @@
 
                     <!-- GEOMETRY DASH GAME STAGE WITH GRAPHIC UPGRADES -->
                     <div id="geometry-break-room">
-                        <div class="arcade-headline" style="color: var(--neon-green);">🔺 STAGE 2 UNLOCKED: CYBER DASH</div>
-                        <p style="color: var(--neon-green); font-weight: bold;">🎯 CHALLENGE: DODGE 15 OBSTACLES TO UNLOCK VAULT LEVEL 2!</p>
-                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Press **SPACEBAR**, **W**, or **CLICK INSIDE BOX** to jump over incoming spikes.</p>
+                        <div class="arcade-headline" style="color: var(--neon-green);">🔺 STAGE 2 UNLOCKED: CYBER DASH (HYPER MODE)</div>
+                        <p style="color: var(--neon-pink); font-weight: bold;">⚠️ WARNING: ULTRA SPEED, ELEVATED NEON BLOCKS, HIGH GRAVITY TRAPS!</p>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px;">Press **SPACEBAR**, **W**, or **CLICK INSIDE BOX** to jump.</p>
                         <div style="font-size: 1.3rem; color: var(--neon-green); font-weight: bold; margin-bottom: 10px; font-family: monospace;">
-                            DODGES: <span id="dashScore">0</span> / 15
+                            DODGES: <span id="dashScore">0</span> / 15 // SPEED FACTOR: <span id="dashSpeedDisplay">1.0x</span>
                         </div>
                         <canvas id="dashCanvas" width="600" height="200"></canvas>
                     </div>
@@ -779,7 +779,6 @@
                 if (this.y >= canvas.height) handleD1();
                 if (this.y <= 0) { this.y = 0; this.velocity = 0; }
                 
-                // Spawn engine smoke texture trail behind player ball
                 if (Math.random() < 0.4) {
                     flapParticles.push(new Particle(this.x - 5, this.y, 'rgba(255, 0, 85, 0.8)'));
                 }
@@ -789,7 +788,6 @@
         class EasyPipe {
             constructor() { this.gap = 165; this.w = 55; this.x = canvas.width; this.top = Math.random()*(canvas.height-this.gap-80)+40; this.passed = false; }
             draw() {
-                // Dynamic neon laser matrix design texture mapping
                 let topGrd = ctx.createLinearGradient(this.x, 0, this.x + this.w, 0);
                 topGrd.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
                 topGrd.addColorStop(0.5, 'rgba(0, 240, 255, 0.1)');
@@ -822,14 +820,11 @@
         function loopFlappy() {
             if (!isP1 || isD1) return;
             
-            // Shaded mesh canvas texture layer mapping
             ctx.fillStyle = '#050711'; ctx.fillRect(0,0,canvas.width,canvas.height);
             
-            // Draw visual background ambient neon wireframes
             ctx.strokeStyle = 'rgba(0,240,255,0.02)'; ctx.lineWidth = 1;
             for(let j = 0; j < canvas.width; j+=20) { ctx.beginPath(); ctx.moveTo(j, 0); ctx.lineTo(j, canvas.height); ctx.stroke(); }
 
-            // Manage dynamic engine trail textures
             for (let k = flapParticles.length - 1; k >= 0; k--) {
                 flapParticles[k].update(); flapParticles[k].draw(ctx);
                 if (flapParticles[k].alpha <= 0) flapParticles.splice(k, 1);
@@ -865,28 +860,55 @@
             }, 1200);
         }
 
-        // --- STAGE 2: GEOMETRY DASH ENGINE (TEXTURED & TRAILED) ---
+        // --- STAGE 2: GEOMETRY DASH ENGINE (HARDER & FASTER ENGINE MODE) ---
         const cDash = document.getElementById('dashCanvas'); const ctxD = cDash.getContext('2d');
-        let playerY = 0, playerV = 0, playerG = 0.55, isJumping = false;
+        let playerY = 0, playerV = 0, playerG = 0.95, isJumping = false; // Higher gravity for snap drops
         let obstacles = [], dashParticles = [], f2 = 0, sc2 = 0, isP2 = false, isD2 = false, locked2 = true;
+        let baseDashSpeed = 7.5; // Upgraded base speed from 5.8
         const groundY = 160;
 
         class DashObstacle {
-            constructor() { this.x = cDash.width; this.w = 16; this.h = 25; this.passed = false; }
+            constructor() { 
+                this.x = cDash.width; 
+                this.w = Math.floor(Math.random() * 15) + 30; // Solid structural block sizing
+                this.h = Math.floor(Math.random() * 10) + 25; // Block structural height tracking
+                this.spikeH = 20; // Anchored spike dimensions
+                this.spikeW = 16;
+                this.passed = false; 
+            }
             draw() {
-                // Gradient laser mapping texture configuration on spikes
-                let spikeGrd = ctxD.createLinearGradient(this.x, groundY - this.h, this.x + this.w, groundY);
+                // 1. Draw the elevated solid platform block
+                let blockGrd = ctxD.createLinearGradient(this.x, groundY - this.h, this.x + this.w, groundY);
+                blockGrd.addColorStop(0, '#10b981'); blockGrd.addColorStop(1, '#065f46');
+                ctxD.fillStyle = blockGrd;
+                ctxD.strokeStyle = 'rgba(0, 240, 255, 0.8)'; ctxD.lineWidth = 1;
+                ctxD.fillRect(this.x, groundY - this.h, this.w, this.h);
+                ctxD.strokeRect(this.x, groundY - this.h, this.w, this.h);
+
+                // 2. Draw the lethal hazard spike perfectly positioned on top of the block platform
+                let spikeX = this.x + (this.w / 2) - (this.spikeW / 2);
+                let spikeBaseY = groundY - this.h;
+                let spikePeakY = spikeBaseY - this.spikeH;
+
+                let spikeGrd = ctxD.createLinearGradient(spikeX, spikePeakY, spikeX + this.spikeW, spikeBaseY);
                 spikeGrd.addColorStop(0, '#ff0055'); spikeGrd.addColorStop(1, '#a855f7');
 
-                ctxD.fillStyle = spikeGrd; ctxD.shadowBlur = 12; ctxD.shadowColor = '#ff0055';
-                ctxD.beginPath(); ctxD.moveTo(this.x, groundY); ctxD.lineTo(this.x + this.w/2, groundY - this.h); ctxD.lineTo(this.x + this.w, groundY); ctxD.closePath(); ctxD.fill();
+                ctxD.fillStyle = spikeGrd; ctxD.shadowBlur = 10; ctxD.shadowColor = '#ff0055';
+                ctxD.beginPath(); 
+                ctxD.moveTo(spikeX, spikeBaseY); 
+                ctxD.lineTo(spikeX + this.spikeW / 2, spikePeakY); 
+                ctxD.lineTo(spikeX + this.spikeW, spikeBaseY); 
+                ctxD.closePath(); ctxD.fill();
+                ctxD.shadowBlur = 0; // Reset blur context mapping
             }
-            update() { this.x -= 3.8; }
+            update() { this.x -= baseDashSpeed; }
         }
 
         function initDashGame() {
             playerY = groundY - 20; playerV = 0; obstacles = []; dashParticles = []; sc2 = 0; f2 = 0; isD2 = false; isP2 = false;
+            baseDashSpeed = 7.5; // Dynamic acceleration mapping tracking array loops
             document.getElementById('dashScore').textContent = sc2;
+            document.getElementById('dashSpeedDisplay').textContent = "1.0x";
             renderDashStatic();
         }
 
@@ -896,8 +918,8 @@
             ctxD.fillStyle = '#00f0ff'; ctxD.fillRect(50, playerY, 20, 20);
             
             ctxD.fillStyle = 'rgba(0,0,0,0.5)'; ctxD.fillRect(0,0,cDash.width,cDash.height);
-            ctxD.fillStyle = '#00f0ff'; ctxD.font = 'bold 13px monospace'; ctxD.textAlign = 'center';
-            ctxD.fillText('CLICK OR SPACEBAR TO JUMP COMPONENT OBSTACLES', cDash.width/2, cDash.height/2);
+            ctxD.fillStyle = '#ff0055'; ctxD.font = 'bold 13px monospace'; ctxD.textAlign = 'center';
+            ctxD.fillText('CLICK OR SPACEBAR TO JUMP COMPONENT OBSTACLES (HYPER HARDCORE)', cDash.width/2, cDash.height/2);
         }
 
         function loopDash() {
@@ -905,39 +927,52 @@
             ctxD.clearRect(0,0,cDash.width,cDash.height);
             ctxD.fillStyle = '#050711'; ctxD.fillRect(0,0,cDash.width,cDash.height);
             
-            // Ground vector floor drawing
             ctxD.strokeStyle = 'rgba(0, 240, 255, 0.5)'; ctxD.lineWidth = 3; ctxD.beginPath(); ctxD.moveTo(0, groundY); ctxD.lineTo(cDash.width, groundY); ctxD.stroke();
 
             playerV += playerG; playerY += playerV;
             if (playerY >= groundY - 20) { playerY = groundY - 20; playerV = 0; isJumping = false; }
 
-            // Generate floor friction sliding exhaust particles
-            if (!isJumping && Math.random() < 0.3) {
+            if (!isJumping && Math.random() < 0.4) {
                 dashParticles.push(new Particle(50, groundY - 5, 'rgba(0, 240, 255, 0.7)'));
             }
 
-            // Draw game running particles vector
             for (let m = dashParticles.length - 1; m >= 0; m--) {
                 dashParticles[m].update(); dashParticles[m].draw(ctxD);
                 if (dashParticles[m].alpha <= 0) dashParticles.splice(m, 1);
             }
 
-            // Draw player box cube vector
             ctxD.save(); ctxD.fillStyle = '#00f0ff'; ctxD.shadowBlur = 12; ctxD.shadowColor = '#00f0ff';
             ctxD.fillRect(50, playerY, 20, 20); ctxD.restore();
 
-            if (f2 % 95 === 0) obstacles.push(new DashObstacle());
+            let spawnInterval = Math.max(40, Math.floor(450 / baseDashSpeed));
+            if (f2 % spawnInterval === 0) obstacles.push(new DashObstacle());
 
             for (let i = obstacles.length - 1; i >= 0; i--) {
                 obstacles[i].update(); obstacles[i].draw();
-                if (50 + 20 > obstacles[i].x && 50 < obstacles[i].x + obstacles[i].w && playerY + 20 > groundY - obstacles[i].h) {
+                
+                let currentObs = obstacles[i];
+                let spikeX = currentObs.x + (currentObs.w / 2) - (currentObs.spikeW / 2);
+                let spikeTopY = groundY - currentObs.h - currentObs.spikeH;
+
+                // Precision Hitbox 1: Solid block structural collision mapping 
+                let hitsBlock = (50 + 20 > currentObs.x && 50 < currentObs.x + currentObs.w && playerY + 20 > groundY - currentObs.h);
+                // Precision Hitbox 2: Upper spiked triangle apex bounding zone logic
+                let hitsSpike = (50 + 20 > spikeX && 50 < spikeX + currentObs.spikeW && playerY + 20 > spikeTopY && playerY < groundY - currentObs.h);
+
+                if (hitsBlock || hitsSpike) {
                     isD2 = true; isP2 = false; playSound('crash'); initDashGame(); return;
                 }
-                if (!obstacles[i].passed && obstacles[i].x + obstacles[i].w < 50) {
-                    sc2++; obstacles[i].passed = true; document.getElementById('dashScore').textContent = sc2; playSound('score');
+
+                if (!currentObs.passed && currentObs.x + currentObs.w < 50) {
+                    sc2++; 
+                    baseDashSpeed += 0.25; // Massive velocity step scaling updates
+                    currentObs.passed = true; 
+                    document.getElementById('dashScore').textContent = sc2; 
+                    document.getElementById('dashSpeedDisplay').textContent = (baseDashSpeed / 7.5).toFixed(2) + "x";
+                    playSound('score');
                     if (sc2 >= 15 && locked2) unlockVault2();
                 }
-                if (obstacles[i].x < -20) obstacles.splice(i, 1);
+                if (currentObs.x < -60) obstacles.splice(i, 1);
             }
             f2++; requestAnimationFrame(loopDash);
         }
@@ -955,7 +990,7 @@
 
         function jumpDash() {
             if (!isP2) { isP2 = true; loopDash(); return; }
-            if (!isJumping) { playerV = -9.2; isJumping = true; playSound('jump'); }
+            if (!isJumping) { playerV = -13.5; isJumping = true; playSound('jump'); } // Tuned jump velocity to offset deep gravity metrics
         }
 
         // UNIVERSAL MECHANICAL CONTROL OVERRIDES
