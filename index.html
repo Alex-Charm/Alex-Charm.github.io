@@ -5,30 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Việt Nam - Vẻ đẹp bất tận</title>
     <style>
+        /* CSS Tổng thể */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; line-height: 1.6; background-color: #f4f4f4; color: #333; }
         
         header { background: linear-gradient(to right, #da291c, #9d1b13); color: white; padding: 2rem; text-align: center; }
         
-        /* Phần Intro mới */
-        .intro-section { 
-            background: #fff; padding: 50px 20px; text-align: center; 
-            border-bottom: 5px solid #f1c40f; 
-        }
+        /* Intro Section */
+        .intro-section { background: #fff; padding: 50px 20px; text-align: center; border-bottom: 5px solid #f1c40f; }
         .intro-section h2 { font-size: 2.5rem; color: #da291c; margin-bottom: 10px; }
         .intro-section p { font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto; }
 
+        /* Menu */
         nav { background: #222; color: white; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 100; }
         nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #f1c40f; }
         
+        /* Gallery */
         .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
         .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
 
+        /* Audio Box */
         .audio-box { background: #eee; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center; }
 
+        /* Footer */
         footer { background: #222; color: white; text-align: center; padding: 20px; margin-top: 20px; }
 
+        /* Modal Popup */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; }
         .modal-content { background: white; margin: 10% auto; padding: 30px; width: 60%; border-radius: 10px; text-align: center; }
     </style>
@@ -45,7 +48,6 @@
     <a href="#" onclick="showPopup()">Khám phá</a>
 </nav>
 
-<!-- Phần Intro vừa thêm -->
 <section class="intro-section" id="intro">
     <h2>Điểm đến của những tâm hồn tự do</h2>
     <p>Việt Nam không chỉ là một quốc gia, mà là một hành trình kỳ diệu. Từ những dãy núi mờ sương phía Bắc đến những bãi biển xanh ngắt miền Trung và nhịp sống sôi động phương Nam, Việt Nam luôn dang tay chào đón những lữ khách muốn khám phá vẻ đẹp bất tận.</p>
@@ -59,28 +61,31 @@
     </div>
 
     <div class="audio-box">
-        <h3>Lắng nghe giai điệu hào hùng</h3>
-        <audio controls style="width: 80%;">
-            <source src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Ti%E1%BA%BFn_qu%C3%A2n_ca_-_Instrumental.ogg" type="audio/ogg">
+        <h3>Lắng nghe Quốc ca Việt Nam</h3>
+        <p>Nhấn nút Play để lắng nghe giai điệu hào hùng:</p>
+        <audio controls preload="metadata" style="width: 80%;">
+            <source src="https://files.catbox.moe/8b8k8p.mp3" type="audio/mpeg">
+            Trình duyệt của bạn không hỗ trợ phát âm thanh.
         </audio>
     </div>
 </div>
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <h2>Thông điệp từ Việt Nam</h2>
-        <p>Cảm ơn bạn đã ghé thăm trang web nhỏ này. Hy vọng bạn sớm có cơ hội đặt chân đến dải đất hình chữ S!</p>
-        <button onclick="closePopup()">Đóng</button>
+        <h2>Thông tin thú vị</h2>
+        <p>Việt Nam có 8 di sản thế giới được UNESCO công nhận và là quốc gia xuất khẩu cà phê lớn thứ 2 thế giới!</p>
+        <button onclick="closePopup()" style="padding: 10px 20px; cursor: pointer;">Đóng</button>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 - Tự hào Việt Nam</p>
+    <p>&copy; 2026 - Tự hào Việt Nam | Được thiết kế bởi Gemini</p>
 </footer>
 
 <script>
     function showPopup() { document.getElementById('myModal').style.display = 'block'; }
     function closePopup() { document.getElementById('myModal').style.display = 'none'; }
+    // Đóng khi click ra ngoài vùng trắng
     window.onclick = function(event) { if (event.target == document.getElementById('myModal')) closePopup(); }
 </script>
 
