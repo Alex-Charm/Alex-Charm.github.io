@@ -1,93 +1,72 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Việt Nam - Vẻ đẹp bất tận</title>
+    <title>Discover France</title>
     <style>
-        /* CSS Tổng thể */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; line-height: 1.6; background-color: #f4f4f4; color: #333; }
+        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #333; }
+        header { background: #0055A4; color: white; padding: 1rem; text-align: center; }
+        nav { background: #EF4135; padding: 0.5rem; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        main { padding: 20px; max-width: 800px; margin: auto; }
+        footer { background: #333; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
         
-        header { background: linear-gradient(to right, #da291c, #9d1b13); color: white; padding: 2rem; text-align: center; }
-        
-        /* Intro Section */
-        .intro-section { background: #fff; padding: 50px 20px; text-align: center; border-bottom: 5px solid #f1c40f; }
-        .intro-section h2 { font-size: 2.5rem; color: #da291c; margin-bottom: 10px; }
-        .intro-section p { font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto; }
+        /* Modal Styles */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 300px; text-align: center; }
+        .close-btn { cursor: pointer; color: red; font-weight: bold; }
 
-        /* Menu */
-        nav { background: #222; color: white; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 100; }
-        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
-        nav a:hover { color: #f1c40f; }
-        
-        /* Gallery */
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
-        .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
-
-        /* Audio Box */
-        .audio-box { background: #eee; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center; }
-
-        /* Footer */
-        footer { background: #222; color: white; text-align: center; padding: 20px; margin-top: 20px; }
-
-        /* Modal Popup */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; }
-        .modal-content { background: white; margin: 10% auto; padding: 30px; width: 60%; border-radius: 10px; text-align: center; }
+        .football-section { background: #f4f4f4; padding: 15px; border-left: 5px solid #0055A4; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>VIỆT NAM</h1>
+    <h1>Welcome to France</h1>
 </header>
 
 <nav>
-    <a href="#intro">Giới thiệu</a>
-    <a href="#gallery">Thắng cảnh</a>
-    <a href="#" onclick="showPopup()">Khám phá</a>
+    <a href="#home">Home</a>
+    <a href="#" onclick="document.getElementById('myModal').style.display='flex'">About France</a>
+    <a href="#football">Football Legends</a>
 </nav>
 
-<section class="intro-section" id="intro">
-    <h2>Điểm đến của những tâm hồn tự do</h2>
-    <p>Việt Nam không chỉ là một quốc gia, mà là một hành trình kỳ diệu. Từ những dãy núi mờ sương phía Bắc đến những bãi biển xanh ngắt miền Trung và nhịp sống sôi động phương Nam, Việt Nam luôn dang tay chào đón những lữ khách muốn khám phá vẻ đẹp bất tận.</p>
-</section>
+<main id="home">
+    <h2>The Beauty of France</h2>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Eiffel_Tower_from_the_south_side.JPG/640px-Eiffel_Tower_from_the_south_side.JPG" alt="Eiffel Tower" style="width:100%; height:auto;">
+    <p>France is a country in Western Europe, known for its medieval cities, alpine villages, and Mediterranean beaches.</p>
 
-<div class="container">
-    <div class="gallery" id="gallery">
-        <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=500&q=80" alt="Vịnh Hạ Long">
-        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=500&q=80" alt="Phố cổ Hội An">
-        <img src="https://images.unsplash.com/photo-1509030452232-678a2b25385c?auto=format&fit=crop&w=500&q=80" alt="Ruộng bậc thang">
-    </div>
+    <h3>National Anthem: La Marseillaise</h3>
+    <audio controls>
+        <!-- Replace with a direct link to the anthem file -->
+        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b3/La_Marseillaise.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <div class="audio-box">
-        <h3>Lắng nghe Quốc ca Việt Nam</h3>
-        <p>Nhấn nút Play để lắng nghe giai điệu hào hùng:</p>
-        <audio controls preload="metadata" style="width: 80%;">
-            <source src="https://files.catbox.moe/8b8k8p.mp3" type="audio/mpeg">
-            Trình duyệt của bạn không hỗ trợ phát âm thanh.
-        </audio>
-    </div>
-</div>
+    <section id="football" class="football-section">
+        <h2>Bonus: Football Legends</h2>
+        <p>France has one of the most successful football teams in history, known as <em>Les Bleus</em>.</p>
+        <ul>
+            <li><strong>Zinedine Zidane:</strong> A midfield maestro and iconic leader of the 1998 World Cup win.</li>
+            <li><strong>Thierry Henry:</strong> A legendary striker and Arsenal's all-time top scorer.</li>
+            <li><strong>Kylian Mbappé:</strong> The modern superstar leading the new generation of French football.</li>
+        </ul>
+    </section>
+</main>
 
+<!-- Pop-up Window -->
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <h2>Thông tin thú vị</h2>
-        <p>Việt Nam có 8 di sản thế giới được UNESCO công nhận và là quốc gia xuất khẩu cà phê lớn thứ 2 thế giới!</p>
-        <button onclick="closePopup()" style="padding: 10px 20px; cursor: pointer;">Đóng</button>
+        <h2>Did you know?</h2>
+        <p>France is the most visited country in the world, receiving nearly 90 million visitors annually!</p>
+        <span class="close-btn" onclick="document.getElementById('myModal').style.display='none'">Close</span>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 - Tự hào Việt Nam | Được thiết kế bởi Gemini</p>
+    <p>&copy; 2026 France Tourism Showcase</p>
 </footer>
-
-<script>
-    function showPopup() { document.getElementById('myModal').style.display = 'block'; }
-    function closePopup() { document.getElementById('myModal').style.display = 'none'; }
-    // Đóng khi click ra ngoài vùng trắng
-    window.onclick = function(event) { if (event.target == document.getElementById('myModal')) closePopup(); }
-</script>
 
 </body>
 </html>
