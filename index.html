@@ -3,69 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover France</title>
+    <title>France: History, Culture, and Sport</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #333; }
-        header { background: #0055A4; color: white; padding: 1rem; text-align: center; }
-        nav { background: #EF4135; padding: 0.5rem; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        main { padding: 20px; max-width: 800px; margin: auto; }
-        footer { background: #333; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; margin: 0; padding: 0; color: #444; background-color: #f9f9f9; }
+        header { background: #0055A4; color: white; padding: 2rem; text-align: center; }
+        nav { background: #EF4135; padding: 1rem; text-align: center; position: sticky; top: 0; }
+        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
+        main { padding: 40px; max-width: 900px; margin: auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .image-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .image-gallery img { width: 100%; border-radius: 5px; }
+        footer { background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
         
         /* Modal Styles */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
-        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 300px; text-align: center; }
-        .close-btn { cursor: pointer; color: red; font-weight: bold; }
-
-        .football-section { background: #f4f4f4; padding: 15px; border-left: 5px solid #0055A4; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 40px; border-radius: 10px; width: 80%; max-width: 500px; text-align: center; }
+        .close-btn { cursor: pointer; color: #EF4135; font-weight: bold; display: inline-block; margin-top: 15px; }
+        
+        .history-section { border-left: 5px solid #0055A4; padding-left: 20px; margin: 20px 0; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Welcome to France</h1>
+    <h1>La République Française</h1>
 </header>
 
 <nav>
     <a href="#home">Home</a>
-    <a href="#" onclick="document.getElementById('myModal').style.display='flex'">About France</a>
-    <a href="#football">Football Legends</a>
+    <a href="#" onclick="document.getElementById('myModal').style.display='flex'">Fun Fact</a>
+    <a href="#history">History</a>
+    <a href="#football">Les Bleus</a>
 </nav>
 
 <main id="home">
-    <h2>The Beauty of France</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Eiffel_Tower_from_the_south_side.JPG/640px-Eiffel_Tower_from_the_south_side.JPG" alt="Eiffel Tower" style="width:100%; height:auto;">
-    <p>France is a country in Western Europe, known for its medieval cities, alpine villages, and Mediterranean beaches.</p>
+    <h2>A Nation of Elegance and Revolution</h2>
+    <div class="image-gallery">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Eiffel_Tower_from_the_south_side.JPG/640px-Eiffel_Tower_from_the_south_side.JPG" alt="Eiffel Tower">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Louvre_Museum_Wikimedia_Commons.jpg/640px-Louvre_Museum_Wikimedia_Commons.jpg" alt="Louvre Museum">
+    </div>
+    
+    <p>France, a country in Western Europe, encompasses medieval and port cities, tranquil villages, mountains, and Mediterranean beaches. Paris, its capital, is famed for its fashion houses, classical art museums like the Louvre, and monuments like the Eiffel Tower.</p>
 
-    <h3>National Anthem: La Marseillaise</h3>
+    <h3>National Anthem</h3>
+    <p><em>La Marseillaise</em> is the national anthem of France, written in 1792.</p>
     <audio controls>
-        <!-- Replace with a direct link to the anthem file -->
         <source src="https://upload.wikimedia.org/wikipedia/commons/b/b3/La_Marseillaise.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
 
-    <section id="football" class="football-section">
-        <h2>Bonus: Football Legends</h2>
-        <p>France has one of the most successful football teams in history, known as <em>Les Bleus</em>.</p>
+    <section id="history" class="history-section">
+        <h2>A Brief History</h2>
         <ul>
-            <li><strong>Zinedine Zidane:</strong> A midfield maestro and iconic leader of the 1998 World Cup win.</li>
-            <li><strong>Thierry Henry:</strong> A legendary striker and Arsenal's all-time top scorer.</li>
-            <li><strong>Kylian Mbappé:</strong> The modern superstar leading the new generation of French football.</li>
+            <li><strong>Ancient Gaul:</strong> Inhabited by Celtic tribes before the Roman conquest by Julius Caesar.</li>
+            <li><strong>The Frankish Kingdom:</strong> Clovis I united the tribes in the 5th century, founding the French nation.</li>
+            <li><strong>The French Revolution (1789):</strong> A turning point that ended the monarchy and introduced democratic ideals of "Liberté, égalité, fraternité."</li>
+            <li><strong>Modern Era:</strong> France emerged from the World Wars to become a founding member of the European Union.</li>
+        </ul>
+    </section>
+
+    <section id="football">
+        <h2>Bonus: The Pride of French Football</h2>
+        <p>France's national football team, <em>Les Bleus</em>, is a two-time FIFA World Cup champion (1998, 2018).</p>
+        <ul>
+            <li><strong>Zinedine Zidane:</strong> Instrumental in the 1998 triumph and widely considered one of the greatest midfielders of all time.</li>
+            <li><strong>Michel Platini:</strong> A legendary playmaker who dominated the 1980s.</li>
+            <li><strong>Kylian Mbappé:</strong> A modern phenom who became one of the youngest players ever to score in a World Cup final.</li>
         </ul>
     </section>
 </main>
 
-<!-- Pop-up Window -->
 <div id="myModal" class="modal">
     <div class="modal-content">
         <h2>Did you know?</h2>
-        <p>France is the most visited country in the world, receiving nearly 90 million visitors annually!</p>
-        <span class="close-btn" onclick="document.getElementById('myModal').style.display='none'">Close</span>
+        <p>France is the most visited country in the world, with over 80-90 million international visitors annually!</p>
+        <span class="close-btn" onclick="document.getElementById('myModal').style.display='none'">Close Window</span>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 France Tourism Showcase</p>
+    <p>&copy; 2026 France Cultural Showcase. All rights reserved.</p>
 </footer>
 
 </body>
