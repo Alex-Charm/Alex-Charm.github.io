@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* --- General Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.8;
@@ -25,9 +29,10 @@
         header {
             background: linear-gradient(135deg, #0055A4 0%, #003366 100%);
             color: white;
-            padding: 3rem 1rem;
+            padding: 5rem 1rem;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #EF4135;
         }
 
         header h1 {
@@ -35,6 +40,14 @@
             font-size: 3.5rem;
             letter-spacing: 2px;
             color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
         }
 
         nav {
@@ -49,15 +62,17 @@
 
         nav a {
             color: white;
-            margin: 0 25px;
+            margin: 0 20px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
         }
 
         nav a:hover {
             color: #ffe0e0;
+            transform: translateY(-2px);
         }
 
         /* --- Main Content --- */
@@ -74,6 +89,11 @@
             margin-bottom: 50px;
             border-bottom: 1px solid #eee;
             padding-bottom: 30px;
+            scroll-margin-top: 80px; /* Offset for sticky nav */
+        }
+
+        section:last-child {
+            border-bottom: none;
         }
 
         /* --- Gallery --- */
@@ -89,6 +109,12 @@
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
 
         .gallery-item img {
@@ -96,59 +122,123 @@
             height: 250px;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
         .image-caption {
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 51, 102, 0.85);
             color: white;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             font-size: 0.9rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         /* --- History Timeline --- */
         .timeline {
             list-style: none;
             padding: 0;
-            border-left: 3px solid #0055A4;
-            margin-left: 10px;
+            position: relative;
+            border-left: 4px solid #0055A4;
+            margin: 20px 0 20px 20px;
         }
 
         .timeline li {
             position: relative;
-            padding-left: 30px;
+            padding: 20px 20px 20px 40px;
             margin-bottom: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .timeline li:hover {
+            transform: translateX(5px);
         }
 
         .timeline li::before {
             content: '';
             position: absolute;
-            left: -10px;
-            top: 5px;
-            width: 15px;
-            height: 15px;
-            background: #0055A4;
+            left: -12px;
+            top: 25px;
+            width: 18px;
+            height: 18px;
+            background: #EF4135;
+            border: 3px solid white;
             border-radius: 50%;
+            box-shadow: 0 0 0 2px #0055A4;
         }
 
         .timeline-year {
-            font-weight: bold;
+            font-weight: 700;
             color: #0055A4;
             display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
         }
 
-        /* --- Audio & Football --- */
+        /* --- Culture & Audio --- */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .audio-container {
-            background: #f4f7f6;
-            padding: 20px;
-            border-radius: 10px;
+            background: #003366;
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .audio-container h3 {
+            color: white;
+            margin-top: 0;
         }
 
+        .audio-container audio {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .food-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .food-list li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #EF4135;
+            font-weight: 600;
+        }
+
+        /* --- Football Modal --- */
         .football-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .player-card {
@@ -157,6 +247,12 @@
             border-radius: 10px;
             text-align: center;
             border: 1px solid #e0e0e0;
+            transition: transform 0.2s;
+        }
+
+        .player-card:hover {
+            transform: scale(1.05);
+            border-color: #0055A4;
         }
 
         /* --- Modal --- */
@@ -167,30 +263,52 @@
             background: rgba(0,0,0,0.85);
             justify-content: center; align-items: center;
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
         }
 
         .modal-content {
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 15px;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             text-align: center;
             position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
             cursor: pointer;
-            color: #EF4135;
-            text-decoration: underline;
+            color: #aaa;
+            font-size: 24px;
             font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #EF4135;
         }
 
         footer {
-            background: #333;
+            background: #1a1a1a;
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
             margin-top: 60px;
         }
     </style>
@@ -206,77 +324,180 @@
     <a href="#home">Home</a>
     <a href="#history">History</a>
     <a href="#culture">Culture</a>
-    <a href="#" onclick="document.getElementById('sportModal').style.display='flex'">Sports</a>
+    <a href="#" id="openSportModal">Sports</a>
 </nav>
 
 <main id="home">
     <section>
         <h2>Welcome to France</h2>
-        <p>France is a captivating nation in Western Europe, renowned for its sophisticated culture, exquisite cuisine, and profound influence on art, fashion, and science.</p>
+        <p>France is a captivating nation in Western Europe, renowned for its sophisticated culture, exquisite cuisine, and profound influence on art, fashion, and science. From the bustling streets of Paris to the lavender fields of Provence, France offers a diverse tapestry of experiences.</p>
         
         <div class="gallery-container">
             <div class="gallery-item">
-                <img src="images (3).jpeg" alt="Eiffel Tower">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80" alt="Eiffel Tower">
                 <div class="image-caption">Eiffel Tower: Iconic Symbol of Paris</div>
             </div>
             <div class="gallery-item">
-                <img src="images (4).jpeg" alt="Louvre">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Louvre">
                 <div class="image-caption">The Louvre: World's Largest Art Museum</div>
             </div>
             <div class="gallery-item">
-                <img src="images (5).jpeg" alt="Mont Saint-Michel">
+                <img src="https://images.unsplash.com/photo-1530309596526-a97aee9b1d06?auto=format&fit=crop&w=800&q=80" alt="Mont Saint-Michel">
                 <div class="image-caption">Mont Saint-Michel: A medieval marvel</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1520637736862-4d197d17c52a?auto=format&fit=crop&w=800&q=80" alt="Versailles">
+                <div class="image-caption">Palace of Versailles: Royal Opulence</div>
             </div>
         </div>
     </section>
 
     <section id="history">
         <h2>A Detailed Journey Through French History</h2>
-        <p>France's past is a rich narrative of shifting borders, philosophical revolution, and global influence.</p>
+        <p>France's past is a rich narrative of shifting borders, philosophical revolution, and global influence. From ancient Gaulish tribes to modern-day republics, here are the key moments that shaped the nation.</p>
+        
         <ul class="timeline">
-            <li><span class="timeline-year">58–50 BC: The Gallic Wars</span> Julius Caesar's conquest of Gaul integrates the region into the Roman Empire, bringing Latin language and Roman law.</li>
-            <li><span class="timeline-year">496 AD: Merovingian Dynasty</span> Clovis I, King of the Franks, converts to Christianity, establishing the foundation of the French state.</li>
-            <li><span class="timeline-year">1066–1453: The Middle Ages</span> The Hundred Years' War against England transforms French national identity, famously led by Joan of Arc.</li>
-            <li><span class="timeline-year">1715–1789: The Enlightenment</span> An era of intellectual ferment led by thinkers like Voltaire and Rousseau, questioning absolute power and paving the way for democracy.</li>
-            <li><span class="timeline-year">1789: The French Revolution</span> The storming of the Bastille triggers the end of the monarchy and the rise of the Republic, centered on "Liberté, égalité, fraternité."</li>
-            <li><span class="timeline-year">1804–1815: The Napoleonic Era</span> Napoleon Bonaparte rises to power, reforms the legal system with the Napoleonic Code, and dominates European politics.</li>
-            <li><span class="timeline-year">1914–1945: The World Wars</span> France suffers deep losses during World War I and experiences the trauma of occupation during World War II before leading the post-war European reconstruction.</li>
-            <li><span class="timeline-year">1958–Present: The Fifth Republic</span> Charles de Gaulle establishes the current constitutional system, balancing executive power with parliamentary democracy.</li>
+            <li>
+                <span class="timeline-year">Prehistory - 50 BC: Ancient Gaul</span>
+                The region now known as France was inhabited by Celtic tribes referred to as Gauls. Remarkable prehistoric art, such as the Lascaux cave paintings, dates back over 17,000 years.
+            </li>
+            <li>
+                <span class="timeline-year">58–50 BC: The Gallic Wars</span>
+                Julius Caesar's conquest of Gaul integrates the region into the Roman Empire. This brings Latin language, Roman law, and infrastructure that form the bedrock of French civilization.
+            </li>
+            <li>
+                <span class="timeline-year">481–511 AD: The Merovingian Dynasty</span>
+                Clovis I, King of the Franks, unites the Frankish tribes and converts to Christianity, establishing the foundation of the French state and the enduring alliance between France and the Church.
+            </li>
+            <li>
+                <span class="timeline-year">732 AD: Battle of Tours</span>
+                Frankish leader Charles Martel defeats the Umayyad Caliphate, halting their advance into Western Europe and securing the future of the Frankish kingdom.
+            </li>
+            <li>
+                <span class="timeline-year">800 AD: Charlemagne's Empire</span>
+                Charlemagne is crowned Holy Roman Emperor, expanding the Frankish realm to cover much of Western Europe and sparking a cultural revival known as the Carolingian Renaissance.
+            </li>
+            <li>
+                <span class="timeline-year">1337–1453: The Hundred Years' War</span>
+                A protracted conflict with England that ultimately forged a strong French national identity. Joan of Arc's divine inspiration and military leadership played a pivotal role in securing French victory.
+            </li>
+            <li>
+                <span class="timeline-year">1519–1547: The French Renaissance</span>
+                King Francis I invites Italian artists, including Leonardo da Vinci, to France. The era sees the construction of magnificent châteaux in the Loire Valley and the beginning of the Louvre.
+            </li>
+            <li>
+                <span class="timeline-year">1643–1715: Reign of Louis XIV</span>
+                The "Sun King" centralizes absolute monarchy and builds the lavish Palace of Versailles, making France the dominant political and cultural power in Europe.
+            </li>
+            <li>
+                <span class="timeline-year">1715–1789: The Age of Enlightenment</span>
+                An era of intellectual ferment led by thinkers like Voltaire, Rousseau, and Montesquieu. Their ideas on liberty, equality, and separation of powers lay the groundwork for modern democracy.
+            </li>
+            <li>
+                <span class="timeline-year">1789: The French Revolution</span>
+                The storming of the Bastille triggers the end of the monarchy. The Declaration of the Rights of Man and of the Citizen is adopted, establishing the motto "Liberté, égalité, fraternité."
+            </li>
+            <li>
+                <span class="timeline-year">1804–1815: The Napoleonic Era</span>
+                Napoleon Bonaparte rises to power, crowning himself Emperor. He reforms the legal system with the Napoleonic Code and dominates European politics before his final defeat at Waterloo.
+            </li>
+            <li>
+                <span class="timeline-year">1914–1918: World War I</span>
+                France suffers devastating losses on the Western Front, particularly at battles like Verdun. The war ends with the Treaty of Versailles, signed just outside Paris.
+            </li>
+            <li>
+                <span class="timeline-year">1940–1944: World War II & The Resistance</span>
+                France falls to Nazi Germany in 1940. General Charles de Gaulle leads the Free French resistance from London, and Paris is ultimately liberated in August 1944.
+            </li>
+            <li>
+                <span class="timeline-year">1958–Present: The Fifth Republic</span>
+                Charles de Gaulle establishes the current constitutional system, balancing executive power with parliamentary democracy. France becomes a nuclear power and a founding pillar of the European Union.
+            </li>
         </ul>
     </section>
 
     <section id="culture">
         <h2>Culture & Gastronomy</h2>
-        <p>French cuisine is designated by UNESCO as an "intangible cultural heritage."</p>
+        <p>French culture is globally revered. Its cuisine is designated by UNESCO as an "intangible cultural heritage," and its arts, philosophy, and fashion continue to set global trends.</p>
         
-        <h3>National Anthem: La Marseillaise</h3>
-        <p>Written in 1792 by Rouget de Lisle, a powerful symbol of the French Revolution.</p>
-        <div class="audio-container">
-            <audio controls>
-                <source src="https://upload.wikimedia.org/wikipedia/commons/b/b3/La_Marseillaise.ogg" type="audio/ogg">
-                Your browser does not support the audio element.
-            </audio>
+        <div class="culture-grid">
+            <div>
+                <h3>Gastronomic Pillars</h3>
+                <p>French cooking emphasizes high-quality ingredients, technique, and the joy of sharing a meal. Here are some staples:</p>
+                <ul class="food-list">
+                    <li>🥐 <strong>Croissant:</strong> A buttery, flaky Viennoiserie pastry.</li>
+                    <li>🧀 <strong>Fromage:</strong> With over 1,000 varieties, cheese is a daily staple.</li>
+                    <li>🍷 <strong>Vin:</strong> France is one of the world's most prestigious wine producers (Bordeaux, Burgundy, Champagne).</li>
+                    <li>🥖 <strong>Baguette:</strong> The iconic long, thin loaf of French bread.</li>
+                    <li>🐌 <strong>Escargots:</strong> Cooked land snails, usually served with garlic and parsley butter.</li>
+                </ul>
+            </div>
+            
+            <div class="audio-container">
+                <h3>La Marseillaise</h3>
+                <p>Written in 1792 by Claude Joseph Rouget de Lisle, it is a powerful symbol of the French Revolution and the national anthem of France.</p>
+                <audio controls>
+                    <!-- Added MP3 and OGG sources for cross-browser compatibility -->
+                    <source src="https://upload.wikimedia.org/wikipedia/commons/d/d5/La_Marseillaise.ogg" type="audio/ogg">
+                    <source src="https://upload.wikimedia.org/wikipedia/commons/3/36/La_Marseillaise.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element. You can <a href="https://en.wikipedia.org/wiki/La_Marseillaise">listen to it here</a>.
+                </audio>
+            </div>
         </div>
     </section>
 </main>
 
+<!-- Sports Modal -->
 <div id="sportModal" class="modal">
     <div class="modal-content">
+        <span class="close-btn" id="closeSportModal">&times;</span>
         <h2>Les Bleus: Football Glory</h2>
-        <p>France has achieved incredible success, twice winning the FIFA World Cup.</p>
+        <p>France has achieved incredible success in international football, winning the FIFA World Cup twice (1998, 2018) and the UEFA European Championship twice (1984, 2000).</p>
         <div class="football-grid">
             <div class="player-card"><strong>Zinedine Zidane</strong><p>Icon of the 1998 World Cup victory.</p></div>
             <div class="player-card"><strong>Thierry Henry</strong><p>Legendary Arsenal and France striker.</p></div>
             <div class="player-card"><strong>Kylian Mbappé</strong><p>Modern superstar and World Cup champion.</p></div>
+            <div class="player-card"><strong>Michel Platini</strong><p>Midfield maestro of the 1980s.</p></div>
         </div>
-        <br>
-        <span class="close-btn" onclick="document.getElementById('sportModal').style.display='none'">Close Window</span>
     </div>
 </div>
 
 <footer>
     <p>&copy; 2026 France Cultural Institute. All rights reserved.</p>
+    <p style="font-size: 0.8rem; color: #888;">Designed to celebrate the beauty of France.</p>
 </footer>
+
+<script>
+    // Simple JavaScript for Modal functionality
+    const modal = document.getElementById('sportModal');
+    const openBtn = document.getElementById('openSportModal');
+    const closeBtn = document.getElementById('closeSportModal');
+
+    // Open Modal
+    openBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        modal.classList.add('active');
+    });
+
+    // Close Modal on clicking 'x'
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    // Close Modal when clicking outside the content
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    // Close Modal with Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+        }
+    });
+</script>
 
 </body>
 </html>
